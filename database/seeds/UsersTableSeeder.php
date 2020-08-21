@@ -33,7 +33,7 @@ class UsersTableSeeder extends Seeder
         User::create([
             'first_name' =>'Pustakawan',
             'last_name' =>'Pustakawan',
-            'email' => 'member@gmail.com',
+            'email' => 'pustakawan@gmail.com',
             'password' => Hash::make('password'),
             'email_verified_at' => $date
         ])->assignRole('pustakawan');
