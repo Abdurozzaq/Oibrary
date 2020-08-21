@@ -84,7 +84,7 @@
                 dark
                 flat
               >
-                <v-btn href="/register" outlined class="mr-2" color="white">Register</v-btn>
+                <!-- <v-btn href="/register" outlined class="mr-2" color="white">Register</v-btn> -->
                 <v-btn href="/login" outlined class="mr-2" color="white">Login</v-btn>
               </v-toolbar>
             </v-card>

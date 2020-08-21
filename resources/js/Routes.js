@@ -213,14 +213,14 @@ export const routes = [
         },
         beforeEnter: multiguard([ifNotAuthenticated]),
     },
-    {
-        path: "/register",
-        component: Register,
-        meta: {
-            title: 'Register - OASHIER',
-        },
-        beforeEnter: multiguard([ifNotAuthenticated]),
-    },
+    // {
+    //     path: "/register",
+    //     component: Register,
+    //     meta: {
+    //         title: 'Register - OASHIER',
+    //     },
+    //     beforeEnter: multiguard([ifNotAuthenticated]),
+    // },
     {
         path: "/forgot-password",
         component: ForgotPassword,

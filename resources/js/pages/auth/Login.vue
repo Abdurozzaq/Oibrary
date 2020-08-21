@@ -74,7 +74,7 @@
                 dark
                 flat
               >
-                <v-btn href="/register" outlined class="mr-2" color="white">Register</v-btn>
+                <!-- <v-btn href="/register" outlined class="mr-2" color="white">Register</v-btn> -->
                 <v-btn href="/forgot-password" outlined class="mr-2" color="white">Forgot Password?</v-btn>
                
               </v-toolbar>

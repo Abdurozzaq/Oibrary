@@ -21,7 +21,7 @@ Route::group([
 ], function ($router) {
 
     Route::post('login', 'Api\Auth\AuthController@login');
-    Route::post('register', 'Api\Auth\AuthController@register');
+    // Route::post('register', 'Api\Auth\AuthController@register');
     Route::get('email/verify/{id}', 'Api\Auth\VerificationApiController@verify')->name('verificationapi.verify');
     Route::post('email/resend', 'Api\Auth\VerificationApiController@resendVerificationmail')->name('verificationapi.resend');
     Route::post('password/forgot', 'Api\Auth\ForgotPasswordController@sendResetLinkEmail')->name('api.forgot-password');

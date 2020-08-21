@@ -23,11 +23,19 @@ class UsersTableSeeder extends Seeder
         ])->assignRole('admin');
 
         User::create([
-            'first_name' =>'User',
-            'last_name' =>'User',
-            'email' => 'user@gmail.com',
+            'first_name' =>'Member',
+            'last_name' =>'Member',
+            'email' => 'member@gmail.com',
             'password' => Hash::make('password'),
             'email_verified_at' => $date
-        ])->assignRole('user');
+        ])->assignRole('member');
+
+        User::create([
+            'first_name' =>'Pustakawan',
+            'last_name' =>'Pustakawan',
+            'email' => 'member@gmail.com',
+            'password' => Hash::make('password'),
+            'email_verified_at' => $date
+        ])->assignRole('pustakawan');
     }
 }
