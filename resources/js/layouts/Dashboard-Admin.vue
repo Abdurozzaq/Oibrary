@@ -87,7 +87,7 @@
         style="width: 300px"
         class="ml-0 pl-4"
       >
-        <span class="hidden-sm-and-down">Toolity <code>Admin</code></span>
+        <span class="hidden-sm-and-down">SD TechStuff <code>Admin</code></span>
       </v-toolbar-title>
       <v-text-field
         flat

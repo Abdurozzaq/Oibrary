@@ -1,7 +1,8 @@
 import multiguard from 'vue-router-multiguard';
 import axios from 'axios'
 
-import UserLayout from "./layouts/Dashboard-User.vue";
+import PustakawanLayout from "./layouts/Dashboard-Pustakawan.vue";
+import MemberLayout from "./layouts/Dashboard-Member.vue";
 import AdminLayout from "./layouts/Dashboard-Admin.vue";
 
 // For Auth
@@ -14,6 +15,15 @@ import RedirectAfterVerify from "./pages/auth/RedirectAfterVerify.vue"
 import LandingLayout from "./layouts/Landing.vue"
 import LandingPage from "./pages/LandingPage.vue"
 import UnverifiedEmail from "./pages/auth/UnverifiedEmail.vue"
+
+// Admin
+import AdminHomePage from "./pages/admin/AdminHome.vue"
+
+// Pustakawan
+import PusatakawanHomePage from "./pages/pustakawan/PustakawanHome.vue"
+
+// Member
+import MemberHomePage from "./pages/member/MemberHome.vue"
 
 import Component from "./components/ExampleComponent.vue"
 
@@ -93,13 +103,13 @@ const adminOnly = (to, from, next) => {
             })
 }
 
-const userOnly = (to, from, next) => {
+const pustakawanOnly = (to, from, next) => {
 
         axios.get('api/auth/me')
             .then(function (response) {
                 // handle success
                 let userRole = response.data.role
-                if (userRole == "user") {
+                if (userRole == "pustakawan") {
                     next()
                     return
                 } else {
@@ -111,6 +121,26 @@ const userOnly = (to, from, next) => {
                 // handle error
                 console.log(error);
             })
+}
+
+const memberOnly = (to, from, next) => {
+
+    axios.get('api/auth/me')
+        .then(function (response) {
+            // handle success
+            let userRole = response.data.role
+            if (userRole == "member") {
+                next()
+                return
+            } else {
+                next('/login')
+                return
+            }
+        })
+        .catch(function (error) {
+            // handle error
+            console.log(error);
+        })
 }
 
 /**
@@ -181,12 +211,23 @@ export const routes = [
     },
     {
         path: "/home",
-        component: UserLayout,
+        component: MemberLayout,
         children: [
             {
                 path: "",
-                component: Component,
-                beforeEnter: multiguard([ifAuthenticated, userOnly, verifiedEmail]),
+                component: MemberHomePage,
+                beforeEnter: multiguard([ifAuthenticated, memberOnly, verifiedEmail]),
+            }
+        ]
+    },
+    {
+        path: "/siPustakawano",
+        component: PustakawanLayout,
+        children: [
+            {
+                path: "",
+                component: PusatakawanHomePage,
+                beforeEnter: multiguard([ifAuthenticated, pustakawanOnly, verifiedEmail]),
             }
         ]
     },
@@ -196,7 +237,7 @@ export const routes = [
         children: [
             {
                 path: "",
-                component: Component,
+                component: AdminHomePage,
                 beforeEnter: multiguard([ifAuthenticated, adminOnly, verifiedEmail]),
             },
         ]

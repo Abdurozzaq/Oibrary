@@ -166,6 +166,8 @@
                   let userRole = response.data.role
                   if (userRole == "admin") {
                     currentObj.$router.push('/siAdmino')
+                  } else if (userRole == "pustakawan") {
+                    currentObj.$router.push('/siPustakawano')
                   } else {
                     currentObj.$router.push('/home')
                   }
