@@ -2202,53 +2202,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
@@ -2256,6 +2209,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
+      firstName: null,
+      lastName: null,
       fav: true,
       menu: false,
       message: false,
@@ -2266,11 +2221,15 @@ __webpack_require__.r(__webpack_exports__);
       itemsPopup: [{
         text: 'Home',
         icon: 'mdi-view-dashboard',
-        url: '/home'
+        url: '/siAdmino'
       }, {
-        text: 'Settings',
+        text: 'Change Identity',
         icon: 'mdi-account',
-        url: '/settings'
+        url: '/siAdmino/settings/identity'
+      }, {
+        text: 'Change Password',
+        icon: 'mdi-account-key',
+        url: '/siAdmino/settings/password'
       }],
       sidebar: [{
         icon: 'mdi-view-dashboard',
@@ -2283,15 +2242,29 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     logout: function logout() {
       var currentObj = this;
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/sanctum/csrf-cookie').then(function (response) {
-        axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/logout').then(function (response) {
-          localStorage.removeItem('userToken');
-          currentObj.$router.push('/login');
-        })["catch"](function (error) {
-          console.log(error);
-        });
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/auth/logout').then(function (response) {
+        localStorage.removeItem('userToken');
+        currentObj.$router.push('/login');
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    getMe: function getMe() {
+      var currentObj = this;
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('api/auth/me').then(function (response) {
+        currentObj.firstName = response.data.user.first_name || 'FirstName';
+        currentObj.lastName = response.data.user.last_name || 'LastName';
+      })["catch"](function (error) {
+        if (error.response) {
+          console.log(error.response.data.errors);
+        }
       });
     }
+  },
+  // End of Methods
+  mounted: function mounted() {
+    var currentObj = this;
+    currentObj.getMe();
   }
 });
 
@@ -5461,173 +5434,128 @@ var render = function() {
         [
           _c(
             "v-list",
-            { attrs: { dense: "" } },
             [
-              _vm._l(_vm.sidebar, function(sidebarItem) {
-                return [
-                  sidebarItem.heading
-                    ? _c(
-                        "v-row",
-                        {
-                          key: sidebarItem.heading,
-                          attrs: { align: "center" }
-                        },
-                        [
-                          _c(
-                            "v-col",
-                            { attrs: { cols: "6" } },
-                            [
-                              sidebarItem.heading
-                                ? _c("v-subheader", [
-                                    _vm._v(
-                                      "\n              " +
-                                        _vm._s(sidebarItem.heading) +
-                                        "\n            "
-                                    )
-                                  ])
-                                : _vm._e()
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "v-col",
-                            {
-                              staticClass: "text-center",
-                              attrs: { cols: "6" }
-                            },
-                            [
-                              _c(
-                                "a",
-                                {
-                                  staticClass: "body-2 black--text",
-                                  attrs: { href: "#!" }
-                                },
-                                [_vm._v("EDIT")]
-                              )
-                            ]
-                          )
-                        ],
+              _c(
+                "v-list-item",
+                { attrs: { link: "", href: "/siAdmino" } },
+                [
+                  _c(
+                    "v-list-item-icon",
+                    [_c("v-icon", [_vm._v("mdi-view-dashboard-outline")])],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c("v-list-item-title", [_vm._v("Home Page")])
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-list-group",
+                {
+                  attrs: { "prepend-icon": "mdi-account-multiple", value: "" },
+                  scopedSlots: _vm._u([
+                    {
+                      key: "activator",
+                      fn: function() {
+                        return [_c("v-list-item-title", [_vm._v("Users")])]
+                      },
+                      proxy: true
+                    }
+                  ])
+                },
+                [
+                  _vm._v(" "),
+                  _c(
+                    "v-list-item",
+                    {
+                      attrs: {
+                        link: "",
+                        color: "red",
+                        href: "/siAdmino/users/create"
+                      }
+                    },
+                    [
+                      _c("v-list-item-title", [_vm._v("Create User")]),
+                      _vm._v(" "),
+                      _c(
+                        "v-list-item-icon",
+                        [_c("v-icon", [_vm._v("mdi-account-plus")])],
                         1
                       )
-                    : sidebarItem.children
-                    ? _c(
-                        "v-list-group",
-                        {
-                          key: sidebarItem.text,
-                          attrs: {
-                            "prepend-icon": sidebarItem.model
-                              ? sidebarItem.icon
-                              : sidebarItem["icon-alt"],
-                            "append-icon": ""
-                          },
-                          scopedSlots: _vm._u(
-                            [
-                              {
-                                key: "activator",
-                                fn: function() {
-                                  return [
-                                    _c(
-                                      "v-list-item-content",
-                                      [
-                                        _c("v-list-item-title", [
-                                          _vm._v(
-                                            "\n                " +
-                                              _vm._s(sidebarItem.text) +
-                                              "\n              "
-                                          )
-                                        ])
-                                      ],
-                                      1
-                                    )
-                                  ]
-                                },
-                                proxy: true
-                              }
-                            ],
-                            null,
-                            true
-                          ),
-                          model: {
-                            value: sidebarItem.model,
-                            callback: function($$v) {
-                              _vm.$set(sidebarItem, "model", $$v)
-                            },
-                            expression: "sidebarItem.model"
-                          }
-                        },
-                        [
-                          _vm._v(" "),
-                          _vm._l(sidebarItem.children, function(child, i) {
-                            return _c(
-                              "v-list-item",
-                              { key: i, attrs: { link: "", href: child.link } },
-                              [
-                                child.icon
-                                  ? _c(
-                                      "v-list-item-action",
-                                      [
-                                        _c("v-icon", [
-                                          _vm._v(_vm._s(child.icon))
-                                        ])
-                                      ],
-                                      1
-                                    )
-                                  : _vm._e(),
-                                _vm._v(" "),
-                                _c(
-                                  "v-list-item-content",
-                                  [
-                                    _c("v-list-item-title", [
-                                      _vm._v(
-                                        "\n                " +
-                                          _vm._s(child.text) +
-                                          "\n              "
-                                      )
-                                    ])
-                                  ],
-                                  1
-                                )
-                              ],
-                              1
-                            )
-                          })
-                        ],
-                        2
-                      )
-                    : _c(
-                        "v-list-item",
-                        {
-                          key: sidebarItem.text,
-                          attrs: { link: "", href: sidebarItem.link }
-                        },
-                        [
-                          _c(
-                            "v-list-item-action",
-                            [_c("v-icon", [_vm._v(_vm._s(sidebarItem.icon))])],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "v-list-item-content",
-                            [
-                              _c("v-list-item-title", [
-                                _vm._v(
-                                  "\n              " +
-                                    _vm._s(sidebarItem.text) +
-                                    "\n            "
-                                )
-                              ])
-                            ],
-                            1
-                          )
-                        ],
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-list-item",
+                    {
+                      attrs: {
+                        link: "",
+                        color: "red",
+                        href: "/siAdmino/users/cashier/list"
+                      }
+                    },
+                    [
+                      _c("v-list-item-title", [_vm._v("Member Users List")]),
+                      _vm._v(" "),
+                      _c(
+                        "v-list-item-icon",
+                        [_c("v-icon", [_vm._v("mdi-account")])],
                         1
                       )
-                ]
-              })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-list-item",
+                    {
+                      attrs: {
+                        link: "",
+                        color: "red",
+                        href: "/siAdmino/users/cashier/list"
+                      }
+                    },
+                    [
+                      _c("v-list-item-title", [
+                        _vm._v("Pustakawan Users List")
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "v-list-item-icon",
+                        [_c("v-icon", [_vm._v("mdi-account")])],
+                        1
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-list-item",
+                    {
+                      attrs: {
+                        link: "",
+                        color: "red",
+                        href: "/siAdmino/users/admin/list"
+                      }
+                    },
+                    [
+                      _c("v-list-item-title", [_vm._v("Admin Users List")]),
+                      _vm._v(" "),
+                      _c(
+                        "v-list-item-icon",
+                        [_c("v-icon", [_vm._v("mdi-account")])],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
             ],
-            2
+            1
           )
         ],
         1
@@ -5639,7 +5567,7 @@ var render = function() {
           attrs: {
             "clipped-left": _vm.$vuetify.breakpoint.lgAndUp,
             app: "",
-            color: "red darken-3",
+            color: "red lighten-1",
             dark: ""
           }
         },
@@ -5658,38 +5586,15 @@ var render = function() {
             { staticClass: "ml-0 pl-4", staticStyle: { width: "300px" } },
             [
               _c("span", { staticClass: "hidden-sm-and-down" }, [
-                _vm._v("SD TechStuff "),
-                _c("code", [_vm._v("Admin")])
+                _vm._v("OASHIER "),
+                _c("code", { staticClass: "red--text text--lighten-1" }, [
+                  _vm._v("Admin")
+                ])
               ])
             ]
           ),
           _vm._v(" "),
-          _c("v-text-field", {
-            staticClass: "hidden-sm-and-down",
-            attrs: {
-              flat: "",
-              "solo-inverted": "",
-              "hide-details": "",
-              "prepend-inner-icon": "mdi-magnify",
-              label: "Search"
-            }
-          }),
-          _vm._v(" "),
           _c("v-spacer"),
-          _vm._v(" "),
-          _c(
-            "v-btn",
-            { attrs: { icon: "" } },
-            [_c("v-icon", [_vm._v("mdi-apps")])],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "v-btn",
-            { attrs: { icon: "" } },
-            [_c("v-icon", [_vm._v("mdi-bell")])],
-            1
-          ),
           _vm._v(" "),
           _c(
             "v-menu",
@@ -5708,22 +5613,7 @@ var render = function() {
                       _c(
                         "v-btn",
                         _vm._g({ attrs: { icon: "", large: "" } }, on),
-                        [
-                          _c(
-                            "v-avatar",
-                            { attrs: { size: "32px", item: "" } },
-                            [
-                              _c("v-img", {
-                                attrs: {
-                                  src:
-                                    "https://cdn.vuetifyjs.com/images/logos/logo.svg",
-                                  alt: "Vuetify"
-                                }
-                              })
-                            ],
-                            1
-                          )
-                        ],
+                        [_c("v-icon", [_vm._v("mdi-face")])],
                         1
                       )
                     ]
@@ -5749,24 +5639,28 @@ var render = function() {
                       _c(
                         "v-list-item",
                         [
-                          _c("v-list-item-avatar", [
-                            _c("img", {
-                              attrs: {
-                                src:
-                                  "https://cdn.vuetifyjs.com/images/john.jpg",
-                                alt: "John"
-                              }
-                            })
-                          ]),
+                          _c(
+                            "v-list-item-avatar",
+                            [
+                              _c("v-icon", { attrs: { size: "40" } }, [
+                                _vm._v("mdi-face")
+                              ])
+                            ],
+                            1
+                          ),
                           _vm._v(" "),
                           _c(
                             "v-list-item-content",
                             [
-                              _c("v-list-item-title", [_vm._v("John Leider")]),
+                              _c("v-list-item-title", [
+                                _vm._v(
+                                  _vm._s(_vm.firstName) +
+                                    " " +
+                                    _vm._s(_vm.lastName)
+                                )
+                              ]),
                               _vm._v(" "),
-                              _c("v-list-item-subtitle", [
-                                _vm._v("Founder of Vuetify.js")
-                              ])
+                              _c("v-list-item-subtitle", [_vm._v("Logged In")])
                             ],
                             1
                           )
@@ -5783,20 +5677,11 @@ var render = function() {
                     "v-list",
                     { attrs: { shaped: "", dense: "" } },
                     [
-                      _c("v-subheader", [_vm._v("REPORTS")]),
+                      _c("v-subheader", [_vm._v("Account")]),
                       _vm._v(" "),
                       _c(
                         "v-list-item-group",
-                        {
-                          attrs: { color: "primary" },
-                          model: {
-                            value: _vm.itemPopup,
-                            callback: function($$v) {
-                              _vm.itemPopup = $$v
-                            },
-                            expression: "itemPopup"
-                          }
-                        },
+                        { attrs: { color: "primary" } },
                         _vm._l(_vm.itemsPopup, function(ip, i) {
                           return _c(
                             "v-list-item",
@@ -5871,60 +5756,8 @@ var render = function() {
       ),
       _vm._v(" "),
       _c(
-        "v-content",
-        [
-          _c(
-            "v-container",
-            { staticClass: "fill-height", attrs: { fluid: "" } },
-            [
-              _c(
-                "v-row",
-                { attrs: { align: "center", justify: "center" } },
-                [
-                  _c(
-                    "v-tooltip",
-                    {
-                      attrs: { right: "" },
-                      scopedSlots: _vm._u([
-                        {
-                          key: "activator",
-                          fn: function(ref) {
-                            var on = ref.on
-                            return [
-                              _c(
-                                "v-btn",
-                                _vm._g(
-                                  {
-                                    attrs: {
-                                      href: _vm.source,
-                                      icon: "",
-                                      large: "",
-                                      target: "_blank"
-                                    }
-                                  },
-                                  on
-                                ),
-                                [
-                                  _c("v-icon", { attrs: { large: "" } }, [
-                                    _vm._v("mdi-code-tags")
-                                  ])
-                                ],
-                                1
-                              )
-                            ]
-                          }
-                        }
-                      ])
-                    },
-                    [_vm._v(" "), _c("span", [_vm._v("Source")])]
-                  )
-                ],
-                1
-              )
-            ],
-            1
-          )
-        ],
+        "v-main",
+        [_c("v-container", { attrs: { fluid: "" } }, [_c("router-view")], 1)],
         1
       )
     ],
