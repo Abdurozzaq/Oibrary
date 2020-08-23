@@ -14,6 +14,18 @@
             sm="8"
             md="4"
           >
+            <v-avatar
+              size="64"
+              class="d-block mx-auto"
+            >
+              <img
+                :src="logo_sekolah"
+                alt="Logo"
+              >
+            </v-avatar>
+
+            <div class="text-h5 text-center grey--text text--darken-2 mb-1">{{ nama_sekolah }}</div>
+
             <v-card class="elevation-12">
               <v-toolbar
                 color="primary"
@@ -128,6 +140,18 @@
         serverErrorCode: null,
       }
     },
+
+    computed: {
+      nama_sekolah: function () {
+        return process.env.MIX_NAMA_SEKOLAH;
+      },
+      alamat_sekolah: function () {
+        return process.env.MIX_ALAMAT_SEKOLAH;
+      },
+      logo_sekolah: function () {
+        return process.env.MIX_LOGO_URL;
+      }
+    }, // End of Computed
 
     methods: {
       login: function() {

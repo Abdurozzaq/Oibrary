@@ -34,3 +34,7 @@ Route::group([
     
 });
 
+/**
+ * Settings 
+ * Admin Section
+ */

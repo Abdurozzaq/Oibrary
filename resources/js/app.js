@@ -10,6 +10,7 @@ import VueAxios from 'vue-axios'
 // For Router
 import VueRouter from 'vue-router';
 import { routes } from './Routes';
+import Vuelidate from 'vuelidate'
 
 // For AXIOS DEFAULT HEADERS
 axios.defaults.withCredentials = true
@@ -22,7 +23,8 @@ if (token) {
   axios.defaults.headers.common['Authorization'] = 'Bearer' + ' ' + token
 }
 
-Vue.use(VueRouter);
+Vue.use(VueRouter)
+Vue.use(Vuelidate)
 const router = new VueRouter({
     mode: 'history',
     routes

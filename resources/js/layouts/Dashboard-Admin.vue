@@ -66,6 +66,27 @@
           </v-list-item>
         </v-list-group>
 
+        <v-list-group
+          prepend-icon="mdi-cog"
+          value
+        >
+          <template v-slot:activator>
+            <v-list-item-title>Settings</v-list-item-title>
+          </template>
+
+          <v-list-item
+            link
+            color="red"
+            href="/siAdmino/settings/data-sekolah"
+          >
+            <v-list-item-title>Edit Data Sekolah</v-list-item-title>
+            <v-list-item-icon>
+              <v-icon>mdi-school</v-icon>
+            </v-list-item-icon>
+          </v-list-item>
+          
+        </v-list-group>
+
       </v-list>
     </v-navigation-drawer>
 
@@ -76,11 +97,23 @@
       dark
     >
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+
+      
+
       <v-toolbar-title
         style="width: 300px"
         class="ml-0 pl-4"
       >
-        <span class="hidden-sm-and-down">OASHIER <code class="red--text text--lighten-1">Admin</code></span>
+        <v-avatar
+          size="48"
+        >
+          <img
+            class="hidden-sm-and-down"
+            :src="logo_sekolah"
+            alt="Logo"
+          >
+        </v-avatar>
+        <span class="hidden-sm-and-down">{{ nama_sekolah }} <code class="red--text text--lighten-1">Admin</code></span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-menu
@@ -182,6 +215,18 @@
       ],
     }), // end of data
 
+    computed: {
+      nama_sekolah: function () {
+        return process.env.MIX_NAMA_SEKOLAH;
+      },
+      alamat_sekolah: function () {
+        return process.env.MIX_ALAMAT_SEKOLAH;
+      },
+      logo_sekolah: function () {
+        return process.env.MIX_LOGO_URL;
+      }
+    }, // End of Computed
+
     methods: {
       logout: function() {
         let currentObj = this
@@ -212,7 +257,6 @@
 
     mounted: function() {
       let currentObj = this
-
       currentObj.getMe()
     }
   }

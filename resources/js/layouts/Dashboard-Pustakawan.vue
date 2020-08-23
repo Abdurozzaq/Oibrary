@@ -78,7 +78,16 @@
         style="width: 300px"
         class="ml-0 pl-4"
       >
-        <span class="hidden-sm-and-down">SD TECHSTUFF <code class="purple lighten-5  purple--text text--darken-3">Pustakawan</code></span>
+        <v-avatar
+          size="48"
+        >
+          <img
+            class="hidden-sm-and-down"
+            :src="logo_sekolah"
+            alt="Logo"
+          >
+        </v-avatar>
+        <span class="hidden-sm-and-down">{{ nama_sekolah }} <code class="purple lighten-5  purple--text text--darken-3">Pustakawan</code></span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-menu
@@ -178,6 +187,18 @@
         { icon: 'mdi-view-dashboard', text: 'Home', link: '/home' },
       ],
     }), // end of data
+
+    computed: {
+      nama_sekolah: function () {
+        return process.env.MIX_NAMA_SEKOLAH;
+      },
+      alamat_sekolah: function () {
+        return process.env.MIX_ALAMAT_SEKOLAH;
+      },
+      logo_sekolah: function () {
+        return process.env.MIX_LOGO_URL;
+      }
+    }, // End of Computed
 
     methods: {
       logout: function() {

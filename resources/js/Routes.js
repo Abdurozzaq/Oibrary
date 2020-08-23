@@ -238,6 +238,9 @@ export const routes = [
             {
                 path: "",
                 component: AdminHomePage,
+                meta: {
+                    title: 'Admin Home - OIBRARY',
+                },
                 beforeEnter: multiguard([ifAuthenticated, adminOnly, verifiedEmail]),
             },
         ]
@@ -250,7 +253,7 @@ export const routes = [
         path: "/login",
         component: Login,
         meta: {
-            title: 'Login - OASHIER',
+            title: 'Login - OIBRARY',
         },
         beforeEnter: multiguard([ifNotAuthenticated]),
     },
@@ -258,7 +261,7 @@ export const routes = [
     //     path: "/register",
     //     component: Register,
     //     meta: {
-    //         title: 'Register - OASHIER',
+    //         title: 'Register - OIBRARY',
     //     },
     //     beforeEnter: multiguard([ifNotAuthenticated]),
     // },
@@ -266,7 +269,7 @@ export const routes = [
         path: "/forgot-password",
         component: ForgotPassword,
         meta: {
-            title: 'Forgot Password - OASHIER',
+            title: 'Forgot Password - OIBRARY',
         },
         beforeEnter: multiguard([ifNotAuthenticated]),
     },
@@ -274,7 +277,7 @@ export const routes = [
         path: "/reset-password",
         component: ResetPassword,
         meta: {
-            title: 'Reset Password - OASHIER',
+            title: 'Reset Password - OIBRARY',
         },
         beforeEnter: multiguard([ifNotAuthenticated]),
     },
@@ -282,7 +285,7 @@ export const routes = [
         path: "/resend-verification-mail",
         component: ResendVerificationMail,
         meta: {
-            title: 'Resend Verification Mail - OASHIER',
+            title: 'Resend Verification Mail - OIBRARY',
         },
         beforeEnter: multiguard([ifNotAuthenticated]),
     },
@@ -290,14 +293,14 @@ export const routes = [
         path: "/verification-success",
         component: RedirectAfterVerify,
         meta: {
-            title: 'Verification Success - OASHIER',
+            title: 'Verification Success - OIBRARY',
         },
     },
     {
         path: "/UnverifiedEmail",
         component: UnverifiedEmail,
         meta: {
-            title: 'Unverified Email Address - OASHIER',
+            title: 'Unverified Email Address - OIBRARY',
         },
     }
 ];
