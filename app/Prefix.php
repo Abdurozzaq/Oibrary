@@ -17,4 +17,10 @@ class Prefix extends Model
     {
         return $this->belongsTo('App\User');
     }
+
+
+    public function buku()
+    {
+        return $this->hasMany('App\Buku');
+    }
 }

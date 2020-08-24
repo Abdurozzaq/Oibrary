@@ -68,5 +68,88 @@ class BukuController extends Controller
             ], 200);
 
         }
-    }
+    } // end of createBuku()
+
+    public function getDaftarBuku() {
+
+        $buku = Buku::join('prefix', 'prefix.id', '=', 'buku.id_prefix')
+                    ->select('buku.*', 'prefix.prefix')
+                    ->get();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Buku telah berhasil diambil.',
+            'data' => $buku
+        ], 200);
+    } // end of getDaftarBuku()
+
+    public function editBuku(Request $request, $id) 
+    {
+        $this->validate($request, [
+            'judul_buku' => 'required',
+            'pengarang_buku' => 'required',
+            'penerbit_buku' => 'required',
+            'tahun_terbit_buku' => 'required',
+            'jumlah_halaman_buku' => 'required',
+            'stok_buku' => 'required',
+            'nama_rak' => 'required',
+            'lokasi_rak' => 'required'
+        ]);
+
+        if($request->hasFile('foto_buku')){
+            $resource = $request->file('foto_buku');
+            $name = Carbon::now()->timestamp."_".$resource->getClientOriginalName();
+            $userId = Auth::user()->id;
+            $url = "/storage/foto_buku/".$userId."/".$name;
+            $resource->move(\base_path() ."/public/storage/foto_buku/".$userId, $name);
+            
+            $buku = Buku::findOrFail($id);
+            $buku->foto_buku = $url;
+            $buku->judul_buku = $request['judul_buku'];
+            $buku->pengarang_buku = $request['pengarang_buku'];
+            $buku->penerbit_buku = $request['penerbit_buku'];
+            $buku->tahun_terbit_buku = $request['tahun_terbit_buku'];
+            $buku->jumlah_halaman_buku = $request['jumlah_halaman_buku'];
+            $buku->stok_buku = $request['stok_buku'];
+            $buku->nama_rak = $request['nama_rak'];
+            $buku->lokasi_rak = $request['lokasi_rak'];
+            $buku->save();
+            
+            return response()->json([
+              'status' => 'success',
+              'message' => 'Buku telah berhasil diubah.'
+            ], 200);
+
+          } else {
+
+            $buku = Buku::findOrFail($id);
+            $buku->judul_buku = $request['judul_buku'];
+            $buku->pengarang_buku = $request['pengarang_buku'];
+            $buku->penerbit_buku = $request['penerbit_buku'];
+            $buku->tahun_terbit_buku = $request['tahun_terbit_buku'];
+            $buku->jumlah_halaman_buku = $request['jumlah_halaman_buku'];
+            $buku->stok_buku = $request['stok_buku'];
+            $buku->nama_rak = $request['nama_rak'];
+            $buku->lokasi_rak = $request['lokasi_rak'];
+            $buku->save();
+        
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Buku telah berhasil diubah.'
+            ], 200);
+
+        }
+    } // end of editBuku()
+
+
+    public function deleteBuku($id) {
+
+        $buku = Buku::findOrFail($id);
+        $buku->delete();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Buku telah berhasil dihapus.'
+        ], 200);
+    } // end of deleteBuku()
 }

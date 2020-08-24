@@ -262,62 +262,62 @@
         }, // End of Validations
 
         computed: {
-            judulBukuErrors () {
-                let currentObj = this
-                const errors = []
-                if (!currentObj.$v.judul_buku.$dirty) return errors
-                !currentObj.$v.judul_buku.required && errors.push('Judul Buku harus di isi.')
-                return errors
-            },
-            pengarangBukuErrors () {
-                let currentObj = this
-                const errors = []
-                if (!currentObj.$v.pengarang_buku.$dirty) return errors
-                !currentObj.$v.pengarang_buku.required && errors.push('Pengarang Buku harus di isi.')
-                return errors
-            },
-            penerbitBukuErrors () {
-                let currentObj = this
-                const errors = []
-                if (!currentObj.$v.penerbit_buku.$dirty) return errors
-                !currentObj.$v.penerbit_buku.required && errors.push('Penerbit Buku harus di isi.')
-                return errors
-            },
-            tahunTerbitBukuErrors () {
-                let currentObj = this
-                const errors = []
-                if (!currentObj.$v.tahun_terbit_buku.$dirty) return errors
-                !currentObj.$v.tahun_terbit_buku.required && errors.push('Tahun Terbit harus di isi.')
-                return errors
-            },
-            jumlahHalamanBukuErrors () {
-                let currentObj = this
-                const errors = []
-                if (!currentObj.$v.jumlah_halaman_buku.$dirty) return errors
-                !currentObj.$v.jumlah_halaman_buku.required && errors.push('Jumlah Halaman Buku harus di isi.')
-                return errors
-            },
-            stokBukuErrors () {
-                let currentObj = this
-                const errors = []
-                if (!currentObj.$v.stok_buku.$dirty) return errors
-                !currentObj.$v.stok_buku.required && errors.push('Stok Buku harus di isi.')
-                return errors
-            },
-            namaRakErrors () {
-                let currentObj = this
-                const errors = []
-                if (!currentObj.$v.nama_rak.$dirty) return errors
-                !currentObj.$v.nama_rak.required && errors.push('Nama Rak harus di isi.')
-                return errors
-            },
-            lokasiRakErrors () {
-                let currentObj = this
-                const errors = []
-                if (!currentObj.$v.lokasi_rak.$dirty) return errors
-                !currentObj.$v.lokasi_rak.required && errors.push('Lokasi Rak harus di isi.')
-                return errors
-            },
+          judulBukuErrors () {
+              let currentObj = this
+              const errors = []
+              if (!currentObj.$v.judul_buku.$dirty) return errors
+              !currentObj.$v.judul_buku.required && errors.push('Judul Buku harus di isi.')
+              return errors
+          },
+          pengarangBukuErrors () {
+              let currentObj = this
+              const errors = []
+              if (!currentObj.$v.pengarang_buku.$dirty) return errors
+              !currentObj.$v.pengarang_buku.required && errors.push('Pengarang Buku harus di isi.')
+              return errors
+          },
+          penerbitBukuErrors () {
+              let currentObj = this
+              const errors = []
+              if (!currentObj.$v.penerbit_buku.$dirty) return errors
+              !currentObj.$v.penerbit_buku.required && errors.push('Penerbit Buku harus di isi.')
+              return errors
+          },
+          tahunTerbitBukuErrors () {
+              let currentObj = this
+              const errors = []
+              if (!currentObj.$v.tahun_terbit_buku.$dirty) return errors
+              !currentObj.$v.tahun_terbit_buku.required && errors.push('Tahun Terbit harus di isi.')
+              return errors
+          },
+          jumlahHalamanBukuErrors () {
+              let currentObj = this
+              const errors = []
+              if (!currentObj.$v.jumlah_halaman_buku.$dirty) return errors
+              !currentObj.$v.jumlah_halaman_buku.required && errors.push('Jumlah Halaman Buku harus di isi.')
+              return errors
+          },
+          stokBukuErrors () {
+              let currentObj = this
+              const errors = []
+              if (!currentObj.$v.stok_buku.$dirty) return errors
+              !currentObj.$v.stok_buku.required && errors.push('Stok Buku harus di isi.')
+              return errors
+          },
+          namaRakErrors () {
+              let currentObj = this
+              const errors = []
+              if (!currentObj.$v.nama_rak.$dirty) return errors
+              !currentObj.$v.nama_rak.required && errors.push('Nama Rak harus di isi.')
+              return errors
+          },
+          lokasiRakErrors () {
+              let currentObj = this
+              const errors = []
+              if (!currentObj.$v.lokasi_rak.$dirty) return errors
+              !currentObj.$v.lokasi_rak.required && errors.push('Lokasi Rak harus di isi.')
+              return errors
+          },
 
           
         }, // End of Computed
