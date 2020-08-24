@@ -22,7 +22,7 @@ class User extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $fillable = [
-        'kode_user', 'foto_user', 'id_prefix', 'first_name', 'last_name', 'nis', 'nuptk', 'alamat', 'no_telp', 'email', 'password',
+        'kode_user', 'kode_user_full', 'foto_user', 'id_prefix', 'first_name', 'last_name', 'nis', 'nuptk', 'alamat', 'no_telp', 'email', 'password',
     ];
 
     /**
@@ -79,9 +79,9 @@ class User extends Authenticatable implements JWTSubject
 
 
 
-    public function prefixKodeMember()
+    public function prefix()
     {
-        return $this->hasOne('App\Prefix');
+        return $this->belongsTo('App\Prefix', 'id_prefix');
     }
 
 
@@ -90,6 +90,7 @@ class User extends Authenticatable implements JWTSubject
 
         static::creating(function($model) {
             $model->kode_user = User::where('id_prefix', $model->id_prefix)->max('kode_user') + 1;
+            $model->kode_user_full = $model->prefix->prefix . str_pad($model->kode_user, 5, 0, STR_PAD_LEFT);
         });
     }
 }

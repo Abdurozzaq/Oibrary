@@ -15,12 +15,17 @@ class Prefix extends Model
 
     public function user()
     {
-        return $this->belongsTo('App\User');
+        return $this->hasMany('App\User');
     }
 
 
     public function buku()
     {
         return $this->hasMany('App\Buku');
+    }
+
+    public function peminjaman()
+    {
+        return $this->hasMany('App\Peminjaman');
     }
 }
