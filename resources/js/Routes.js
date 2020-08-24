@@ -18,6 +18,7 @@ import UnverifiedEmail from "./pages/auth/UnverifiedEmail.vue"
 
 // Admin
 import AdminHomePage from "./pages/admin/AdminHome.vue"
+import AdminCreateUser from "./pages/admin/users/CreateUser.vue"
 
 // Pustakawan
 import PusatakawanHomePage from "./pages/pustakawan/PustakawanHome.vue"
@@ -240,6 +241,14 @@ export const routes = [
                 component: AdminHomePage,
                 meta: {
                     title: 'Admin Home - OIBRARY',
+                },
+                beforeEnter: multiguard([ifAuthenticated, adminOnly, verifiedEmail]),
+            },
+            {
+                path: "users/create",
+                component: AdminCreateUser,
+                meta: {
+                    title: 'Create User - OIBRARY',
                 },
                 beforeEnter: multiguard([ifAuthenticated, adminOnly, verifiedEmail]),
             },

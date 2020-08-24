@@ -80,6 +80,7 @@
       >
         <v-avatar
           size="48"
+          v-if="logo_sekolah"
         >
           <img
             class="hidden-sm-and-down"

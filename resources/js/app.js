@@ -13,7 +13,7 @@ import { routes } from './Routes';
 import Vuelidate from 'vuelidate'
 
 // For AXIOS DEFAULT HEADERS
-axios.defaults.withCredentials = true
+axios.defaults.withCredentials = true;
 axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 axios.defaults.headers.common['Content-Type'] = 'application/json';
 axios.defaults.baseURL = 'http://localhost:8000';

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDataSekolahTable extends Migration
+class CreatePrefixTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,10 @@ class CreateDataSekolahTable extends Migration
      */
     public function up()
     {
-        Schema::create('data_sekolah', function (Blueprint $table) {
+        Schema::create('prefix', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_sekolah');
-            $table->string('npsn_sekolah');
-            $table->string('alamat_sekolah');
-            $table->string('status');
-            $table->string('bentuk_pendidikan');
+            $table->string('prefix');
+            $table->string('deskripsi');
             $table->timestamps();
         });
     }
@@ -31,6 +28,6 @@ class CreateDataSekolahTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('data_sekolahs');
+        Schema::dropIfExists('prefixes');
     }
 }

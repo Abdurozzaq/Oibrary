@@ -22,7 +22,7 @@ class User extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $fillable = [
-        'first_name', 'last_name', 'email', 'password',
+        'kode_user', 'id_prefix', 'first_name', 'last_name', 'nis', 'nuptk', 'alamat', 'no_telp', 'email', 'password',
     ];
 
     /**
@@ -74,5 +74,22 @@ class User extends Authenticatable implements JWTSubject
     public function getJWTCustomClaims()
     {
         return [];
+    }
+
+
+
+
+    public function prefixKodeMember()
+    {
+        return $this->hasOne('App\Prefix');
+    }
+
+
+    public static function boot() {
+        parent::boot();
+
+        static::creating(function($model) {
+            $model->kode_user = User::where('id_prefix', $model->id_prefix)->max('kode_user') + 1;
+        });
     }
 }

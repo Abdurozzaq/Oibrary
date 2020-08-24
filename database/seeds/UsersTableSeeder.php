@@ -15,6 +15,8 @@ class UsersTableSeeder extends Seeder
     {
         $date = now(); 
         User::create([
+            'kode_user' => '1',
+            'id_prefix' => '1',
             'first_name' =>'Admin',
             'last_name' =>'Admin',
             'email' => 'admin@gmail.com',
@@ -23,6 +25,18 @@ class UsersTableSeeder extends Seeder
         ])->assignRole('admin');
 
         User::create([
+            'kode_user' => '1',
+            'id_prefix' => '2',
+            'first_name' =>'Pustakawan',
+            'last_name' =>'Pustakawan',
+            'email' => 'pustakawan@gmail.com',
+            'password' => Hash::make('password'),
+            'email_verified_at' => $date
+        ])->assignRole('pustakawan');
+
+        User::create([
+            'kode_user' => '1',
+            'id_prefix' => '3',
             'first_name' =>'Member',
             'last_name' =>'Member',
             'email' => 'member@gmail.com',
@@ -30,12 +44,6 @@ class UsersTableSeeder extends Seeder
             'email_verified_at' => $date
         ])->assignRole('member');
 
-        User::create([
-            'first_name' =>'Pustakawan',
-            'last_name' =>'Pustakawan',
-            'email' => 'pustakawan@gmail.com',
-            'password' => Hash::make('password'),
-            'email_verified_at' => $date
-        ])->assignRole('pustakawan');
+       
     }
 }

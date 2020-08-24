@@ -38,3 +38,4 @@ Route::group([
  * Settings 
  * Admin Section
  */
+Route::post('/siAdmino/users/create', 'Api\Admin\UsersController@createUser');
