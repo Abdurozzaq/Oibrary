@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Support\Facades\Hash;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class UsersController extends Controller
 {
@@ -20,53 +22,112 @@ class UsersController extends Controller
             'role' => 'required'
         ]);
 
-       
+        if($request->hasFile('foto_user')){
+            $resource = $request->file('foto_user');
+            $name = Carbon::now()->timestamp."_".$resource->getClientOriginalName();
+            $userId = Auth::user()->id;
+            $url = "/storage/foto_user/".$userId."/".$name;
+            $resource->move(\base_path() ."/public/storage/foto_user/".$userId, $name);
+            
+            if ($request['role'] == 'admin') {
 
-        if ($request['role'] == 'admin') {
+                $user = User::create([
+                    'foto_user' => $url,
+                    'first_name' => $request['first_name'],
+                    'last_name' => $request['last_name'],
+                    'email' => $request['email'],
+                    'password' => Hash::make($request['password']),
+                    'id_prefix' => '1'
+                ])->assignRole('admin');
+    
+            } else if ($request['role'] == 'pustakawan'){
+    
+                $user = User::create([
+                    'foto_user' => $url,
+                    'first_name' => $request['first_name'],
+                    'last_name' => $request['last_name'],
+                    'email' => $request['email'],
+                    'nis' => $request['nis'],
+                    'nuptk' => $request['nuptk'],
+                    'alamat' => $request['alamat'],
+                    'no_telp' => $request['no_telp'],
+                    'password' => Hash::make($request['password']),
+                    'id_prefix' => '2'
+                ])->assignRole('pustakawan');
+    
+            } else {
+    
+                $user = User::create([
+                    'foto_user' => $url,
+                    'first_name' => $request['first_name'],
+                    'last_name' => $request['last_name'],
+                    'email' => $request['email'],
+                    'nis' => $request['nis'],
+                    'nuptk' => $request['nuptk'],
+                    'alamat' => $request['alamat'],
+                    'no_telp' => $request['no_telp'],
+                    'password' => Hash::make($request['password']),
+                    'id_prefix' => '3'
+                ])->assignRole('member');
+    
+            }
 
-            $user = User::create([
-                'first_name' => $request['first_name'],
-                'last_name' => $request['last_name'],
-                'email' => $request['email'],
-                'password' => Hash::make($request['password']),
-                'id_prefix' => '1'
-            ])->assignRole('admin');
+            $user->sendApiEmailVerificationNotification();
+            
+            return response()->json([
+              'status' => 'success',
+              'message' => 'User telah berhasil ditambahkan. Sekarang konfirmasi email user tersebut, dengan mengklik email aktivasi yang telah di kirim.'
+            ], 200);
 
-        } else if ($request['role'] == 'pustakawan'){
+          } else {
 
-            $user = User::create([
-                'first_name' => $request['first_name'],
-                'last_name' => $request['last_name'],
-                'email' => $request['email'],
-                'nis' => $request['nis'],
-                'nuptk' => $request['nuptk'],
-                'alamat' => $request['alamat'],
-                'no_telp' => $request['no_telp'],
-                'password' => Hash::make($request['password']),
-                'id_prefix' => '2'
-            ])->assignRole('pustakawan');
+            if ($request['role'] == 'admin') {
 
-        } else {
+                $user = User::create([
+                    'first_name' => $request['first_name'],
+                    'last_name' => $request['last_name'],
+                    'email' => $request['email'],
+                    'password' => Hash::make($request['password']),
+                    'id_prefix' => '1'
+                ])->assignRole('admin');
+    
+            } else if ($request['role'] == 'pustakawan'){
+    
+                $user = User::create([
+                    'first_name' => $request['first_name'],
+                    'last_name' => $request['last_name'],
+                    'email' => $request['email'],
+                    'nis' => $request['nis'],
+                    'nuptk' => $request['nuptk'],
+                    'alamat' => $request['alamat'],
+                    'no_telp' => $request['no_telp'],
+                    'password' => Hash::make($request['password']),
+                    'id_prefix' => '2'
+                ])->assignRole('pustakawan');
+    
+            } else {
+    
+                $user = User::create([
+                    'first_name' => $request['first_name'],
+                    'last_name' => $request['last_name'],
+                    'email' => $request['email'],
+                    'nis' => $request['nis'],
+                    'nuptk' => $request['nuptk'],
+                    'alamat' => $request['alamat'],
+                    'no_telp' => $request['no_telp'],
+                    'password' => Hash::make($request['password']),
+                    'id_prefix' => '3'
+                ])->assignRole('member');
+    
+            }
 
-            $user = User::create([
-                'first_name' => $request['first_name'],
-                'last_name' => $request['last_name'],
-                'email' => $request['email'],
-                'nis' => $request['nis'],
-                'nuptk' => $request['nuptk'],
-                'alamat' => $request['alamat'],
-                'no_telp' => $request['no_telp'],
-                'password' => Hash::make($request['password']),
-                'id_prefix' => '3'
-            ])->assignRole('member');
+            $user->sendApiEmailVerificationNotification();
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'User telah berhasil ditambahkan, tanpa foto user. Sekarang konfirmasi email user tersebut, dengan mengklik email aktivasi yang telah di kirim'
+            ], 200);
 
         }
-
-        $user->sendApiEmailVerificationNotification();
-
-        return response()->json([
-            'status' => 'success',
-            'message' => 'Please confirm the new user account email address by clicking on verify user button sent to you on his email'
-        ], 200);
     }
 }

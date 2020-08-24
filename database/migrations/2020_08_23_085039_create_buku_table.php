@@ -17,6 +17,7 @@ class CreateBukuTable extends Migration
             $table->id();
             $table->string('kode_buku');
             $table->string('id_prefix');
+            $table->string('foto_buku')->nullable();
             $table->string('judul_buku');
             $table->string('pengarang_buku');
             $table->string('penerbit_buku');

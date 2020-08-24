@@ -35,7 +35,14 @@ Route::group([
 });
 
 /**
- * Settings 
  * Admin Section
  */
+// Users
 Route::post('/siAdmino/users/create', 'Api\Admin\UsersController@createUser');
+
+
+/**
+ * Pustakawan Section
+ */
+// Buku
+Route::post('/perpus/buku/create', 'Api\Pustakawan\Buku\BukuController@createBuku');

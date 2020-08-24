@@ -2,7 +2,7 @@ import multiguard from 'vue-router-multiguard';
 import axios from 'axios'
 
 import PustakawanLayout from "./layouts/Dashboard-Pustakawan.vue";
-import MemberLayout from "./layouts/Dashboard-Member.vue";
+// import MemberLayout from "./layouts/Dashboard-Member.vue";
 import AdminLayout from "./layouts/Dashboard-Admin.vue";
 
 // For Auth
@@ -22,9 +22,11 @@ import AdminCreateUser from "./pages/admin/users/CreateUser.vue"
 
 // Pustakawan
 import PusatakawanHomePage from "./pages/pustakawan/PustakawanHome.vue"
+import CreateBuku from "./pages/pustakawan/buku/BuatBuku.vue"
+import DaftarBuku from "./pages/pustakawan/buku/DaftarBuku.vue"
 
-// Member
-import MemberHomePage from "./pages/member/MemberHome.vue"
+// // Member
+// import MemberHomePage from "./pages/member/MemberHome.vue"
 
 import Component from "./components/ExampleComponent.vue"
 
@@ -32,6 +34,8 @@ const token = localStorage.getItem('userToken')
 if (token) {
   axios.defaults.headers.common['Authorization'] = 'Bearer' + ' ' + token
 }
+
+const nama_sekolah = process.env.MIX_NAMA_SEKOLAH
 
 /**
  *
@@ -68,7 +72,7 @@ const ifNotAuthenticated = (to, from, next) => {
                         next('/siAdmino')
                         return
                     } else {
-                        next('/home')
+                        next('/perpus')
                     }
                 })
                 .catch(function (error) {
@@ -124,25 +128,25 @@ const pustakawanOnly = (to, from, next) => {
             })
 }
 
-const memberOnly = (to, from, next) => {
+// const memberOnly = (to, from, next) => {
 
-    axios.get('api/auth/me')
-        .then(function (response) {
-            // handle success
-            let userRole = response.data.role
-            if (userRole == "member") {
-                next()
-                return
-            } else {
-                next('/login')
-                return
-            }
-        })
-        .catch(function (error) {
-            // handle error
-            console.log(error);
-        })
-}
+//     axios.get('api/auth/me')
+//         .then(function (response) {
+//             // handle success
+//             let userRole = response.data.role
+//             if (userRole == "member") {
+//                 next()
+//                 return
+//             } else {
+//                 next('/login')
+//                 return
+//             }
+//         })
+//         .catch(function (error) {
+//             // handle error
+//             console.log(error);
+//         })
+// }
 
 /**
  * Guard For
@@ -210,26 +214,45 @@ export const routes = [
             }
         ]
     },
+    // {
+    //     path: "/home",
+    //     component: MemberLayout,
+    //     children: [
+    //         {
+    //             path: "",
+    //             component: MemberHomePage,
+    //             beforeEnter: multiguard([ifAuthenticated, memberOnly, verifiedEmail]),
+    //         }
+    //     ]
+    // },
     {
-        path: "/home",
-        component: MemberLayout,
-        children: [
-            {
-                path: "",
-                component: MemberHomePage,
-                beforeEnter: multiguard([ifAuthenticated, memberOnly, verifiedEmail]),
-            }
-        ]
-    },
-    {
-        path: "/siPustakawano",
+        path: "/perpus",
         component: PustakawanLayout,
         children: [
             {
                 path: "",
                 component: PusatakawanHomePage,
-                beforeEnter: multiguard([ifAuthenticated, pustakawanOnly, verifiedEmail]),
-            }
+                meta: {
+                    title: 'Home - ' + nama_sekolah,
+                },
+                beforeEnter: multiguard([ifAuthenticated, pustakawanOnly, verifiedEmail, pageTitle]),
+            },
+            {
+                path: "buku/create",
+                component: CreateBuku,
+                meta: {
+                    title: 'Tambah Buku - ' + nama_sekolah,
+                },
+                beforeEnter: multiguard([ifAuthenticated, pustakawanOnly, verifiedEmail, pageTitle]),
+            },
+            {
+                path: "buku/list",
+                component: DaftarBuku,
+                meta: {
+                    title: 'Daftar Buku - ' + nama_sekolah,
+                },
+                beforeEnter: multiguard([ifAuthenticated, pustakawanOnly, verifiedEmail, pageTitle]),
+            },
         ]
     },
     {
@@ -240,17 +263,17 @@ export const routes = [
                 path: "",
                 component: AdminHomePage,
                 meta: {
-                    title: 'Admin Home - OIBRARY',
+                    title: 'Admin Home - ' + nama_sekolah,
                 },
-                beforeEnter: multiguard([ifAuthenticated, adminOnly, verifiedEmail]),
+                beforeEnter: multiguard([ifAuthenticated, adminOnly, verifiedEmail, pageTitle]),
             },
             {
                 path: "users/create",
                 component: AdminCreateUser,
                 meta: {
-                    title: 'Create User - OIBRARY',
+                    title: 'Create User - ' + nama_sekolah,
                 },
-                beforeEnter: multiguard([ifAuthenticated, adminOnly, verifiedEmail]),
+                beforeEnter: multiguard([ifAuthenticated, adminOnly, verifiedEmail, pageTitle]),
             },
         ]
     },
@@ -262,15 +285,15 @@ export const routes = [
         path: "/login",
         component: Login,
         meta: {
-            title: 'Login - OIBRARY',
+            title: 'Login - ' + nama_sekolah,
         },
-        beforeEnter: multiguard([ifNotAuthenticated]),
+        beforeEnter: multiguard([ifNotAuthenticated, pageTitle]),
     },
     // {
     //     path: "/register",
     //     component: Register,
     //     meta: {
-    //         title: 'Register - OIBRARY',
+    //         title: 'Register - ' + nama_sekolah,
     //     },
     //     beforeEnter: multiguard([ifNotAuthenticated]),
     // },
@@ -278,39 +301,41 @@ export const routes = [
         path: "/forgot-password",
         component: ForgotPassword,
         meta: {
-            title: 'Forgot Password - OIBRARY',
+            title: 'Forgot Password - ' + nama_sekolah,
         },
-        beforeEnter: multiguard([ifNotAuthenticated]),
+        beforeEnter: multiguard([ifNotAuthenticated, pageTitle]),
     },
     {
         path: "/reset-password",
         component: ResetPassword,
         meta: {
-            title: 'Reset Password - OIBRARY',
+            title: 'Reset Password - ' + nama_sekolah,
         },
-        beforeEnter: multiguard([ifNotAuthenticated]),
+        beforeEnter: multiguard([ifNotAuthenticated, pageTitle]),
     },
     {
         path: "/resend-verification-mail",
         component: ResendVerificationMail,
         meta: {
-            title: 'Resend Verification Mail - OIBRARY',
+            title: 'Resend Verification Mail - ' + nama_sekolah,
         },
-        beforeEnter: multiguard([ifNotAuthenticated]),
+        beforeEnter: multiguard([ifNotAuthenticated, pageTitle]),
     },
     {
         path: "/verification-success",
         component: RedirectAfterVerify,
         meta: {
-            title: 'Verification Success - OIBRARY',
+            title: 'Verification Success - ' + nama_sekolah,
         },
+        beforeEnter: multiguard([pageTitle]),
     },
     {
         path: "/UnverifiedEmail",
         component: UnverifiedEmail,
         meta: {
-            title: 'Unverified Email Address - OIBRARY',
+            title: 'Unverified Email Address - ' + nama_sekolah,
         },
+        beforeEnter: multiguard([pageTitle]),
     }
 ];
 

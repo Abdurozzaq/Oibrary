@@ -173,7 +173,16 @@
                       </v-col>
                     </v-row>  
 
-                    
+                    <v-row justify="start">
+                      <v-col cols="12" lg="6" md="12" sm="12" xs="12">
+                        <v-file-input
+                            label="Foto User"
+                            filled
+                            prepend-icon="mdi-camera"
+                            v-model="foto_user"
+                          ></v-file-input>
+                      </v-col>
+                    </v-row>
 
                     
 
@@ -220,7 +229,7 @@
 </template>
 
 <script>
-  import { required, numeric } from 'vuelidate/lib/validators'
+  import { required, email } from 'vuelidate/lib/validators'
   import axios from 'axios'
   export default {
     name: 'createUserPage',
@@ -229,6 +238,7 @@
         dialog: false,
 
         // Form
+        foto_user: null,
         first_name: null,
         last_name: null,
         nis: null,
@@ -236,7 +246,6 @@
         alamat: null,
         no_telp: null,
         email: null,
-        address: null,
         password: null,
         password_confirmation: null,
         role: 'member',
@@ -266,7 +275,8 @@
         required,
       },
       email: { 
-        required 
+        required,
+        email
       },
       password: {
         required,
@@ -281,7 +291,7 @@
         let currentObj = this
         const errors = []
         if (!currentObj.$v.first_name.$dirty) return errors
-        !currentObj.$v.first_name.required && errors.push('First Name is required.')
+        !currentObj.$v.first_name.required && errors.push('Nama Depan harus di isi.')
         return errors
       },
 
@@ -289,7 +299,7 @@
         let currentObj = this
         const errors = []
         if (!currentObj.$v.last_name.$dirty) return errors
-        !currentObj.$v.last_name.required && errors.push('Last Name is required.')
+        !currentObj.$v.last_name.required && errors.push('Nama Belakang harus di isi.')
         return errors
       },
 
@@ -297,7 +307,8 @@
         let currentObj = this
         const errors = []
         if (!currentObj.$v.email.$dirty) return errors
-        !currentObj.$v.email.required && errors.push('Email is required.')
+        !currentObj.$v.email.required && errors.push('Email harus di isi.')
+        !currentObj.$v.email.email && errors.push('Email harus valid.')
         return errors
       },
 
@@ -305,14 +316,14 @@
           let currentObj = this
           const errors = []
           if (!currentObj.$v.password.$dirty) return errors
-          !currentObj.$v.password.required && errors.push('Password is required.')
+          !currentObj.$v.password.required && errors.push('Password harus di isi.')
           return errors
       },
       passwordConfirmationErrors () {
           let currentObj = this
           const errors = []
           if (!currentObj.$v.password_confirmation.$dirty) return errors
-          !currentObj.$v.password_confirmation.required && errors.push('Password Confirmation is required.')
+          !currentObj.$v.password_confirmation.required && errors.push('Password Confirmation harus di isi.')
           return errors
       },
   
@@ -334,18 +345,23 @@
           currentObj.errorAlert = false
           currentObj.overlay = true
 
-          axios.post('api/siAdmino/users/create', {
-            first_name: currentObj.first_name,
-            last_name: currentObj.last_name,
-            nis: currentObj.nis,
-            nuptk: currentObj.nuptk,
-            alamat: currentObj.alamat,
-            no_telp: currentObj.no_telp,
-            email: currentObj.email,
-            password: currentObj.password,
-            password_confirmation: currentObj.password_confirmation,
-            role: currentObj.role
-          })
+          let formData = new FormData();
+
+          // Files
+          formData.append("foto_user", currentObj.foto_user)
+          // Text
+          formData.append("first_name", currentObj.first_name)
+          formData.append("last_name", currentObj.last_name)
+          formData.append("nis", currentObj.nis)
+          formData.append("nuptk", currentObj.nuptk)
+          formData.append("alamat", currentObj.alamat)
+          formData.append("no_telp", currentObj.no_telp)
+          formData.append("email", currentObj.email)
+          formData.append("password", currentObj.password)
+          formData.append("password_confirmation", currentObj.password_confirmation)
+          formData.append("role", currentObj.role)
+
+          axios.post('api/siAdmino/users/create', formData)
             .then(function (response) {
 
               // after success show successSnackbar

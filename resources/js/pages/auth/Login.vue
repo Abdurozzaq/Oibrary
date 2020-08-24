@@ -187,13 +187,20 @@
               })
               .then(function (response) {
                   // handle success
+                  // let userRole = response.data.role
+                  // if (userRole == "admin") {
+                  //   currentObj.$router.push('/siAdmino')
+                  // } else if (userRole == "pustakawan") {
+                  //   currentObj.$router.push('/siPustakawano')
+                  // } else {
+                  //   currentObj.$router.push('/home')
+                  // }
                   let userRole = response.data.role
                   if (userRole == "admin") {
                     currentObj.$router.push('/siAdmino')
-                  } else if (userRole == "pustakawan") {
-                    currentObj.$router.push('/siPustakawano')
-                  } else {
-                    currentObj.$router.push('/home')
+                  } 
+                  if (userRole == 'pustakawan') {
+                    currentObj.$router.push('/perpus')
                   }
               })
               .catch(function (error) {

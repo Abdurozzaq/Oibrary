@@ -16,10 +16,11 @@ class Peminjaman extends Model
         'denda',
         'id_buku',
         'id_member',
-        'id_pustakawan'
+        'id_pustakawan',
+        'id_prefix'
     ];
 
-    public function boot() {
+    public static function boot() {
         parent::boot();
 
         static::creating(function($model) {

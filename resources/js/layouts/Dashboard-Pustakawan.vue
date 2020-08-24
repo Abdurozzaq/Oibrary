@@ -44,7 +44,7 @@
 
           <v-list-item
             link
-            href="/home/menu/create"
+            href="/perpus/buku/create"
           >
             <v-list-item-title>Tambah Buku</v-list-item-title>
             <v-list-item-icon>
@@ -54,7 +54,7 @@
 
           <v-list-item
             link
-            href="/home/menu/list"
+            href="/perpus/buku/list"
           >
             <v-list-item-title>Daftar Buku</v-list-item-title>
             <v-list-item-icon>

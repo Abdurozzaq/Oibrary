@@ -18,10 +18,12 @@ class Buku extends Model
         'jumlah_halaman_buku',
         'stok_buku',
         'nama_rak',
-        'lokasi_rak'
+        'lokasi_rak',
+        'id_prefix',
+        'foto_buku'
     ];
 
-    public function boot() {
+    public static function boot() {
         parent::boot();
 
         static::creating(function($model) {
