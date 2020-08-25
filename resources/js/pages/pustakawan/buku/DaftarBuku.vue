@@ -27,7 +27,7 @@
           persistent-hint
           single-line
           append-outer-icon="mdi-send"
-          @click:append-outer="searchOrder"
+          @click:append-outer="searchBuku"
           class="mb-3"
         ></v-text-field>
       </v-card-title>
@@ -48,19 +48,19 @@
           <v-tooltip bottom>
             <template v-slot:activator="{ on, attrs }">
               <v-btn v-bind="attrs" v-on="on" class="ma-2" fab dark small color="green" @click.prevent="openEditDetails(props.item)">
-                <v-icon dark>mdi-account-edit</v-icon>
+                <v-icon dark>mdi-tooltip-edit</v-icon>
               </v-btn>
             </template>
-            <span>Edit User</span>
+            <span>Edit Buku</span>
           </v-tooltip>
 
           <v-tooltip bottom>
             <template v-slot:activator="{ on, attrs }">
               <v-btn v-bind="attrs" v-on="on" class="ma-2" fab dark small color="red" @click.prevent="deleteUser(props.item)">
-                <v-icon dark>mdi-account-remove</v-icon>
+                <v-icon dark>mdi-trash-can-outline</v-icon>
               </v-btn>
             </template>
-            <span>Delete User</span>
+            <span>Delete Buku</span>
           </v-tooltip>
 
         </template>
@@ -94,19 +94,19 @@
           <v-tooltip bottom>
             <template v-slot:activator="{ on, attrs }">
               <v-btn v-bind="attrs" v-on="on" class="ma-2" fab dark small color="green" @click.prevent="openEditDetails(props.item)">
-                <v-icon dark>mdi-account-edit</v-icon>
+                <v-icon dark>mdi-tooltip-edit</v-icon>
               </v-btn>
             </template>
-            <span>Edit User</span>
+            <span>Edit Buku</span>
           </v-tooltip>
 
           <v-tooltip bottom>
             <template v-slot:activator="{ on, attrs }">
               <v-btn v-bind="attrs" v-on="on" class="ma-2" fab dark small color="red" @click.prevent="deleteUser(props.item)">
-                <v-icon dark>mdi-account-remove</v-icon>
+                <v-icon dark>mdi-trash-can-outline</v-icon>
               </v-btn>
             </template>
-            <span>Delete User</span>
+            <span>Delete Buku</span>
           </v-tooltip>
 
         </template>
@@ -518,7 +518,7 @@
           })
       },
 
-      searchOrder: function() {
+      searchBuku: function() {
         let currentObj = this
         if (currentObj.search != null) {
           currentObj.daftarBukuFiltered = currentObj.daftarBuku.filter(

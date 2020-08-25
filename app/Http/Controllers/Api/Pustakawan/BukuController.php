@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api\Pustakawan\Buku;
+namespace App\Http\Controllers\Api\Pustakawan;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;

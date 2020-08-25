@@ -25,7 +25,7 @@
       <v-list>
         <v-list-item
           link
-          href="/siPustakawano"
+          href="/perpus"
         >
           <v-list-item-icon>
             <v-icon>mdi-view-dashboard-outline</v-icon>
@@ -34,7 +34,7 @@
         </v-list-item>
 
         <v-list-group
-          prepend-icon="mdi-food"
+          prepend-icon="mdi-book-multiple"
           value
           active-class="white--text"
         >
@@ -62,6 +62,16 @@
             </v-list-item-icon>
           </v-list-item>
         </v-list-group>
+
+        <v-list-item
+          link
+          href="/perpus/pinjam-buku"
+        >
+          <v-list-item-icon>
+            <v-icon>mdi-book</v-icon>
+          </v-list-item-icon>
+          <v-list-item-title>Pinjam Buku</v-list-item-title>
+        </v-list-item>
 
       </v-list>
     </v-navigation-drawer>

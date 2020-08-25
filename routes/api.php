@@ -45,7 +45,11 @@ Route::post('/siAdmino/users/create', 'Api\Admin\UsersController@createUser');
  * Pustakawan Section
  */
 // Buku
-Route::post('/perpus/buku/create', 'Api\Pustakawan\Buku\BukuController@createBuku');
-Route::get('/perpus/buku/list', 'Api\Pustakawan\Buku\BukuController@getDaftarBuku');
-Route::post('/perpus/buku/edit/{id}', 'Api\Pustakawan\Buku\BukuController@editBuku');
-Route::post('/perpus/buku/delete/{id}', 'Api\Pustakawan\Buku\BukuController@deleteBuku');
+Route::post('/perpus/buku/create', 'Api\Pustakawan\BukuController@createBuku');
+Route::get('/perpus/buku/list', 'Api\Pustakawan\BukuController@getDaftarBuku');
+Route::post('/perpus/buku/edit/{id}', 'Api\Pustakawan\BukuController@editBuku');
+Route::post('/perpus/buku/delete/{id}', 'Api\Pustakawan\BukuController@deleteBuku');
+// Member
+Route::get('/perpus/users/member/list', 'Api\Pustakawan\MemberController@getDaftarMember');
+// Peminjaman
+Route::post('/perpus/pinjam-buku', 'Api\Pustakawan\PeminjamanController@createPeminjamanBuku');
