@@ -18,7 +18,8 @@ class Peminjaman extends Model
         'id_buku',
         'id_member',
         'id_pustakawan',
-        'id_prefix'
+        'id_prefix',
+        'jumlah_buku',
     ];
 
     public function prefix()
