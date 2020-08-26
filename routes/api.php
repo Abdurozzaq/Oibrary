@@ -53,3 +53,4 @@ Route::post('/perpus/buku/delete/{id}', 'Api\Pustakawan\BukuController@deleteBuk
 Route::get('/perpus/users/member/list', 'Api\Pustakawan\MemberController@getDaftarMember');
 // Peminjaman
 Route::post('/perpus/pinjam-buku', 'Api\Pustakawan\PeminjamanController@createPeminjamanBuku');
+Route::get('/perpus/sikulasi/list', 'Api\Pustakawan\PeminjamanController@getDaftarPeminjaman');

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Buku;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class BukuController extends Controller
 {
@@ -72,9 +73,7 @@ class BukuController extends Controller
 
     public function getDaftarBuku() {
 
-        $buku = Buku::join('prefix', 'prefix.id', '=', 'buku.id_prefix')
-                    ->select('buku.*', 'prefix.prefix')
-                    ->get();
+        $buku = DB::table('buku')->get();
 
         return response()->json([
             'status' => 'success',

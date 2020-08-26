@@ -15,7 +15,7 @@
 
     <v-card class="mb-4">
       <v-card-title>
-        Pilih Anggota
+       1. Pilih Anggota
       </v-card-title>
       <v-card-text>
         <v-autocomplete
@@ -33,7 +33,7 @@
 
     <v-card class="mb-4">
       <v-card-title>
-      Pilih Buku
+      2. Pilih Buku
         <v-spacer></v-spacer>
         <v-text-field
           v-model="search"
@@ -106,7 +106,7 @@
                   color="deep-purple lighten-2"
                   text
                   @click.prevent="pilihBuku(buku)"
-                  :disabled="buku.stok_buku == 0"
+                  :disabled="buku.stok_buku == 0 || id_anggota == null"
                 >
                   Pilih Buku
                 </v-btn>
@@ -171,7 +171,7 @@
                   color="deep-purple lighten-2"
                   text
                   @click.prevent="pilihBuku(buku)"
-                  :disabled="buku.stok_buku == 0"
+                  :disabled="buku.stok_buku == 0 || id_anggota == null"
                 >
                   Pilih Buku
                 </v-btn>
@@ -203,7 +203,7 @@
 
     <v-card class="mb-3">
       <v-card-title>
-        Buku Yang Terpilih:
+        3. Buku Yang Terpilih:
         <v-spacer></v-spacer>
         <v-btn
           color="blue-grey"

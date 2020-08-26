@@ -93,4 +93,5 @@ class User extends Authenticatable implements JWTSubject
             $model->kode_user_full = $model->prefix->prefix . str_pad($model->kode_user, 5, 0, STR_PAD_LEFT);
         });
     }
+
 }

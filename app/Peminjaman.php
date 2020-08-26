@@ -35,4 +35,5 @@ class Peminjaman extends Model
             $model->kode_peminjaman_full = $model->prefix->prefix . str_pad($model->kode_peminjaman, 5, 0, STR_PAD_LEFT);
         });
     }
+
 }

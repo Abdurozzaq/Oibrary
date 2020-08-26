@@ -8,6 +8,7 @@ use App\Peminjaman;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use App\Buku;
+use Illuminate\Support\Facades\DB;
 
 class PeminjamanController extends Controller
 {
@@ -40,6 +41,27 @@ class PeminjamanController extends Controller
         return response()->json([
             'status' => 'success',
             'message' => 'Berhasil Pinjam Buku',
+        ], 200);
+    }
+
+
+    public function getDaftarPeminjaman() {
+        $data = DB::table('peminjaman')
+                    ->join('buku', 'buku.id', '=', 'peminjaman.id_buku')
+                    ->join('users', 'users.id', '=', 'peminjaman.id_member')
+                    ->select(
+                        'peminjaman.*', 
+                        'buku.judul_buku', 
+                        'buku.pengarang_buku', 
+                        'users.first_name', 
+                        'users.last_name', 
+                    )
+                    ->get();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Berhasil Mendapatkan Data Peminjaman',
+            'data' => $data
         ], 200);
     }
 }

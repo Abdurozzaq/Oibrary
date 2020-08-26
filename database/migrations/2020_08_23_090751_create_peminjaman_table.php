@@ -26,6 +26,7 @@ class CreatePeminjamanTable extends Migration
             $table->string('tanggal_harus_kembali');
             $table->string('tanggal_pengembalian')->nullable();
             $table->string('denda')->nullable();
+            $table->string('terlambat')->nullable();
             $table->timestamps();
         });
     }

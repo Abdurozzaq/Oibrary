@@ -72,6 +72,15 @@
           </v-list-item-icon>
           <v-list-item-title>Pinjam Buku</v-list-item-title>
         </v-list-item>
+        <v-list-item
+          link
+          href="/perpus/sirkulasi"
+        >
+          <v-list-item-icon>
+            <v-icon>mdi-autorenew</v-icon>
+          </v-list-item-icon>
+          <v-list-item-title>Sirkulasi</v-list-item-title>
+        </v-list-item>
 
       </v-list>
     </v-navigation-drawer>
