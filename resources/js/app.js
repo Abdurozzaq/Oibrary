@@ -16,7 +16,7 @@ import Vuelidate from 'vuelidate'
 axios.defaults.withCredentials = true;
 axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 axios.defaults.headers.common['Content-Type'] = 'application/json';
-axios.defaults.baseURL = process.env.MIX_API_URL;
+axios.defaults.baseURL = "http://oibrary.local";
 
 const token = localStorage.getItem('userToken')
 if (token) {
