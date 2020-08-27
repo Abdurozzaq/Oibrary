@@ -82,6 +82,35 @@
           <v-list-item-title>Sirkulasi</v-list-item-title>
         </v-list-item>
 
+        <v-list-group
+          prepend-icon="mdi-inbox"
+          value
+          active-class="white--text"
+        >
+          <template v-slot:activator>
+            <v-list-item-title>Log Data</v-list-item-title>
+          </template>
+
+          <v-list-item
+            link
+            href="/perpus/log-data/peminjaman"
+          >
+            <v-list-item-title>Peminjaman</v-list-item-title>
+            <v-list-item-icon>
+              <v-icon>mdi-inbox-arrow-up</v-icon>
+            </v-list-item-icon>
+          </v-list-item>
+
+          <v-list-item
+            link
+            href="/perpus/log-data/pengembalian"
+          >
+            <v-list-item-title>Pengembalian</v-list-item-title>
+            <v-list-item-icon>
+              <v-icon>mdi-inbox-arrow-down</v-icon>
+            </v-list-item-icon>
+          </v-list-item>
+        </v-list-group>
       </v-list>
     </v-navigation-drawer>
 

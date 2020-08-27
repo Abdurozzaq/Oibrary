@@ -53,4 +53,8 @@ Route::post('/perpus/buku/delete/{id}', 'Api\Pustakawan\BukuController@deleteBuk
 Route::get('/perpus/users/member/list', 'Api\Pustakawan\MemberController@getDaftarMember');
 // Peminjaman
 Route::post('/perpus/pinjam-buku', 'Api\Pustakawan\PeminjamanController@createPeminjamanBuku');
-Route::get('/perpus/sikulasi/list', 'Api\Pustakawan\PeminjamanController@getDaftarPeminjaman');
+Route::get('/perpus/sikulasi/list', 'Api\Pustakawan\PeminjamanController@getDaftarSirkulasi');
+Route::post('/perpus/perpanjang-buku/{id}', 'Api\Pustakawan\PeminjamanController@perpanjangBuku');
+Route::post('/perpus/kembalikan-buku/{id}', 'Api\Pustakawan\PeminjamanController@kembalikanBuku');
+Route::get('/perpus/log-data/peminjaman', 'Api\Pustakawan\PeminjamanController@getDaftarPeminjaman');
+Route::get('/perpus/log-data/peminjaman/export', 'Api\Pustakawan\PeminjamanController@exportLogPeminjaman');

@@ -26,6 +26,7 @@ import CreateBuku from "./pages/pustakawan/buku/BuatBuku.vue"
 import DaftarBuku from "./pages/pustakawan/buku/DaftarBuku.vue"
 import PinjamBuku from "./pages/pustakawan/peminjaman/PinjamBuku.vue"
 import Sirkulasi from "./pages/pustakawan/peminjaman/Sirkulasi.vue"
+import LogPeminjaman from "./pages/pustakawan/logData/Peminjaman.vue"
 
 // // Member
 // import MemberHomePage from "./pages/member/MemberHome.vue"
@@ -268,6 +269,14 @@ export const routes = [
                 component: Sirkulasi,
                 meta: {
                     title: 'Sirkulasi - ' + nama_sekolah,
+                },
+                beforeEnter: multiguard([ifAuthenticated, pustakawanOnly, verifiedEmail, pageTitle]),
+            },
+            {
+                path: "log-data/peminjaman",
+                component: LogPeminjaman,
+                meta: {
+                    title: 'Log Data Peminjaman - ' + nama_sekolah,
                 },
                 beforeEnter: multiguard([ifAuthenticated, pustakawanOnly, verifiedEmail, pageTitle]),
             },

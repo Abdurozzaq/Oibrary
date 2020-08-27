@@ -49,10 +49,10 @@ class denda extends Command
         foreach($pengembalian as $item) {
             $tglKembali = Carbon::parse($item['tanggal_harus_kembali']);
 
-            $selisih = $tglSekarang->diffInWeekdays($tglKembali);
+            $selisih = $tglSekarang->diffInWeekdays($tglKembali) - 1;
 
             if($selisih > 0) {
-                $item['denda'] = $selisih * 100;
+                $item['denda'] = $selisih * 500;
                 $item['terlambat'] = $selisih;
                 $item->save();
             }

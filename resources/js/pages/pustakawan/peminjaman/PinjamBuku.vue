@@ -468,7 +468,7 @@ export default {
             currentObj.snackColor = 'success'
             currentObj.snackText = 'Berhasil Pinjam Buku'
 
-            currentObj.$router.push('/perpus/peminjaman')
+            currentObj.$router.push('/perpus/sirkulasi')
           })
           .catch(function (error) {
             currentObj.overlaybukuTerpilih = false

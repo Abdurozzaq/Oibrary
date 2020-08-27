@@ -39,6 +39,9 @@
         :items-per-page="5"
         class="elevation-1"
       >
+        <template v-slot:[`item.nama_peminjam`]="{ item }">
+          <span>{{ item.first_name }} {{ item.last_name }}</span>
+        </template>
 
         <template v-slot:[`item.tanggal_pinjam`]="{ item }">
           <span>{{ moment(item.tanggal_pinjam).format('DD-MM-YYYY') }}</span>
@@ -48,11 +51,22 @@
           <span>{{ moment(item.tanggal_harus_kembali).format('DD-MM-YYYY') }}</span>
         </template>
 
+        <template v-slot:[`item.denda`]="{ item }">
+          <span v-if="item.denda != null" class="red--text font-weight-bold">Rp.{{ item.denda }}</span>
+          <span v-else class="font-weight-bold">-</span>
+        </template>
+
+        <template v-slot:[`item.terlambat`]="{ item }">
+          <span v-if="item.terlambat != null" class="red--text font-weight-bold">{{ item.terlambat }} Hari</span>
+          <span v-else class="font-weight-bold">-</span>
+        </template>
+
         <template v-slot:[`item.action`]="props">
           <v-tooltip bottom>
             <template v-slot:activator="{ on, attrs }">
-              <v-btn v-bind="attrs" v-on="on" class="ma-2" fab dark small color="green" @click.prevent="perpanjang(props.item)">
+              <v-btn v-bind="attrs" v-on="on" class="ma-2" dark small color="green" @click.prevent="perpanjang(props.item)">
                 <v-icon dark>mdi-autorenew</v-icon>
+                Perpanjang
               </v-btn>
             </template>
             <span>Perpanjang</span>
@@ -60,8 +74,9 @@
 
           <v-tooltip bottom>
             <template v-slot:activator="{ on, attrs }">
-              <v-btn v-bind="attrs" v-on="on" class="ma-2" fab dark small color="green" @click.prevent="kembalikan(props.item)">
+              <v-btn v-bind="attrs" v-on="on" class="ma-2" dark small color="amber" @click.prevent="kembalikan(props.item)">
                 <v-icon dark>mdi-inbox-arrow-down</v-icon>
+                Kembalikan
               </v-btn>
             </template>
             <span>Kembalikan</span>
@@ -69,15 +84,6 @@
 
         </template>
 
-        <template v-slot:[`item.foto_buku`]="props">
-          <v-img
-            :src="props.item.foto_buku"
-            aspect-ratio="1"
-            max-width="500"
-            max-height="300"
-          >
-          </v-img>
-        </template>
 
       </v-data-table>
 
@@ -89,6 +95,10 @@
         class="elevation-1"
       >
 
+        <template v-slot:[`item.nama_peminjam`]="{ item }">
+          <span>{{ item.first_name }} {{ item.last_name }}</span>
+        </template>
+
         <template v-slot:[`item.tanggal_pinjam`]="{ item }">
           <span>{{ moment(item.tanggal_pinjam).format('DD-MM-YYYY') }}</span>
         </template>
@@ -97,12 +107,23 @@
           <span>{{ moment(item.tanggal_harus_kembali).format('DD-MM-YYYY') }}</span>
         </template>
 
+        <template v-slot:[`item.denda`]="{ item }">
+          <span v-if="item.denda != null" class="red--text font-weight-bold">Rp.{{ item.denda }}</span>
+          <span v-else class="font-weight-bold">-</span>
+        </template>
+
+        <template v-slot:[`item.terlambat`]="{ item }">
+          <span v-if="item.terlambat != null" class="red--text font-weight-bold">{{ item.terlambat }} Hari</span>
+          <span v-else class="font-weight-bold">-</span>
+        </template>
+
         <template v-slot:[`item.action`]="props">
 
           <v-tooltip bottom>
             <template v-slot:activator="{ on, attrs }">
-              <v-btn v-bind="attrs" v-on="on" class="ma-2" fab dark small color="green" @click.prevent="perpanjang(props.item)">
+              <v-btn v-bind="attrs" v-on="on" class="ma-2" dark small color="green" @click.prevent="perpanjang(props.item)">
                 <v-icon dark>mdi-autorenew</v-icon>
+                Perpanjang
               </v-btn>
             </template>
             <span>Perpanjang</span>
@@ -110,8 +131,9 @@
 
           <v-tooltip bottom>
             <template v-slot:activator="{ on, attrs }">
-              <v-btn v-bind="attrs" v-on="on" class="ma-2" fab dark small color="green" @click.prevent="kembalikan(props.item)">
+              <v-btn v-bind="attrs" v-on="on" class="ma-2" dark small color="amber" @click.prevent="kembalikan(props.item)">
                 <v-icon dark>mdi-inbox-arrow-down</v-icon>
+                Kembalikan
               </v-btn>
             </template>
             <span>Kembalikan</span>
@@ -119,15 +141,6 @@
 
         </template>
 
-        <template v-slot:[`item.foto_buku`]="props">
-          <v-img
-            :src="props.item.foto_buku"
-            aspect-ratio="1"
-            max-width="500"
-            max-height="300"
-          >
-          </v-img>
-        </template>
       </v-data-table>
 
       <v-overlay
@@ -186,6 +199,18 @@
             value: 'kode_peminjaman_full'
           },
           {
+            text: 'Kode Peminjam',
+            align: 'start',
+            sortable: true,
+            value: 'kode_user_full',
+          },
+          {
+            text: 'Nama Peminjam',
+            align: 'start',
+            sortable: true,
+            value: 'nama_peminjam',
+          },
+          {
             text: 'Judul Buku',
             align: 'start',
             sortable: true,
@@ -216,6 +241,12 @@
             value: 'denda',
           },
           {
+            text: 'Terlambat',
+            align: 'start',
+            sortable: true,
+            value: 'terlambat',
+          },
+          {
             text: 'Action',
             value: 'action',
             sortable: false
@@ -239,6 +270,7 @@
             currentObj.snack = true
             currentObj.snackColor = 'error'
             currentObj.snackText = 'Tidak Bisa Mendapatkan Data Peminjaman'
+            currentObj.overlay = false
           })
       },
 
@@ -253,6 +285,8 @@
             ||
             peminjaman.pengarang_buku.toLowerCase().includes(currentObj.search.toLowerCase())
             ||
+            peminjaman.kode_user_full.toLowerCase().includes(currentObj.search.toLowerCase())
+            ||
             peminjaman.first_name.toLowerCase().includes(currentObj.search.toLowerCase())
             ||
             peminjaman.last_name.toLowerCase().includes(currentObj.search.toLowerCase())
@@ -266,7 +300,59 @@
           currentObj.daftarPeminjamanFiltered = null
         }
 
-      },
+      }, // searchPeminjaman()
+
+      perpanjang: function(props) {
+        let currentObj = this
+
+        currentObj.overlay = true
+
+        axios.post('api/perpus/perpanjang-buku/' + props.id)
+          .then(function (response) {
+
+            currentObj.snack = true
+            currentObj.snackColor = 'success'
+            currentObj.snackText = 'Berhasil Perpanjang Buku!'
+
+            currentObj.overlay = false
+
+            currentObj.getData()
+          })
+          .catch(function (error) {
+
+            currentObj.snack = true
+            currentObj.snackColor = 'error'
+            currentObj.snackText = 'Tidak Bisa Perpanjang Buku'
+
+            currentObj.overlay = false
+          })
+      }, // End of perpanjang()
+
+      kembalikan: function(props) {
+        let currentObj = this
+
+        currentObj.overlay = true
+
+        axios.post('api/perpus/kembalikan-buku/' + props.id)
+          .then(function (response) {
+
+            currentObj.snack = true
+            currentObj.snackColor = 'success'
+            currentObj.snackText = 'Berhasil Mengembalikan Buku!'
+
+            currentObj.overlay = false
+
+            currentObj.getData()
+          })
+          .catch(function (error) {
+
+            currentObj.snack = true
+            currentObj.snackColor = 'error'
+            currentObj.snackText = 'Tidak Bisa Mengembalikan Buku'
+
+            currentObj.overlay = false
+          })
+      }
 
     }, // End of Methods
 

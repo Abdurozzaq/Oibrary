@@ -25,6 +25,7 @@
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
+        "file-saver": "^2.0.2",
         "material-design-icons-iconfont": "^5.0.1",
         "moment": "^2.27.0",
         "vue-axios": "^2.1.5",
