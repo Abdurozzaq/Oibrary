@@ -134,6 +134,7 @@ class PeminjamanController extends Controller
                     ->select(
                         'buku.kode_buku_full',
                         'buku.judul_buku', 
+                        'peminjaman.jumlah_buku',
                         'peminjaman.kode_peminjaman_full', 
                         DB::raw('DATE_FORMAT(peminjaman.tanggal_pinjam, "%d-%m-%Y") as tanggal_pinjam'),
                         'users.kode_user_full',
@@ -161,6 +162,7 @@ class PeminjamanController extends Controller
                     ->select(
                         'buku.kode_buku_full',
                         'buku.judul_buku', 
+                        'peminjaman.jumlah_buku',
                         'peminjaman.kode_peminjaman_full', 
                         DB::raw('DATE_FORMAT(peminjaman.tanggal_pengembalian, "%d-%m-%Y") as tanggal_pengembalian'),
                         'users.kode_user_full',

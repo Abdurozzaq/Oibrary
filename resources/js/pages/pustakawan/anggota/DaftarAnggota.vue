@@ -427,43 +427,24 @@
 
       searchAnggota: function() {
         let currentObj = this
+        
         if (currentObj.search != null) {
 
-          for (var anggota in currentObj.daftarAnggota) {
-            if (anggota.nis != null) {
-              currentObj.daftarAnggotaFiltered = currentObj.daftarAnggota.filter(
-                anggota => 
-                anggota.kode_user_full.toLowerCase().includes(currentObj.search.toLowerCase())
-                ||
-                anggota.full_name.toLowerCase().includes(currentObj.search.toLowerCase()) 
-                ||
-                anggota.nis.toLowerCase().includes(currentObj.search.toLowerCase())
-                ||
-                anggota.email.toLowerCase().includes(currentObj.search.toLowerCase())
-              )
-            } else if(anggota.nuptk != null) {
-              currentObj.daftarAnggotaFiltered = currentObj.daftarAnggota.filter(
-                anggota => 
-                anggota.kode_user_full.toLowerCase().includes(currentObj.search.toLowerCase())
-                ||
-                anggota.full_name.toLowerCase().includes(currentObj.search.toLowerCase()) 
-                ||
-                anggota.nuptk.toLowerCase().includes(currentObj.search.toLowerCase())
-                ||
-                anggota.email.toLowerCase().includes(currentObj.search.toLowerCase())
-              )
-            } else {
-              currentObj.daftarAnggotaFiltered = currentObj.daftarAnggota.filter(
-                anggota => 
-                anggota.kode_user_full.toLowerCase().includes(currentObj.search.toLowerCase())
-                ||
-                anggota.full_name.toLowerCase().includes(currentObj.search.toLowerCase()) 
-                ||
-                anggota.email.toLowerCase().includes(currentObj.search.toLowerCase())
-              )
+          axios.post('api/perpus/users/member/search', {
+            'query': currentObj.search
+          })
+          .then(function (response) {
+
+            currentObj.daftarAnggotaFiltered = response.data.data
+            currentObj.overlay = false
+          })
+          .catch(function (error) {
+            if(error.response) {
+              currentObj.serverError = error.response.data.errors
+              currentObj.errorAlert = true
             }
-          }
-          
+            currentObj.overlay = false
+          })
 
         } else {
           currentObj.daftarAnggotaFiltered = null
@@ -488,15 +469,15 @@
         let currentObj = this
 
         currentObj.editAnggotaDialog = false
-        currentObj.edit_id = null
-        currentObj.edit_first_name = null
-        currentObj.edit_last_name = null
-        currentObj.edit_nis = null
-        currentObj.edit_nuptk = null
-        currentObj.edit_alamat = null
-        currentObj.edit_no_telp = null
-        currentObj.edit_email = null
-        currentObj.edit_foto_user = null
+        currentObj.edit_id = ''
+        currentObj.edit_first_name = ''
+        currentObj.edit_last_name = ''
+        currentObj.edit_nis = ''
+        currentObj.edit_nuptk = ''
+        currentObj.edit_alamat = ''
+        currentObj.edit_no_telp = ''
+        currentObj.edit_email = ''
+        currentObj.edit_foto_user = ''
       },
 
       editAnggota: function () {

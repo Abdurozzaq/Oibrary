@@ -20,6 +20,7 @@ class LogPengembalianExport implements FromCollection
                     ->select(
                         'buku.kode_buku_full',
                         'buku.judul_buku', 
+                        'peminjaman.jumlah_buku',
                         'peminjaman.kode_peminjaman_full', 
                         DB::raw('DATE_FORMAT(peminjaman.tanggal_pengembalian, "%d-%m-%Y") as tanggal_pengembalian'),
                         'users.kode_user_full',

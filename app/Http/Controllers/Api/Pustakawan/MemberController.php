@@ -118,12 +118,8 @@ class MemberController extends Controller
                 $anggota->email = $request['email'];
                 $anggota->email_verified_at = Carbon::now()->timestamp;
             }
-            if ($request['nis']) {
-                $anggota->nis = $request['nis'];
-            }
-            if ($request['nuptk']) {
-                $anggota->nuptk = $request['nuptk'];
-            }
+            $anggota->nis = $request['nis'];
+            $anggota->nuptk = $request['nuptk'];
             $anggota->alamat = $request['alamat'];
             $anggota->no_telp = $request['no_telp'];
             $anggota->save();
@@ -142,12 +138,8 @@ class MemberController extends Controller
                 $anggota->email = $request['email'];
                 $anggota->email_verified_at = Carbon::now()->timestamp;
             }
-            if ($request['nis']) {
-                $anggota->nis = $request['nis'];
-            }
-            if($request['nuptk']) {
-                $anggota->nuptk = $request['nuptk'];
-            }
+            $anggota->nis = $request['nis'];
+            $anggota->nuptk = $request['nuptk'];
             $anggota->alamat = $request['alamat'];
             $anggota->no_telp = $request['no_telp'];
             $anggota->save();
@@ -170,6 +162,29 @@ class MemberController extends Controller
         return response()->json([
             'status' => 'success',
             'message' => 'Anggota telah berhasil dihapus.'
+        ], 200);
+    }
+
+    public function searchMember(Request $request) {
+
+        $this->validate($request, [
+            'query' => 'required',
+        ]);
+
+        $query = $request['query'];
+
+        $data = User::where('kode_user_full','like',"%".$query."%")
+                        ->orWhere('first_name', 'like', "%".$query."%")
+                        ->orWhere('last_name', 'like', "%".$query."%")
+                        ->orWhere('nis', 'like', "%".$query."%")
+                        ->orWhere('nuptk', 'like', "%".$query."%")
+                        ->orWhere('email', 'like', "%".$query."%")
+                        ->get();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Berhasil Mencari Anggota Dengan Kata Kunci Yang Diberikan',
+            'data' => $data
         ], 200);
     }
 }

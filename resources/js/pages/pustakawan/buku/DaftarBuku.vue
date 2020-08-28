@@ -67,7 +67,17 @@
 
         <template v-slot:[`item.foto_buku`]="props">
           <v-img
+            v-if="props.item.foto_buku"
             :src="props.item.foto_buku"
+            aspect-ratio="1"
+            max-width="500"
+            max-height="300"
+          >
+          </v-img>
+
+          <v-img
+            v-else
+            src="/statics/buku-cover.jpg"
             aspect-ratio="1"
             max-width="500"
             max-height="300"
@@ -113,7 +123,17 @@
 
         <template v-slot:[`item.foto_buku`]="props">
           <v-img
+            v-if="props.item.foto_buku"
             :src="props.item.foto_buku"
+            aspect-ratio="1"
+            max-width="500"
+            max-height="300"
+          >
+          </v-img>
+
+          <v-img
+            v-else
+            src="/statics/buku-cover.jpg"
             aspect-ratio="1"
             max-width="500"
             max-height="300"
@@ -562,16 +582,16 @@
         let currentObj = this
 
         currentObj.editBukuDialog = false
-        currentObj.edit_id = null
-        currentObj.edit_judul_buku = null
-        currentObj.edit_pengarang_buku = null
-        currentObj.edit_penerbit_buku = null
-        currentObj.edit_tahun_terbit_buku = null
-        currentObj.edit_foto_buku = null
-        currentObj.edit_jumlah_halaman_buku = null
-        currentObj.edit_stok_buku = null
-        currentObj.edit_nama_rak = null
-        currentObj.edit_lokasi_rak = null
+        currentObj.edit_id = ''
+        currentObj.edit_judul_buku = ''
+        currentObj.edit_pengarang_buku = ''
+        currentObj.edit_penerbit_buku = ''
+        currentObj.edit_tahun_terbit_buku = ''
+        currentObj.edit_foto_buku = ''
+        currentObj.edit_jumlah_halaman_buku = ''
+        currentObj.edit_stok_buku = ''
+        currentObj.edit_nama_rak = ''
+        currentObj.edit_lokasi_rak = ''
       },
 
       editBuku: function () {

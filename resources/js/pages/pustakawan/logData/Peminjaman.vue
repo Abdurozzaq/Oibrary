@@ -123,6 +123,12 @@
             value: 'judul_buku',
           },
           {
+            text: 'Jumlah Buku',
+            align: 'start',
+            sortable: true,
+            value: 'jumlah_buku',
+          },
+          {
             text: 'Kode Peminjaman',
             align: 'start',
             sortable: true,

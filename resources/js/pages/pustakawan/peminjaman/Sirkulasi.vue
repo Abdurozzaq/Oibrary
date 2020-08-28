@@ -229,6 +229,12 @@
             value: 'tanggal_pinjam',
           },
           {
+            text: 'Jumlah Buku',
+            align: 'start',
+            sortable: true,
+            value: 'jumlah_buku',
+          },
+          {
             text: 'Tgl Harus Kembali',
             align: 'start',
             sortable: true,

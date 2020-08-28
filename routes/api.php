@@ -54,6 +54,7 @@ Route::get('/perpus/users/member/list', 'Api\Pustakawan\MemberController@getDaft
 Route::post('/perpus/users/member/edit/{id}', 'Api\Pustakawan\MemberController@editMember');
 Route::post('/perpus/users/member/delete/{id}', 'Api\Pustakawan\MemberController@deleteMember');
 Route::post('/perpus/users/member/create', 'Api\Pustakawan\MemberController@createMember');
+Route::post('/perpus/users/member/search', 'Api\Pustakawan\MemberController@searchMember');
 // Peminjaman
 Route::post('/perpus/pinjam-buku', 'Api\Pustakawan\PeminjamanController@createPeminjamanBuku');
 Route::get('/perpus/sikulasi/list', 'Api\Pustakawan\PeminjamanController@getDaftarSirkulasi');
