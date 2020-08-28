@@ -428,7 +428,7 @@
       searchAnggota: function() {
         let currentObj = this
         
-        if (currentObj.search != null) {
+        if (currentObj.search != null && currentObj.search.length != 0) {
 
           axios.post('api/perpus/users/member/search', {
             'query': currentObj.search
