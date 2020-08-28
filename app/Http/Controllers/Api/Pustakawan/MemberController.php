@@ -88,11 +88,23 @@ class MemberController extends Controller
 
     public function editMember(Request $request, $id) {
 
-        $this->validate($request, [
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'email' => 'required|email|unique:users',
-        ]);
+        if ($request['email']) {
+            $user = User::findOrFail($id);
+            if ($user->email == $request['email']) {
+                $this->validate($request, [
+                    'first_name' => 'required',
+                    'last_name' => 'required',
+                ]);
+            } else {
+                $this->validate($request, [
+                    'first_name' => 'required',
+                    'last_name' => 'required',
+                    'email' => 'required|email|unique:users',
+                ]);
+            }
+        }
+
+        
 
 
         if($request->hasFile('foto_user')){
@@ -106,8 +118,10 @@ class MemberController extends Controller
             $anggota->foto_user = $url;
             $anggota->first_name = $request['first_name'];
             $anggota->last_name = $request['last_name'];
-            $anggota->email = $request['email'];
-            $anggota->email_verified_at = Carbon::now()->timestamp;
+            if ($anggota->email != $request['email']) {
+                $anggota->email = $request['email'];
+                $anggota->email_verified_at = Carbon::now()->timestamp;
+            }
             if ($request['nis']) {
                 $anggota->nis = $request['nis'];
             }
@@ -128,8 +142,10 @@ class MemberController extends Controller
             $anggota = User::findOrFail($id);
             $anggota->first_name = $request['first_name'];
             $anggota->last_name = $request['last_name'];
-            $anggota->email = $request['email'];
-            $anggota->email_verified_at = Carbon::now()->timestamp;
+            if ($anggota->email != $request['email']) {
+                $anggota->email = $request['email'];
+                $anggota->email_verified_at = Carbon::now()->timestamp;
+            }
             if ($request['nis']) {
                 $anggota->nis = $request['nis'];
             }
