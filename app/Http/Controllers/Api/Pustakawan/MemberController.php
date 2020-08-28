@@ -32,8 +32,6 @@ class MemberController extends Controller
             'first_name' => 'required',
             'last_name' => 'required',
             'email' => 'required|email|unique:users',
-            'password' => 'required|confirmed|min:8',
-            'password_confirmation' => 'required|min:8',
             'role' => 'required'
         ]);
 
@@ -55,7 +53,6 @@ class MemberController extends Controller
                 'nuptk' => $request['nuptk'],
                 'alamat' => $request['alamat'],
                 'no_telp' => $request['no_telp'],
-                'password' => Hash::make($request['password']),
                 'id_prefix' => '3'
             ])->assignRole('member');
             
@@ -74,7 +71,6 @@ class MemberController extends Controller
                 'nuptk' => $request['nuptk'],
                 'alamat' => $request['alamat'],
                 'no_telp' => $request['no_telp'],
-                'password' => Hash::make($request['password']),
                 'id_prefix' => '3'
             ])->assignRole('member');
 

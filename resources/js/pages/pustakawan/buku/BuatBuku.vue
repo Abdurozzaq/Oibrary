@@ -208,15 +208,15 @@
         data () {
             return {
                 // v-model
-                judul_buku: null,
-                pengarang_buku: null,
-                penerbit_buku: null,
-                tahun_terbit_buku: null,
-                foto_buku: null,
-                jumlah_halaman_buku: null,
-                stok_buku: null,
-                nama_rak: null,
-                lokasi_rak: null,
+                judul_buku: '',
+                pengarang_buku: '',
+                penerbit_buku: '',
+                tahun_terbit_buku: '',
+                foto_buku: '',
+                jumlah_halaman_buku: '',
+                stok_buku: '',
+                nama_rak: '',
+                lokasi_rak: '',
 
                 // For Form Exception
                 errorAlert: false,
@@ -357,6 +357,9 @@
                         currentObj.snackText = 'Buku telah berhasil dibuat.'
 
                         currentObj.overlay = false
+
+
+                        currentObj.$router.push('/perpus/buku/list')
 
                     })
                     .catch(function (error) {

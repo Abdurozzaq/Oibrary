@@ -279,15 +279,15 @@
         total: null,
 
         // Form
-        edit_id: null,
-        edit_first_name: null,
-        edit_last_name: null,
-        edit_nis: null,
-        edit_nuptk: null,
-        edit_foto_user: null,
-        edit_alamat: null,
-        edit_no_telp: null,
-        edit_email: null,
+        edit_id: '',
+        edit_first_name: '',
+        edit_last_name: '',
+        edit_nis: '',
+        edit_nuptk: '',
+        edit_foto_user: '',
+        edit_alamat: '',
+        edit_no_telp: '',
+        edit_email: '',
 
         // Form Response
         editErrorAlert: false,

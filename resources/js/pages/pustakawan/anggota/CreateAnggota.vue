@@ -197,14 +197,14 @@
         dialog: false,
 
         // Form
-        foto_user: null,
-        first_name: null,
-        last_name: null,
-        nis: null,
-        nuptk: null,
-        alamat: null,
-        no_telp: null,
-        email: null,
+        foto_user: '',
+        first_name: '',
+        last_name: '',
+        nis: '',
+        nuptk: '',
+        alamat: '',
+        no_telp: '',
+        email: '',
         role: 'member',
 
         // Response

@@ -314,16 +314,16 @@
         total: null,
 
         // Form
-        edit_id: null,
-        edit_judul_buku: null,
-        edit_pengarang_buku: null,
-        edit_penerbit_buku: null,
-        edit_tahun_terbit_buku: null,
-        edit_foto_buku: null,
-        edit_jumlah_halaman_buku: null,
-        edit_stok_buku: null,
-        edit_nama_rak: null,
-        edit_lokasi_rak: null,
+        edit_id: '',
+        edit_judul_buku: '',
+        edit_pengarang_buku: '',
+        edit_penerbit_buku: '',
+        edit_tahun_terbit_buku: '',
+        edit_foto_buku: '',
+        edit_jumlah_halaman_buku: '',
+        edit_stok_buku: '',
+        edit_nama_rak: '',
+        edit_lokasi_rak: '',
 
         // Form Response
         editErrorAlert: false,
