@@ -27,6 +27,7 @@ import DaftarBuku from "./pages/pustakawan/buku/DaftarBuku.vue"
 import PinjamBuku from "./pages/pustakawan/peminjaman/PinjamBuku.vue"
 import Sirkulasi from "./pages/pustakawan/peminjaman/Sirkulasi.vue"
 import LogPeminjaman from "./pages/pustakawan/logData/Peminjaman.vue"
+import LogPengembalian from "./pages/pustakawan/logData/Pengembalian.vue"
 
 // // Member
 // import MemberHomePage from "./pages/member/MemberHome.vue"
@@ -213,6 +214,9 @@ export const routes = [
         children: [
             {
                 path: "",
+                meta: {
+                    title: 'Welcome To' + 'Perpus ' + nama_sekolah,
+                },
                 component: LandingPage,
             }
         ]
@@ -236,7 +240,7 @@ export const routes = [
                 path: "",
                 component: PusatakawanHomePage,
                 meta: {
-                    title: 'Home - ' + nama_sekolah,
+                    title: 'Home - ' + 'Perpus ' + nama_sekolah,
                 },
                 beforeEnter: multiguard([ifAuthenticated, pustakawanOnly, verifiedEmail, pageTitle]),
             },
@@ -244,7 +248,7 @@ export const routes = [
                 path: "buku/create",
                 component: CreateBuku,
                 meta: {
-                    title: 'Tambah Buku - ' + nama_sekolah,
+                    title: 'Tambah Buku - ' + 'Perpus ' + nama_sekolah,
                 },
                 beforeEnter: multiguard([ifAuthenticated, pustakawanOnly, verifiedEmail, pageTitle]),
             },
@@ -252,7 +256,7 @@ export const routes = [
                 path: "buku/list",
                 component: DaftarBuku,
                 meta: {
-                    title: 'Daftar Buku - ' + nama_sekolah,
+                    title: 'Daftar Buku - ' + 'Perpus ' + nama_sekolah,
                 },
                 beforeEnter: multiguard([ifAuthenticated, pustakawanOnly, verifiedEmail, pageTitle]),
             },
@@ -260,7 +264,7 @@ export const routes = [
                 path: "pinjam-buku",
                 component: PinjamBuku,
                 meta: {
-                    title: 'Pinjam Buku - ' + nama_sekolah,
+                    title: 'Pinjam Buku - ' + 'Perpus ' + nama_sekolah,
                 },
                 beforeEnter: multiguard([ifAuthenticated, pustakawanOnly, verifiedEmail, pageTitle]),
             },
@@ -268,7 +272,7 @@ export const routes = [
                 path: "sirkulasi",
                 component: Sirkulasi,
                 meta: {
-                    title: 'Sirkulasi - ' + nama_sekolah,
+                    title: 'Sirkulasi - ' + 'Perpus ' + nama_sekolah,
                 },
                 beforeEnter: multiguard([ifAuthenticated, pustakawanOnly, verifiedEmail, pageTitle]),
             },
@@ -276,7 +280,15 @@ export const routes = [
                 path: "log-data/peminjaman",
                 component: LogPeminjaman,
                 meta: {
-                    title: 'Log Data Peminjaman - ' + nama_sekolah,
+                    title: 'Log Data Peminjaman - ' + 'Perpus ' + nama_sekolah,
+                },
+                beforeEnter: multiguard([ifAuthenticated, pustakawanOnly, verifiedEmail, pageTitle]),
+            },
+            {
+                path: "log-data/pengembalian",
+                component: LogPengembalian,
+                meta: {
+                    title: 'Log Data Pengembalian - ' + 'Perpus ' + nama_sekolah,
                 },
                 beforeEnter: multiguard([ifAuthenticated, pustakawanOnly, verifiedEmail, pageTitle]),
             },
@@ -290,7 +302,7 @@ export const routes = [
                 path: "",
                 component: AdminHomePage,
                 meta: {
-                    title: 'Admin Home - ' + nama_sekolah,
+                    title: 'Admin Home - ' + 'Perpus ' + nama_sekolah,
                 },
                 beforeEnter: multiguard([ifAuthenticated, adminOnly, verifiedEmail, pageTitle]),
             },
@@ -298,7 +310,7 @@ export const routes = [
                 path: "users/create",
                 component: AdminCreateUser,
                 meta: {
-                    title: 'Create User - ' + nama_sekolah,
+                    title: 'Create User - ' + 'Perpus ' + nama_sekolah,
                 },
                 beforeEnter: multiguard([ifAuthenticated, adminOnly, verifiedEmail, pageTitle]),
             },
@@ -312,7 +324,7 @@ export const routes = [
         path: "/login",
         component: Login,
         meta: {
-            title: 'Login - ' + nama_sekolah,
+            title: 'Login - ' + 'Perpus ' + nama_sekolah,
         },
         beforeEnter: multiguard([ifNotAuthenticated, pageTitle]),
     },
@@ -328,7 +340,7 @@ export const routes = [
         path: "/forgot-password",
         component: ForgotPassword,
         meta: {
-            title: 'Forgot Password - ' + nama_sekolah,
+            title: 'Forgot Password - ' + 'Perpus ' + nama_sekolah,
         },
         beforeEnter: multiguard([ifNotAuthenticated, pageTitle]),
     },
@@ -336,7 +348,7 @@ export const routes = [
         path: "/reset-password",
         component: ResetPassword,
         meta: {
-            title: 'Reset Password - ' + nama_sekolah,
+            title: 'Reset Password - ' + 'Perpus ' + nama_sekolah,
         },
         beforeEnter: multiguard([ifNotAuthenticated, pageTitle]),
     },
@@ -344,7 +356,7 @@ export const routes = [
         path: "/resend-verification-mail",
         component: ResendVerificationMail,
         meta: {
-            title: 'Resend Verification Mail - ' + nama_sekolah,
+            title: 'Resend Verification Mail - ' + 'Perpus ' + nama_sekolah,
         },
         beforeEnter: multiguard([ifNotAuthenticated, pageTitle]),
     },
@@ -352,7 +364,7 @@ export const routes = [
         path: "/verification-success",
         component: RedirectAfterVerify,
         meta: {
-            title: 'Verification Success - ' + nama_sekolah,
+            title: 'Verification Success - ' + 'Perpus ' + nama_sekolah,
         },
         beforeEnter: multiguard([pageTitle]),
     },
@@ -360,7 +372,7 @@ export const routes = [
         path: "/UnverifiedEmail",
         component: UnverifiedEmail,
         meta: {
-            title: 'Unverified Email Address - ' + nama_sekolah,
+            title: 'Unverified Email Address - ' + 'Perpus ' + nama_sekolah,
         },
         beforeEnter: multiguard([pageTitle]),
     }

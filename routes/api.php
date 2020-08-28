@@ -58,3 +58,5 @@ Route::post('/perpus/perpanjang-buku/{id}', 'Api\Pustakawan\PeminjamanController
 Route::post('/perpus/kembalikan-buku/{id}', 'Api\Pustakawan\PeminjamanController@kembalikanBuku');
 Route::get('/perpus/log-data/peminjaman', 'Api\Pustakawan\PeminjamanController@getDaftarPeminjaman');
 Route::get('/perpus/log-data/peminjaman/export', 'Api\Pustakawan\PeminjamanController@exportLogPeminjaman');
+Route::get('/perpus/log-data/pengembalian', 'Api\Pustakawan\PeminjamanController@getDaftarPengembalian');
+Route::get('/perpus/log-data/pengembalian/export', 'Api\Pustakawan\PeminjamanController@exportLogPengembalian');

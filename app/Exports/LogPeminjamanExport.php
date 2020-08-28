@@ -14,7 +14,6 @@ class LogPeminjamanExport implements FromCollection
     public function collection()
     {
         return DB::table('peminjaman')
-                    ->whereNotNull('tanggal_pengembalian')
                     ->join('buku', 'buku.id', '=', 'peminjaman.id_buku')
                     ->join('users', 'users.id', '=', 'peminjaman.id_member')
                     ->select(

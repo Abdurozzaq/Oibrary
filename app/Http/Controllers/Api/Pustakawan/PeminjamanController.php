@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Buku;
 use Illuminate\Support\Facades\DB;
 use App\Exports\LogPeminjamanExport;
+use App\Exports\LogPengembalianExport;
 use Maatwebsite\Excel\Facades\Excel;
 
 class PeminjamanController extends Controller
@@ -128,7 +129,6 @@ class PeminjamanController extends Controller
 
     public function getDaftarPeminjaman() {
         $data = DB::table('peminjaman')
-                    ->whereNotNull('tanggal_pengembalian')
                     ->join('buku', 'buku.id', '=', 'peminjaman.id_buku')
                     ->join('users', 'users.id', '=', 'peminjaman.id_member')
                     ->select(
@@ -151,5 +151,32 @@ class PeminjamanController extends Controller
     public function exportLogPeminjaman()
 	{
 		return Excel::download(new LogPeminjamanExport, 'LogPeminjaman.xlsx');
-	}
+    }
+    
+    public function getDaftarPengembalian() {
+        $data = DB::table('peminjaman')
+                    ->whereNotNull('tanggal_pengembalian')
+                    ->join('buku', 'buku.id', '=', 'peminjaman.id_buku')
+                    ->join('users', 'users.id', '=', 'peminjaman.id_member')
+                    ->select(
+                        'buku.kode_buku_full',
+                        'buku.judul_buku', 
+                        'peminjaman.kode_peminjaman_full', 
+                        DB::raw('DATE_FORMAT(peminjaman.tanggal_pengembalian, "%d-%m-%Y") as tanggal_pengembalian'),
+                        'users.kode_user_full',
+                        DB::raw('CONCAT(users.first_name, " ", users.last_name) AS full_name')
+                    )
+                    ->get();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Berhasil Mendapatkan Data Pengembalian',
+            'data' => $data
+        ], 200);
+    }
+
+    public function exportLogPengembalian()
+	{
+		return Excel::download(new LogPengembalianExport, 'LogPengembalian.xlsx');
+    }
 }
