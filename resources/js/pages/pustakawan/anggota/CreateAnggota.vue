@@ -93,6 +93,11 @@
                           v-model="nuptk"
                         ></v-text-field>
 
+                        
+                      </v-col>
+
+                      <v-col cols="12" lg="6" md="12" sm="12" xs="12">
+
                         <v-text-field
                           label="Alamat"
                           hint="Alamat"
@@ -114,9 +119,7 @@
                           required
                           v-model="no_telp"
                         ></v-text-field>
-                      </v-col>
-
-                      <v-col cols="12" lg="6" md="12" sm="12" xs="12">
+                        
                         <v-text-field
                           label="Email"
                           hint="Email | Required"
@@ -130,35 +133,6 @@
                           @input="$v.email.$touch()" 
                           @blur="$v.email.$touch()"
                         ></v-text-field>
-
-                        <v-text-field
-                          label="Your Password"
-                          hint="Password | Required"
-                          persistent-hint
-                          single-line
-                          filled
-                          required
-                          type="password"
-                          :error-messages="passwordErrors"
-                          v-model="password"
-                          @input="$v.password.$touch()" 
-                          @blur="$v.password.$touch()"
-                        ></v-text-field>
-
-                        <v-text-field
-                          label="Confirm Your Password"
-                          hint="Confirm Password | Required"
-                          persistent-hint
-                          single-line
-                          filled
-                          required
-                          type="password"
-                          :error-messages="passwordConfirmationErrors"
-                          v-model="password_confirmation"
-                          @input="$v.password_confirmation.$touch()" 
-                          @blur="$v.password_confirmation.$touch()"
-                        ></v-text-field>
-
 
                         <v-file-input
                           label="Foto User"
@@ -231,8 +205,6 @@
         alamat: null,
         no_telp: null,
         email: null,
-        password: null,
-        password_confirmation: null,
         role: 'member',
 
         // Response
@@ -257,12 +229,6 @@
       email: { 
         required,
         email
-      },
-      password: {
-        required,
-      },
-      password_confirmation: {
-        required,
       },
     }, // end of validations
 
@@ -290,21 +256,6 @@
         !currentObj.$v.email.required && errors.push('Email harus di isi.')
         !currentObj.$v.email.email && errors.push('Email harus valid.')
         return errors
-      },
-
-      passwordErrors () {
-          let currentObj = this
-          const errors = []
-          if (!currentObj.$v.password.$dirty) return errors
-          !currentObj.$v.password.required && errors.push('Password harus di isi.')
-          return errors
-      },
-      passwordConfirmationErrors () {
-          let currentObj = this
-          const errors = []
-          if (!currentObj.$v.password_confirmation.$dirty) return errors
-          !currentObj.$v.password_confirmation.required && errors.push('Password Confirmation harus di isi.')
-          return errors
       },
   
     }, //End of Computed
@@ -337,8 +288,6 @@
           formData.append("alamat", currentObj.alamat)
           formData.append("no_telp", currentObj.no_telp)
           formData.append("email", currentObj.email)
-          formData.append("password", currentObj.password)
-          formData.append("password_confirmation", currentObj.password_confirmation)
           formData.append("role", currentObj.role)
 
           axios.post('api/perpus/users/member/create', formData)
