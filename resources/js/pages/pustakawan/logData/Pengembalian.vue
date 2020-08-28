@@ -182,7 +182,7 @@
             ||
             peminjaman.full_name.toLowerCase().includes(currentObj.search.toLowerCase())
             ||
-            peminjaman.tanggal_pinjam.toLowerCase().includes(currentObj.search.toLowerCase())
+            peminjaman.tanggal_pengembalian.toLowerCase().includes(currentObj.search.toLowerCase())
           )
 
         } else {

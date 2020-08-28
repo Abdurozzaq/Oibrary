@@ -17,7 +17,7 @@
 
     <v-card>
       <v-card-title>
-      Your Cashier Users List
+      Daftar Buku
         <v-spacer></v-spacer>
         <v-text-field
           v-model="search"

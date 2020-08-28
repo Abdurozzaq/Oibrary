@@ -28,6 +28,8 @@ import PinjamBuku from "./pages/pustakawan/peminjaman/PinjamBuku.vue"
 import Sirkulasi from "./pages/pustakawan/peminjaman/Sirkulasi.vue"
 import LogPeminjaman from "./pages/pustakawan/logData/Peminjaman.vue"
 import LogPengembalian from "./pages/pustakawan/logData/Pengembalian.vue"
+import CreateAnggota from "./pages/pustakawan/anggota/CreateAnggota.vue"
+import DaftarAnggota from "./pages/pustakawan/anggota/DaftarAnggota.vue"
 
 // // Member
 // import MemberHomePage from "./pages/member/MemberHome.vue"
@@ -289,6 +291,22 @@ export const routes = [
                 component: LogPengembalian,
                 meta: {
                     title: 'Log Data Pengembalian - ' + 'Perpus ' + nama_sekolah,
+                },
+                beforeEnter: multiguard([ifAuthenticated, pustakawanOnly, verifiedEmail, pageTitle]),
+            },
+            {
+                path: "anggota/create",
+                component: CreateAnggota,
+                meta: {
+                    title: 'Tambah Anggota - ' + 'Perpus ' + nama_sekolah,
+                },
+                beforeEnter: multiguard([ifAuthenticated, pustakawanOnly, verifiedEmail, pageTitle]),
+            },
+            {
+                path: "anggota/list",
+                component: DaftarAnggota,
+                meta: {
+                    title: 'Daftar Anggota - ' + 'Perpus ' + nama_sekolah,
                 },
                 beforeEnter: multiguard([ifAuthenticated, pustakawanOnly, verifiedEmail, pageTitle]),
             },

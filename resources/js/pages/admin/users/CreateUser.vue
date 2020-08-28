@@ -17,9 +17,9 @@
                 left
                 color="white"
               >
-                mdi-food-fork-drink
+                mdi-account-multiple
               </v-icon>
-              <span class="title white--text">Create User</span>
+              <span class="title white--text">Tambah User</span>
             </v-card-title>
             
               <v-card-text class="headline font-weight-bold">
@@ -134,6 +134,7 @@
                         ></v-text-field>
 
                         <v-text-field
+                          v-if="role == 'admin' || role == 'pustakawan'"
                           label="Your Password"
                           hint="Password | Required"
                           persistent-hint
@@ -141,13 +142,11 @@
                           filled
                           required
                           type="password"
-                          :error-messages="passwordErrors"
                           v-model="password"
-                          @input="$v.password.$touch()" 
-                          @blur="$v.password.$touch()"
                         ></v-text-field>
 
                         <v-text-field
+                          v-if="role == 'admin' || role == 'pustakawan'"
                           label="Confirm Your Password"
                           hint="Confirm Password | Required"
                           persistent-hint
@@ -155,10 +154,8 @@
                           filled
                           required
                           type="password"
-                          :error-messages="passwordConfirmationErrors"
                           v-model="password_confirmation"
-                          @input="$v.password_confirmation.$touch()" 
-                          @blur="$v.password_confirmation.$touch()"
+
                         ></v-text-field>
                         
                         <v-select
@@ -170,20 +167,15 @@
                           hint="User Role"
                           persistent-hint
                         ></v-select>
+
+                        <v-file-input
+                          label="Foto User"
+                          filled
+                          prepend-icon="mdi-camera"
+                          v-model="foto_user"
+                        ></v-file-input>
                       </v-col>
                     </v-row>  
-
-                    <v-row justify="start">
-                      <v-col cols="12" lg="6" md="12" sm="12" xs="12">
-                        <v-file-input
-                            label="Foto User"
-                            filled
-                            prepend-icon="mdi-camera"
-                            v-model="foto_user"
-                          ></v-file-input>
-                      </v-col>
-                    </v-row>
-
                     
 
                   </v-col>
@@ -197,7 +189,7 @@
                     align="center"
                     justify="end"
                   >
-                    <v-btn color="red darken-1 white--text" type="submit" >Create</v-btn>
+                    <v-btn color="red darken-1 white--text" type="submit" >Tambah</v-btn>
                   </v-row>
                 </v-list-item>
               </v-card-actions>
@@ -278,12 +270,6 @@
         required,
         email
       },
-      password: {
-        required,
-      },
-      password_confirmation: {
-        required,
-      },
     }, // end of validations
 
     computed: {
@@ -310,21 +296,6 @@
         !currentObj.$v.email.required && errors.push('Email harus di isi.')
         !currentObj.$v.email.email && errors.push('Email harus valid.')
         return errors
-      },
-
-      passwordErrors () {
-          let currentObj = this
-          const errors = []
-          if (!currentObj.$v.password.$dirty) return errors
-          !currentObj.$v.password.required && errors.push('Password harus di isi.')
-          return errors
-      },
-      passwordConfirmationErrors () {
-          let currentObj = this
-          const errors = []
-          if (!currentObj.$v.password_confirmation.$dirty) return errors
-          !currentObj.$v.password_confirmation.required && errors.push('Password Confirmation harus di isi.')
-          return errors
       },
   
     }, //End of Computed

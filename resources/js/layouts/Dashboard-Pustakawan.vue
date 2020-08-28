@@ -34,6 +34,36 @@
         </v-list-item>
 
         <v-list-group
+          prepend-icon="mdi-account-multiple"
+          value
+          active-class="white--text"
+        >
+          <template v-slot:activator>
+            <v-list-item-title>Anggota</v-list-item-title>
+          </template>
+
+          <v-list-item
+            link
+            href="/perpus/anggota/create"
+          >
+            <v-list-item-title>Tambah Anggota</v-list-item-title>
+            <v-list-item-icon>
+              <v-icon>mdi-plus-circle-outline</v-icon>
+            </v-list-item-icon>
+          </v-list-item>
+
+          <v-list-item
+            link
+            href="/perpus/anggota/list"
+          >
+            <v-list-item-title>Daftar Anggota</v-list-item-title>
+            <v-list-item-icon>
+              <v-icon>mdi-format-list-bulleted-type</v-icon>
+            </v-list-item-icon>
+          </v-list-item>
+        </v-list-group>
+
+        <v-list-group
           prepend-icon="mdi-book-multiple"
           value
           active-class="white--text"

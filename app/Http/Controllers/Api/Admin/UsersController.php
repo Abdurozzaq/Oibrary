@@ -13,14 +13,23 @@ class UsersController extends Controller
 {
     public function createUser(Request $request) {
 
-        $this->validate($request, [
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|confirmed|min:8',
-            'password_confirmation' => 'required|min:8',
-            'role' => 'required'
-        ]);
+        if ($request['role'] == 'member') {
+            $this->validate($request, [
+                'first_name' => 'required',
+                'last_name' => 'required',
+                'email' => 'required|email|unique:users',
+                'role' => 'required'
+            ]);
+        } else {
+            $this->validate($request, [
+                'first_name' => 'required',
+                'last_name' => 'required',
+                'email' => 'required|email|unique:users',
+                'password' => 'required|confirmed|min:8',
+                'password_confirmation' => 'required|min:8',
+                'role' => 'required'
+            ]);
+        }
 
         if($request->hasFile('foto_user')){
             $resource = $request->file('foto_user');
@@ -36,6 +45,7 @@ class UsersController extends Controller
                     'first_name' => $request['first_name'],
                     'last_name' => $request['last_name'],
                     'email' => $request['email'],
+                    'email_verified_at' => Carbon::now()->timestamp,
                     'password' => Hash::make($request['password']),
                     'id_prefix' => '1'
                 ])->assignRole('admin');
@@ -47,6 +57,7 @@ class UsersController extends Controller
                     'first_name' => $request['first_name'],
                     'last_name' => $request['last_name'],
                     'email' => $request['email'],
+                    'email_verified_at' => Carbon::now()->timestamp,
                     'nis' => $request['nis'],
                     'nuptk' => $request['nuptk'],
                     'alamat' => $request['alamat'],
@@ -62,17 +73,15 @@ class UsersController extends Controller
                     'first_name' => $request['first_name'],
                     'last_name' => $request['last_name'],
                     'email' => $request['email'],
+                    'email_verified_at' => Carbon::now()->timestamp,
                     'nis' => $request['nis'],
                     'nuptk' => $request['nuptk'],
                     'alamat' => $request['alamat'],
                     'no_telp' => $request['no_telp'],
-                    'password' => Hash::make($request['password']),
                     'id_prefix' => '3'
                 ])->assignRole('member');
     
             }
-
-            $user->sendApiEmailVerificationNotification();
             
             return response()->json([
               'status' => 'success',
@@ -87,6 +96,7 @@ class UsersController extends Controller
                     'first_name' => $request['first_name'],
                     'last_name' => $request['last_name'],
                     'email' => $request['email'],
+                    'email_verified_at' => Carbon::now()->timestamp,
                     'password' => Hash::make($request['password']),
                     'id_prefix' => '1'
                 ])->assignRole('admin');
@@ -97,6 +107,7 @@ class UsersController extends Controller
                     'first_name' => $request['first_name'],
                     'last_name' => $request['last_name'],
                     'email' => $request['email'],
+                    'email_verified_at' => Carbon::now()->timestamp,
                     'nis' => $request['nis'],
                     'nuptk' => $request['nuptk'],
                     'alamat' => $request['alamat'],
@@ -111,17 +122,15 @@ class UsersController extends Controller
                     'first_name' => $request['first_name'],
                     'last_name' => $request['last_name'],
                     'email' => $request['email'],
+                    'email_verified_at' => Carbon::now()->timestamp,
                     'nis' => $request['nis'],
                     'nuptk' => $request['nuptk'],
                     'alamat' => $request['alamat'],
                     'no_telp' => $request['no_telp'],
-                    'password' => Hash::make($request['password']),
                     'id_prefix' => '3'
                 ])->assignRole('member');
     
             }
-
-            $user->sendApiEmailVerificationNotification();
 
             return response()->json([
                 'status' => 'success',

@@ -17,7 +17,7 @@
                 left
                 color="white"
               >
-                mdi-school
+                mdi-book-plus
               </v-icon>
               <span color="white" class="title white--text">Tambah Buku</span>
             </v-card-title>
