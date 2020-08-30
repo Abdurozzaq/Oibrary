@@ -8,7 +8,7 @@
         style="width: 300px"
         class="ml-0 pl-4"
       >
-        <span>OZZAQDEV</span>
+        <span>{{ nama_sekolah }}</span>
       </v-toolbar-title>
 
       <v-spacer></v-spacer>
@@ -41,7 +41,19 @@
       return {
 
       }
-    }
+    }, // End of Data ()
+
+    computed: {
+      nama_sekolah: function () {
+        return process.env.MIX_NAMA_SEKOLAH;
+      },
+      alamat_sekolah: function () {
+        return process.env.MIX_ALAMAT_SEKOLAH;
+      },
+      logo_sekolah: function () {
+        return process.env.MIX_LOGO_URL;
+      }
+    }, // End of Computed
   }
 </script>
 
