@@ -173,7 +173,7 @@ class MemberController extends Controller
 
         $query = $request['query'];
 
-        $data = User::where('kode_user_full','like',"%".$query."%")
+        $data = User::orwhere('kode_user_full','like',"%".$query."%")
                         ->orWhere('first_name', 'like', "%".$query."%")
                         ->orWhere('last_name', 'like', "%".$query."%")
                         ->orWhere('nis', 'like', "%".$query."%")
