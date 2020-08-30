@@ -19,6 +19,7 @@ import UnverifiedEmail from "./pages/auth/UnverifiedEmail.vue"
 // Admin
 import AdminHomePage from "./pages/admin/AdminHome.vue"
 import AdminCreateUser from "./pages/admin/users/CreateUser.vue"
+import AdminEditPassword from "./pages/admin/settings/EditPassword.vue"
 
 // Pustakawan
 import PusatakawanHomePage from "./pages/pustakawan/PustakawanHome.vue"
@@ -30,6 +31,7 @@ import LogPeminjaman from "./pages/pustakawan/logData/Peminjaman.vue"
 import LogPengembalian from "./pages/pustakawan/logData/Pengembalian.vue"
 import CreateAnggota from "./pages/pustakawan/anggota/CreateAnggota.vue"
 import DaftarAnggota from "./pages/pustakawan/anggota/DaftarAnggota.vue"
+import PustakawanEditPassword from "./pages/pustakawan/settings/EditPassword.vue"
 
 // // Member
 // import MemberHomePage from "./pages/member/MemberHome.vue"
@@ -310,6 +312,14 @@ export const routes = [
                 },
                 beforeEnter: multiguard([ifAuthenticated, pustakawanOnly, verifiedEmail, pageTitle]),
             },
+            {
+                path: "profile/settings/password",
+                component: PustakawanEditPassword,
+                meta: {
+                    title: 'Ganti Password - ' + 'Perpus ' + nama_sekolah,
+                },
+                beforeEnter: multiguard([ifAuthenticated, pustakawanOnly, verifiedEmail, pageTitle]),
+            },
         ]
     },
     {
@@ -329,6 +339,14 @@ export const routes = [
                 component: AdminCreateUser,
                 meta: {
                     title: 'Create User - ' + 'Perpus ' + nama_sekolah,
+                },
+                beforeEnter: multiguard([ifAuthenticated, adminOnly, verifiedEmail, pageTitle]),
+            },
+            {
+                path: "profile/settings/password",
+                component: AdminEditPassword,
+                meta: {
+                    title: 'Ganti Password - ' + 'Perpus ' + nama_sekolah,
                 },
                 beforeEnter: multiguard([ifAuthenticated, adminOnly, verifiedEmail, pageTitle]),
             },

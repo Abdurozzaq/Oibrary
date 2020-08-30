@@ -35,6 +35,12 @@ Route::group([
 });
 
 /**
+ * Universal Role
+ */
+// Profile Settings
+Route::post('/universal/profile/password/edit', 'Api\ProfileSettingsController@changePassword');
+
+/**
  * Admin Section
  */
 // Users

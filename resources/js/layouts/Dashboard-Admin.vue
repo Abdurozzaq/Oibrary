@@ -207,8 +207,8 @@
       itemPopup: 1,
       itemsPopup: [
         { text: 'Home', icon: 'mdi-view-dashboard', url: '/siAdmino' },
-        { text: 'Change Identity', icon: 'mdi-account', url: '/siAdmino/settings/identity' },
-        { text: 'Change Password', icon: 'mdi-account-key', url: '/siAdmino/settings/password' },
+        { text: 'Change Identity', icon: 'mdi-account', url: '/siAdmino/profile/settings/identity' },
+        { text: 'Change Password', icon: 'mdi-account-key', url: '/siAdmino/profile/settings/password' },
       ],
 
       sidebar: [

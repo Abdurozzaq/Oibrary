@@ -257,9 +257,9 @@
 
       itemPopup: 1,
       itemsPopup: [
-        { text: 'Home', icon: 'mdi-view-dashboard', url: '/home' },
-        { text: 'Change Identity', icon: 'mdi-account', url: '/home/settings/identity' },
-        { text: 'Change Password', icon: 'mdi-account-key', url: '/home/settings/password' },
+        { text: 'Home', icon: 'mdi-view-dashboard', url: '/perpus' },
+        { text: 'Change Identity', icon: 'mdi-account', url: '/perpus/profile/settings/identity' },
+        { text: 'Change Password', icon: 'mdi-account-key', url: '/perpus/profile/settings/password' },
       ],
 
       sidebar: [
