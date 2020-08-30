@@ -39,6 +39,7 @@ Route::group([
  */
 // Profile Settings
 Route::post('/universal/profile/password/edit', 'Api\ProfileSettingsController@changePassword');
+Route::post('/universal/profile/identity/edit', 'Api\ProfileSettingsController@editIdentity');
 
 /**
  * Admin Section

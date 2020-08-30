@@ -15,14 +15,13 @@ class ProfileSettingsController extends Controller
         $this->validate($request, [
             'first_name' => 'required',
             'last_name' => 'required',
+            'email' => 'required|email'
         ]);
 
         $user = User::findOrFail(Auth::user()->id);
         $user->first_name = $request['first_name'];
         $user->last_name = $request['last_name'];
-        if ($request['restaurant_name']) {
-            $user->restaurant_name = $request['restaurant_name'];
-        }
+        $user->email = $request['email'];
         $user->save();
 
         return response()->json([

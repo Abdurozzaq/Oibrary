@@ -21,6 +21,7 @@ import Halaman404 from "./pages/404.vue"
 import AdminHomePage from "./pages/admin/AdminHome.vue"
 import AdminCreateUser from "./pages/admin/users/CreateUser.vue"
 import AdminEditPassword from "./pages/admin/settings/EditPassword.vue"
+import AdminEditIdentity from "./pages/admin/settings/EditIdentity.vue"
 
 // Pustakawan
 import PusatakawanHomePage from "./pages/pustakawan/PustakawanHome.vue"
@@ -33,6 +34,7 @@ import LogPengembalian from "./pages/pustakawan/logData/Pengembalian.vue"
 import CreateAnggota from "./pages/pustakawan/anggota/CreateAnggota.vue"
 import DaftarAnggota from "./pages/pustakawan/anggota/DaftarAnggota.vue"
 import PustakawanEditPassword from "./pages/pustakawan/settings/EditPassword.vue"
+import PustakawanEditIdentity from "./pages/pustakawan/settings/EditIdentity.vue"
 
 // // Member
 // import MemberHomePage from "./pages/member/MemberHome.vue"
@@ -321,6 +323,14 @@ export const routes = [
                 },
                 beforeEnter: multiguard([ifAuthenticated, pustakawanOnly, verifiedEmail, pageTitle]),
             },
+            {
+                path: "profile/settings/identity",
+                component: PustakawanEditIdentity,
+                meta: {
+                    title: 'Ubah Identitas - ' + 'Perpus ' + nama_sekolah,
+                },
+                beforeEnter: multiguard([ifAuthenticated, pustakawanOnly, verifiedEmail, pageTitle]),
+            },
         ]
     },
     {
@@ -348,6 +358,14 @@ export const routes = [
                 component: AdminEditPassword,
                 meta: {
                     title: 'Ganti Password - ' + 'Perpus ' + nama_sekolah,
+                },
+                beforeEnter: multiguard([ifAuthenticated, adminOnly, verifiedEmail, pageTitle]),
+            },
+            {
+                path: "profile/settings/identity",
+                component: AdminEditIdentity,
+                meta: {
+                    title: 'Ubah Identitas - ' + 'Perpus ' + nama_sekolah,
                 },
                 beforeEnter: multiguard([ifAuthenticated, adminOnly, verifiedEmail, pageTitle]),
             },
