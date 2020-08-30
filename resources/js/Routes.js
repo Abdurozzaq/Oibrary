@@ -15,6 +15,7 @@ import RedirectAfterVerify from "./pages/auth/RedirectAfterVerify.vue"
 import LandingLayout from "./layouts/Landing.vue"
 import LandingPage from "./pages/LandingPage.vue"
 import UnverifiedEmail from "./pages/auth/UnverifiedEmail.vue"
+import Halaman404 from "./pages/404.vue"
 
 // Admin
 import AdminHomePage from "./pages/admin/AdminHome.vue"
@@ -409,6 +410,14 @@ export const routes = [
         component: UnverifiedEmail,
         meta: {
             title: 'Unverified Email Address - ' + 'Perpus ' + nama_sekolah,
+        },
+        beforeEnter: multiguard([pageTitle]),
+    },
+    {
+        path: "*",
+        component: Halaman404,
+        meta: {
+            title: '404 Not Found - ' + 'Perpus ' + nama_sekolah,
         },
         beforeEnter: multiguard([pageTitle]),
     }
