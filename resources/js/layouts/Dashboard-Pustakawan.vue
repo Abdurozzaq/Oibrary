@@ -61,6 +61,15 @@
               <v-icon>mdi-format-list-bulleted-type</v-icon>
             </v-list-item-icon>
           </v-list-item>
+          <v-list-item
+            link
+            href="/perpus/anggota/import"
+          >
+            <v-list-item-title>Import Anggota</v-list-item-title>
+            <v-list-item-icon>
+              <v-icon>mdi-cloud-upload</v-icon>
+            </v-list-item-icon>
+          </v-list-item>
         </v-list-group>
 
         <v-list-group
