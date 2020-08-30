@@ -10,31 +10,23 @@ use Maatwebsite\Excel\Concerns\WithValidation;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
-use Illuminate\Support\Facades\Validator;
 
-class AnggotaImport implements ToCollection, WithHeadingRow
+class AnggotaImport implements ToCollection, WithValidation, WithHeadingRow
 {
     use Importable;
 
-    // public function rules(): array
-    // {
-    //     return [
-    //         '*.first_name' => 'required',
-    //         '*.last_name' => 'required',
-    //         '*.email' => 'required|email|unique:users',
-    //     ];
-
-    // }
-
-    public function collection(Collection $rows)
+    public function rules(): array
     {
-
-        Validator::make($rows->toArray(), [
+        return [
             '*.first_name' => 'required',
             '*.last_name' => 'required',
             '*.email' => 'required|email|unique:users',
-        ])->validate();
+        ];
 
+    }
+
+    public function collection(Collection $rows)
+    {
         foreach ($rows as $row) 
         {
             $user = User::create([
