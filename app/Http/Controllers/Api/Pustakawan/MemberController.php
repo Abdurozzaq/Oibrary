@@ -190,29 +190,4 @@ class MemberController extends Controller
         ], 200);
     }
 
-    public function importAnggotaFromExcel(Request $request) 
-	{
-		// validasi
-		$this->validate($request, [
-			'file' => 'required|mimes:csv,xls,xlsx'
-		]);
- 
-		// menangkap file excel
-		$file = $request->file('file');
- 
-		// membuat nama file unik
-		$nama_file = rand().$file->getClientOriginalName();
- 
-		// upload ke folder file_siswa di dalam folder public
-		$file->move('file_anggota',$nama_file);
- 
-		// import data
-		Excel::import(new AnggotaImport, public_path('/file_anggota/'.$nama_file));
-
- 
-		return response()->json([
-            'status' => 'success',
-            'message' => 'Data Anggota Berhasil Diimport!',
-        ], 200);
-	}
 }

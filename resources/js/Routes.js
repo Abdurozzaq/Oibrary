@@ -30,7 +30,6 @@ import LogPeminjaman from "./pages/pustakawan/logData/Peminjaman.vue"
 import LogPengembalian from "./pages/pustakawan/logData/Pengembalian.vue"
 import CreateAnggota from "./pages/pustakawan/anggota/CreateAnggota.vue"
 import DaftarAnggota from "./pages/pustakawan/anggota/DaftarAnggota.vue"
-import ImportAnggota from "./pages/pustakawan/anggota/ImportAnggota.vue"
 
 // // Member
 // import MemberHomePage from "./pages/member/MemberHome.vue"
@@ -308,14 +307,6 @@ export const routes = [
                 component: DaftarAnggota,
                 meta: {
                     title: 'Daftar Anggota - ' + 'Perpus ' + nama_sekolah,
-                },
-                beforeEnter: multiguard([ifAuthenticated, pustakawanOnly, verifiedEmail, pageTitle]),
-            },
-            {
-                path: "anggota/import",
-                component: ImportAnggota,
-                meta: {
-                    title: 'Import Anggota - ' + 'Perpus ' + nama_sekolah,
                 },
                 beforeEnter: multiguard([ifAuthenticated, pustakawanOnly, verifiedEmail, pageTitle]),
             },
