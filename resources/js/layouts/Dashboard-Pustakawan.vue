@@ -11,24 +11,9 @@
 
       <template v-slot:prepend>
         <v-list-item two-line>
-
-          <v-avatar
-            v-if="foto_user"
-            size="32px"
-            item
-          >
-            <v-img
-              :src="foto_user"
-              alt="Vuetify"
-            >
-            </v-img>
-          </v-avatar>
-
-          <v-list-item-avatar v-else>
+          <v-list-item-avatar>
             <v-icon>mdi-face</v-icon>
           </v-list-item-avatar>
-
-          
 
           <v-list-item-content>
             <v-list-item-title>{{ firstName }} {{ lastName }}</v-list-item-title>
@@ -196,39 +181,14 @@
             large
             v-on="on"
           >
-            <v-avatar
-              v-if="foto_user"
-              size="32px"
-              item
-            >
-              <v-img
-                :src="foto_user"
-                alt="Vuetify"
-              >
-              </v-img>
-            </v-avatar>
-
-            <v-icon v-else>mdi-face</v-icon>
+            <v-icon>mdi-face</v-icon>
           </v-btn>
         </template>
 
         <v-card>
           <v-list>
             <v-list-item>
-
-              <v-avatar
-                v-if="foto_user"
-                size="32px"
-                item
-              >
-                <v-img
-                  :src="foto_user"
-                  alt="Vuetify"
-                >
-                </v-img>
-              </v-avatar>
-
-              <v-list-item-avatar v-else>
+              <v-list-item-avatar>
                 <v-icon size="40">mdi-face</v-icon>
               </v-list-item-avatar>
 
@@ -288,7 +248,6 @@
     data: () => ({
       firstName: null,
       lastName: null,
-      foto_user: null,
       fav: true,
       menu: false,
       message: false,
@@ -340,8 +299,6 @@
 
             currentObj.firstName = response.data.user.first_name || 'FirstName'
             currentObj.lastName = response.data.user.last_name || 'LastName'
-            cuurentObj.foto_user = response.data.user.foto_user
-            console.log(response.data.user.foto_user)
           })
           .catch(function (error) {
             if(error.response) {
