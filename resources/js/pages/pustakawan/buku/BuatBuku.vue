@@ -212,7 +212,7 @@
                 pengarang_buku: '',
                 penerbit_buku: '',
                 tahun_terbit_buku: '',
-                foto_buku: '',
+                foto_buku: [],
                 jumlah_halaman_buku: '',
                 stok_buku: '',
                 nama_rak: '',

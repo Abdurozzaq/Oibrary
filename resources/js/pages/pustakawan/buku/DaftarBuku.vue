@@ -339,7 +339,7 @@
         edit_pengarang_buku: '',
         edit_penerbit_buku: '',
         edit_tahun_terbit_buku: '',
-        edit_foto_buku: '',
+        edit_foto_buku: [],
         edit_jumlah_halaman_buku: '',
         edit_stok_buku: '',
         edit_nama_rak: '',

@@ -230,7 +230,7 @@
         dialog: false,
 
         // Form
-        foto_user: '',
+        foto_user: [],
         first_name: '',
         last_name: '',
         nis: '',

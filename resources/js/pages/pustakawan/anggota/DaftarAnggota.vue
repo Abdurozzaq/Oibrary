@@ -284,7 +284,7 @@
         edit_last_name: '',
         edit_nis: '',
         edit_nuptk: '',
-        edit_foto_user: '',
+        edit_foto_user: [],
         edit_alamat: '',
         edit_no_telp: '',
         edit_email: '',
