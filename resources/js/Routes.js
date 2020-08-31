@@ -21,6 +21,8 @@ import Halaman404 from "./pages/404.vue"
 import AdminHomePage from "./pages/admin/AdminHome.vue"
 import AdminCreateUser from "./pages/admin/users/CreateUser.vue"
 import AdminDaftarAnggota from "./pages/admin/users/DaftarAnggota.vue"
+import AdminDaftarPustakawan from "./pages/admin/users/DaftarPustakawan.vue"
+import AdminDaftarAdmin from "./pages/admin/users/DaftarAdmin.vue"
 import AdminEditPassword from "./pages/admin/settings/EditPassword.vue"
 import AdminEditIdentity from "./pages/admin/settings/EditIdentity.vue"
 
@@ -359,6 +361,22 @@ export const routes = [
                 component: AdminDaftarAnggota,
                 meta: {
                     title: 'Daftar Anggota - ' + 'Perpus ' + nama_sekolah,
+                },
+                beforeEnter: multiguard([ifAuthenticated, adminOnly, verifiedEmail, pageTitle]),
+            },
+            {
+                path: "users/pustakawan/list",
+                component: AdminDaftarPustakawan,
+                meta: {
+                    title: 'Daftar Pustakawan - ' + 'Perpus ' + nama_sekolah,
+                },
+                beforeEnter: multiguard([ifAuthenticated, adminOnly, verifiedEmail, pageTitle]),
+            },
+            {
+                path: "users/admin/list",
+                component: AdminDaftarAdmin,
+                meta: {
+                    title: 'Daftar Admin - ' + 'Perpus ' + nama_sekolah,
                 },
                 beforeEnter: multiguard([ifAuthenticated, adminOnly, verifiedEmail, pageTitle]),
             },

@@ -172,13 +172,27 @@ class MemberController extends Controller
 
         $query = $request['query'];
 
-        $data = User::orwhere('kode_user_full','like',"%".$query."%")
+        $dataOri = User::orwhere('kode_user_full','like',"%".$query."%")
                         ->orWhere('first_name', 'like', "%".$query."%")
                         ->orWhere('last_name', 'like', "%".$query."%")
                         ->orWhere('nis', 'like', "%".$query."%")
                         ->orWhere('nuptk', 'like', "%".$query."%")
+                        ->orWhere('alamat', 'like', "%".$query."%")
+                        ->orWhere('no_telp', 'like', "%".$query."%")
                         ->orWhere('email', 'like', "%".$query."%")
+                        ->select(
+                            'users.*', 
+                            DB::raw('CONCAT(users.first_name, " ", users.last_name) AS full_name')
+                        )
                         ->get();
+        
+        $data = [];
+
+        foreach ($dataOri as $item) {
+            if ($item->hasRole('member')) {
+                array_push($data, $item);
+            }
+        }
 
         return response()->json([
             'status' => 'success',

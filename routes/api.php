@@ -50,8 +50,19 @@ Route::post('/siAdmino/users/create', 'Api\Admin\UsersController@createUser');
 Route::get('/siAdmino/users/member/list', 'Api\Admin\MemberController@getDaftarMember');
 Route::post('/siAdmino/users/member/edit/{id}', 'Api\Admin\MemberController@editMember');
 Route::post('/siAdmino/users/member/delete/{id}', 'Api\Admin\MemberController@deleteMember');
-Route::post('/siAdmino/users/member/create', 'Api\Admin\MemberController@createMember');
 Route::post('/siAdmino/users/member/search', 'Api\Admin\MemberController@searchMember');
+
+// Pustakawan
+Route::get('/siAdmino/users/pustakawan/list', 'Api\Admin\PustakawanController@getDaftarPustakawan');
+Route::post('/siAdmino/users/pustakawan/edit/{id}', 'Api\Admin\PustakawanController@editPustakawan');
+Route::post('/siAdmino/users/pustakawan/delete/{id}', 'Api\Admin\PustakawanController@deletePustakawan');
+Route::post('/siAdmino/users/pustakawan/search', 'Api\Admin\PustakawanController@searchPustakawan');
+
+// Admin
+Route::get('/siAdmino/users/admin/list', 'Api\Admin\AdminController@getDaftarAdmin');
+Route::post('/siAdmino/users/admin/edit/{id}', 'Api\Admin\AdminController@editAdmin');
+Route::post('/siAdmino/users/admin/delete/{id}', 'Api\Admin\AdminController@deleteAdmin');
+Route::post('/siAdmino/users/admin/search', 'Api\Admin\AdminController@searchAdmin');
 
 
 /**

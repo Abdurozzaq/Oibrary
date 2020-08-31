@@ -349,7 +349,7 @@
               } else if(currentObj.role == 'pustakawan') {
                 currentObj.$router.push('/siAdmino/users/pustakawan/list')
               } else {
-                currentObj.$router.push('/siAdmino/users/member/list')
+                currentObj.$router.push('/siAdmino/users/anggota/list')
               }
               
 

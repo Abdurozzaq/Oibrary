@@ -47,7 +47,7 @@
            <v-list-item
             link
             color="red"
-            href="/siAdmino/users/cashier/list"
+            href="/siAdmino/users/pustakawan/list"
           >
             <v-list-item-title>Daftar Pustakawan</v-list-item-title>
             <v-list-item-icon>
@@ -66,27 +66,7 @@
           </v-list-item>
         </v-list-group>
 
-        <v-list-group
-          prepend-icon="mdi-cog"
-          value
-        >
-          <template v-slot:activator>
-            <v-list-item-title>Settings</v-list-item-title>
-          </template>
-
-          <v-list-item
-            link
-            color="red"
-            href="/siAdmino/settings/data-sekolah"
-          >
-            <v-list-item-title>Edit Data Sekolah</v-list-item-title>
-            <v-list-item-icon>
-              <v-icon>mdi-school</v-icon>
-            </v-list-item-icon>
-          </v-list-item>
-          
-        </v-list-group>
-
+        
       </v-list>
     </v-navigation-drawer>
 
