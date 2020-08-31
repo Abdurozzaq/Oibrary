@@ -390,7 +390,7 @@
         let currentObj = this
         const errors = []
         if (!currentObj.$v.edit_last_name.$dirty) return errors
-        !currentObj.$v.ledit_ast_name.required && errors.push('Nama Belakang harus di isi.')
+        !currentObj.$v.edit_last_name.required && errors.push('Nama Belakang harus di isi.')
         return errors
       },
 
@@ -477,7 +477,7 @@
         currentObj.edit_alamat = ''
         currentObj.edit_no_telp = ''
         currentObj.edit_email = ''
-        currentObj.edit_foto_user = ''
+        currentObj.edit_foto_user = []
       },
 
       editAnggota: function () {
