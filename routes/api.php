@@ -46,6 +46,12 @@ Route::post('/universal/profile/identity/edit', 'Api\ProfileSettingsController@e
  */
 // Users
 Route::post('/siAdmino/users/create', 'Api\Admin\UsersController@createUser');
+// Members
+Route::get('/siAdmino/users/member/list', 'Api\Admin\MemberController@getDaftarMember');
+Route::post('/siAdmino/users/member/edit/{id}', 'Api\Admin\MemberController@editMember');
+Route::post('/siAdmino/users/member/delete/{id}', 'Api\Admin\MemberController@deleteMember');
+Route::post('/siAdmino/users/member/create', 'Api\Admin\MemberController@createMember');
+Route::post('/siAdmino/users/member/search', 'Api\Admin\MemberController@searchMember');
 
 
 /**

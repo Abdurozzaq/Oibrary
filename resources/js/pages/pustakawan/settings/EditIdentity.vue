@@ -24,23 +24,11 @@
             
               <v-card-text class="headline font-weight-bold">
                 <v-row>
-                  <v-col cols="12">
-                    <v-alert
-                      v-model="errorAlert"
-                      border="top"
-                      color="red lighten-2"
-                      
-                      dismissible
-                    >
-                      <ul v-for="(error, index) in serverError" v-bind:key="index">
-                        <li>
-                          {{ error[0] }} 
-                        </li>
-                      </ul>
-                    </v-alert>
-
+                  <v-col cols="12" lg="6" md="12" sm="12" xs="12">
                     <v-text-field
-                      label="First Name"
+                      label="Nama Depan"
+                      hint="Nama Depan | Required"
+                      persistent-hint
                       single-line
                       filled
                       
@@ -52,7 +40,9 @@
                     ></v-text-field>
 
                     <v-text-field
-                      label="Last Name"
+                      label="Nama Belakang"
+                      hint="Nama Belakang | Required"
+                      persistent-hint
                       single-line
                       filled
                       
@@ -64,7 +54,33 @@
                     ></v-text-field>
 
                     <v-text-field
+                      label="Alamat"
+                      hint="Alamat"
+                      persistent-hint
+                      single-line
+                      filled
+                      
+                      required
+                      v-model="alamat"
+                    ></v-text-field>
+
+                    <v-text-field
+                      label="No. Telp"
+                      hint="No. Telp"
+                      persistent-hint
+                      single-line
+                      filled
+                      
+                      required
+                      v-model="no_telp"
+                    ></v-text-field>
+                  </v-col>
+
+                  <v-col cols="12" lg="6" md="12" sm="12" xs="12">
+                    <v-text-field
                       label="Email"
+                      hint="Email | Required"
+                      persistent-hint
                       single-line
                       filled
                       
@@ -74,8 +90,16 @@
                       @input="$v.email.$touch()" 
                       @blur="$v.email.$touch()"
                     ></v-text-field>
+
+                    <v-file-input
+                      label="Foto User"
+                      filled
+                      prepend-icon="mdi-camera"
+                      v-model="foto_user"
+                    ></v-file-input>
                   </v-col>
-                </v-row>
+                </v-row>  
+                  
               </v-card-text>
 
               <v-card-actions>
@@ -125,7 +149,9 @@
                 first_name: '',
                 last_name: '',
                 email: '',
-
+                no_telp: '',
+                alamat: '',
+                foto_user: [],
                 // For Form Exception
                 errorAlert: false,
                 serverError: null,
@@ -189,11 +215,19 @@
                     currentObj.snackText = 'Input Data Invalid'
                     currentObj.overlay = false
                 } else {
-                    axios.post('api/universal/profile/identity/edit', {
-                        first_name: currentObj.first_name,
-                        last_name: currentObj.last_name,
-                        email: currentObj.email
-                    })
+
+                  let formData = new FormData();
+
+                  // Files
+                  formData.append("foto_user", currentObj.foto_user)
+                  // Text
+                  formData.append("first_name", currentObj.first_name)
+                  formData.append("last_name", currentObj.last_name)
+                  formData.append("alamat", currentObj.alamat)
+                  formData.append("no_telp", currentObj.no_telp)
+                  formData.append("email", currentObj.email)
+
+                    axios.post('api/universal/profile/identity/edit', formData)
                     .then(function (response) {
                         
                         currentObj.snack = true
@@ -221,10 +255,12 @@
                 axios.get('api/auth/me')
                 .then(function (response) {
 
-                    currentObj.first_name = response.data.user.first_name
-                    currentObj.last_name = response.data.user.last_name
-                    currentObj.email = response.data.user.email
-                    
+                    currentObj.first_name = response.data.user.first_name || ''
+                    currentObj.last_name = response.data.user.last_name || ''
+                    currentObj.email = response.data.user.email || ''
+                    currentObj.alamat = response.data.user.alamat || ''
+                    currentObj.no_telp = response.data.user.no_telp || ''
+                    currentObj.foto_user = response.data.user.foto_user || []
 
                     currentObj.overlay = false
 

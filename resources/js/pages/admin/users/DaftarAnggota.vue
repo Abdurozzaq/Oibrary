@@ -410,7 +410,7 @@
         let currentObj = this
 
         currentObj.overlay = true
-        axios.get('api/perpus/users/member/list')
+        axios.get('api/siAdmino/users/member/list')
           .then(function (response) {
 
             currentObj.daftarAnggota = response.data.data
@@ -430,7 +430,7 @@
         
         if (currentObj.search != null && currentObj.search.length != 0) {
 
-          axios.post('api/perpus/users/member/search', {
+          axios.post('api/siAdmino/users/member/search', {
             'query': currentObj.search
           })
           .then(function (response) {
@@ -504,7 +504,7 @@
           formData.append("no_telp", currentObj.edit_no_telp)
           formData.append("email", currentObj.edit_email)
 
-          axios.post('api/perpus/users/member/edit/' + currentObj.edit_id, formData)
+          axios.post('api/siAdmino/users/member/edit/' + currentObj.edit_id, formData)
             .then(function (response) {
               currentObj.overlayEditAnggota = false
               currentObj.snack = true
@@ -529,7 +529,7 @@
         let currentObj = this
         currentObj.overlay = true
 
-        axios.post('api/perpus/users/member/delete/' + item.id)
+        axios.post('api/siAdmino/users/member/delete/' + item.id)
           .then(function (response) {
             currentObj.overlay = false
             currentObj.snack = true

@@ -37,9 +37,9 @@
           <v-list-item
             link
             color="red"
-            href="/siAdmino/users/cashier/list"
+            href="/siAdmino/users/anggota/list"
           >
-            <v-list-item-title>Member Users List</v-list-item-title>
+            <v-list-item-title>Daftar Anggota</v-list-item-title>
             <v-list-item-icon>
               <v-icon>mdi-account</v-icon>
             </v-list-item-icon>
@@ -49,7 +49,7 @@
             color="red"
             href="/siAdmino/users/cashier/list"
           >
-            <v-list-item-title>Pustakawan Users List</v-list-item-title>
+            <v-list-item-title>Daftar Pustakawan</v-list-item-title>
             <v-list-item-icon>
               <v-icon>mdi-account</v-icon>
             </v-list-item-icon>
@@ -59,7 +59,7 @@
             color="red"
             href="/siAdmino/users/admin/list"
           >
-            <v-list-item-title>Admin Users List</v-list-item-title>
+            <v-list-item-title>Daftar Admin</v-list-item-title>
             <v-list-item-icon>
               <v-icon>mdi-account</v-icon>
             </v-list-item-icon>

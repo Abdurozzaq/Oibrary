@@ -20,6 +20,7 @@ import Halaman404 from "./pages/404.vue"
 // Admin
 import AdminHomePage from "./pages/admin/AdminHome.vue"
 import AdminCreateUser from "./pages/admin/users/CreateUser.vue"
+import AdminDaftarAnggota from "./pages/admin/users/DaftarAnggota.vue"
 import AdminEditPassword from "./pages/admin/settings/EditPassword.vue"
 import AdminEditIdentity from "./pages/admin/settings/EditIdentity.vue"
 
@@ -350,6 +351,14 @@ export const routes = [
                 component: AdminCreateUser,
                 meta: {
                     title: 'Create User - ' + 'Perpus ' + nama_sekolah,
+                },
+                beforeEnter: multiguard([ifAuthenticated, adminOnly, verifiedEmail, pageTitle]),
+            },
+            {
+                path: "users/anggota/list",
+                component: AdminDaftarAnggota,
+                meta: {
+                    title: 'Daftar Anggota - ' + 'Perpus ' + nama_sekolah,
                 },
                 beforeEnter: multiguard([ifAuthenticated, adminOnly, verifiedEmail, pageTitle]),
             },

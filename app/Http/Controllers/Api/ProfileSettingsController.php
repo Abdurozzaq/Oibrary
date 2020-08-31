@@ -18,16 +18,43 @@ class ProfileSettingsController extends Controller
             'email' => 'required|email'
         ]);
 
-        $user = User::findOrFail(Auth::user()->id);
-        $user->first_name = $request['first_name'];
-        $user->last_name = $request['last_name'];
-        $user->email = $request['email'];
-        $user->save();
+        if($request->hasFile('foto_user')){
+            $resource = $request->file('foto_user');
+            $name = Carbon::now()->timestamp."_".$resource->getClientOriginalName();
+            $userId = Auth::user()->id;
+            $url = "/storage/foto_user/".$userId."/".$name;
+            $resource->move(\base_path() ."/public/storage/foto_user/".$userId, $name);
+                
+            $anggota = User::findOrFail(Auth::user()->id);
+            $anggota->foto_user = $url;
+            $user->first_name = $request['first_name'];
+            $user->last_name = $request['last_name'];
+            $user->email = $request['email'];
+            $user->alamat = $request['alamat'];
+            $user->no_telp = $request['no_telp'];
+            $user->save();
+            
+            return response()->json([
+              'status' => 'success',
+              'message' => 'Identitas Anda Telah Berhasil diubah'
+            ], 200);
 
-        return response()->json([
-            'status' => 'success',
-            'message' => 'Identity Changed Successfully',
-        ], 200);
+        } else {
+
+            $user = User::findOrFail(Auth::user()->id);
+            $user->first_name = $request['first_name'];
+            $user->last_name = $request['last_name'];
+            $user->email = $request['email'];
+            $user->alamat = $request['alamat'];
+            $user->no_telp = $request['no_telp'];
+            $user->save();
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Identitas Anda telah berhasil diubah'
+            ], 200);
+    
+        }
         
     }
 

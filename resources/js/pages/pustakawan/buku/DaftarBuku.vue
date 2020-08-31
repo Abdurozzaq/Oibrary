@@ -567,15 +567,15 @@
       openEditDetails: function(item) {
         let currentObj = this
         currentObj.editBukuDialog = true
-        currentObj.edit_id = item.id
-        currentObj.edit_judul_buku = item.judul_buku
-        currentObj.edit_pengarang_buku = item.pengarang_buku
-        currentObj.edit_penerbit_buku = item.penerbit_buku
-        currentObj.edit_tahun_terbit_buku = item.tahun_terbit_buku
-        currentObj.edit_jumlah_halaman_buku = item.jumlah_halaman_buku
-        currentObj.edit_stok_buku = item.stok_buku
-        currentObj.edit_nama_rak = item.nama_rak
-        currentObj.edit_lokasi_rak = item.lokasi_rak
+        currentObj.edit_id = item.id || ''
+        currentObj.edit_judul_buku = item.judul_buku || ''
+        currentObj.edit_pengarang_buku = item.pengarang_buku || ''
+        currentObj.edit_penerbit_buku = item.penerbit_buku || ''
+        currentObj.edit_tahun_terbit_buku = item.tahun_terbit_buku || ''
+        currentObj.edit_jumlah_halaman_buku = item.jumlah_halaman_buku || ''
+        currentObj.edit_stok_buku = item.stok_buku || ''
+        currentObj.edit_nama_rak = item.nama_rak || ''
+        currentObj.edit_lokasi_rak = item.lokasi_rak || ''
       },
 
       closeAndResetVar: function () {
