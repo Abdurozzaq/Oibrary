@@ -5,8 +5,9 @@ namespace App\Exports;
 use App\Peminjaman;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Concerns\WithHeadings;
 
-class LogPeminjamanExport implements FromCollection
+class LogPeminjamanExport implements FromCollection, WithHeadings
 {
     /**
     * @return \Illuminate\Support\Collection
@@ -26,5 +27,18 @@ class LogPeminjamanExport implements FromCollection
                         DB::raw('CONCAT(users.first_name, " ", users.last_name) AS full_name')
                     )
                     ->get();
+    }
+
+    public function headings(): array
+    {
+        return [
+            'Kode Buku',
+            'Judul Buku',
+            'Jumlah Buku',
+            'Kode Peminjaman',
+            'Tgl Pinjam',
+            'Kode Peminjam',
+            'Nama Peminajam'
+        ];
     }
 }
