@@ -36,11 +36,11 @@ return [
     'mailers' => [
         'smtp' => [
             'transport' => 'smtp',
-            'host' => 'smtp.gmail.com',
-            'port' => '465',
-            'encryption' => 'ssl',
-            'username' => 'abdurozzaq627@gmail.com',
-            'password' => 'zoowwcxfiybsuqcj',
+            'host' => env('MAIL_HOST'),
+            'port' => env('MAIL_PORT'),
+            'encryption' => env('MAIL_ENCRYPTION'),
+            'username' => env('MAIL_USERNAME'),
+            'password' => env('MAIL_PASSWORD'),
             'timeout' => null,
         ],
 
@@ -83,8 +83,8 @@ return [
     */
 
     'from' => [
-        'address' => 'Abdurozzaq627@gmail.com',
-        'name' => 'Abdurozzaq N.H',
+        'address' => env('MAIL_FROM_ADDRESS'),
+        'name' => env('MAIL_FROM_NAME'),
     ],
 
     /*

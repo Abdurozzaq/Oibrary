@@ -16,9 +16,9 @@
       <v-btn href="/login" text>
         LOGIN
       </v-btn>
-      <v-btn href="/register" text>
+      <!-- <v-btn href="/register" text>
         REGISTER
-      </v-btn>
+      </v-btn> -->
     </v-app-bar>
 
     <!-- Sizes your content based upon application components -->

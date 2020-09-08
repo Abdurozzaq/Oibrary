@@ -81,23 +81,23 @@
                 </v-overlay>
 
               </v-card-text>
-              <v-toolbar
+              <!-- <v-toolbar
                 color="primary"
                 dark
                 flat
               >
-                <!-- <v-btn href="/register" outlined class="mr-2" color="white">Register</v-btn> -->
+                <v-btn href="/register" outlined class="mr-2" color="white">Register</v-btn>
                 <v-btn href="/forgot-password" outlined class="mr-2" color="white">Forgot Password?</v-btn>
                
-              </v-toolbar>
-              <v-toolbar
+              </v-toolbar> -->
+              <!-- <v-toolbar
                 color="primary"
                 dark
                 flat
                
               >
                 <v-btn href="/resend-verification-mail" outlined class="mr-2" color="white">Resend Verification Mail?</v-btn>
-              </v-toolbar>
+              </v-toolbar> -->
             </v-card>
           </v-col>
         </v-row>

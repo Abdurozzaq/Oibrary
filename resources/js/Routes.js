@@ -418,30 +418,30 @@ export const routes = [
     //     },
     //     beforeEnter: multiguard([ifNotAuthenticated]),
     // },
-    {
-        path: "/forgot-password",
-        component: ForgotPassword,
-        meta: {
-            title: 'Forgot Password - ' + 'Perpus ' + nama_sekolah,
-        },
-        beforeEnter: multiguard([ifNotAuthenticated, pageTitle]),
-    },
-    {
-        path: "/reset-password",
-        component: ResetPassword,
-        meta: {
-            title: 'Reset Password - ' + 'Perpus ' + nama_sekolah,
-        },
-        beforeEnter: multiguard([ifNotAuthenticated, pageTitle]),
-    },
-    {
-        path: "/resend-verification-mail",
-        component: ResendVerificationMail,
-        meta: {
-            title: 'Resend Verification Mail - ' + 'Perpus ' + nama_sekolah,
-        },
-        beforeEnter: multiguard([ifNotAuthenticated, pageTitle]),
-    },
+    // {
+    //     path: "/forgot-password",
+    //     component: ForgotPassword,
+    //     meta: {
+    //         title: 'Forgot Password - ' + 'Perpus ' + nama_sekolah,
+    //     },
+    //     beforeEnter: multiguard([ifNotAuthenticated, pageTitle]),
+    // },
+    // {
+    //     path: "/reset-password",
+    //     component: ResetPassword,
+    //     meta: {
+    //         title: 'Reset Password - ' + 'Perpus ' + nama_sekolah,
+    //     },
+    //     beforeEnter: multiguard([ifNotAuthenticated, pageTitle]),
+    // },
+    // {
+    //     path: "/resend-verification-mail",
+    //     component: ResendVerificationMail,
+    //     meta: {
+    //         title: 'Resend Verification Mail - ' + 'Perpus ' + nama_sekolah,
+    //     },
+    //     beforeEnter: multiguard([ifNotAuthenticated, pageTitle]),
+    // },
     {
         path: "/verification-success",
         component: RedirectAfterVerify,
