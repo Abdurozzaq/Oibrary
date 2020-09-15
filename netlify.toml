@@ -1,0 +1,4 @@
+[[redirects]]
+  from = "/*"
+  to = "http://backend.oibrary.netlify.app/:splat"
+  status = 200
