@@ -25,8 +25,8 @@ class ProfileSettingsController extends Controller
             $url = "/storage/foto_user/".$userId."/".$name;
             $resource->move(\base_path() ."/public/storage/foto_user/".$userId, $name);
                 
-            $anggota = User::findOrFail(Auth::user()->id);
-            $anggota->foto_user = $url;
+            $user = User::findOrFail(Auth::user()->id);
+            $user->foto_user = $url;
             $user->first_name = $request['first_name'];
             $user->last_name = $request['last_name'];
             $user->email = $request['email'];
