@@ -2,7 +2,7 @@
 
 # Oibrary - Web App Library
 
-# Note: This application uses Indonesian as the main language.
+Note: This application uses Indonesian as the main language.
 
 # FEATURES
 User Role: Admin & Librarian (and members as data only)
