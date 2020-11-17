@@ -34,57 +34,67 @@ Route::group([
     
 });
 
-/**
- * Universal Role
- */
-// Profile Settings
-Route::post('/universal/profile/password/edit', 'Api\ProfileSettingsController@changePassword');
-Route::post('/universal/profile/identity/edit', 'Api\ProfileSettingsController@editIdentity');
+Route::group([
 
-/**
- * Admin Section
- */
-// Users
-Route::post('/siAdmino/users/create', 'Api\Admin\UsersController@createUser');
-// Members
-Route::get('/siAdmino/users/member/list', 'Api\Admin\MemberController@getDaftarMember');
-Route::post('/siAdmino/users/member/edit/{id}', 'Api\Admin\MemberController@editMember');
-Route::post('/siAdmino/users/member/delete/{id}', 'Api\Admin\MemberController@deleteMember');
-Route::post('/siAdmino/users/member/search', 'Api\Admin\MemberController@searchMember');
+    'middleware' => 'api',
+    'prefix' => 'auth'
 
-// Pustakawan
-Route::get('/siAdmino/users/pustakawan/list', 'Api\Admin\PustakawanController@getDaftarPustakawan');
-Route::post('/siAdmino/users/pustakawan/edit/{id}', 'Api\Admin\PustakawanController@editPustakawan');
-Route::post('/siAdmino/users/pustakawan/delete/{id}', 'Api\Admin\PustakawanController@deletePustakawan');
-Route::post('/siAdmino/users/pustakawan/search', 'Api\Admin\PustakawanController@searchPustakawan');
+], function ($router) {
 
-// Admin
-Route::get('/siAdmino/users/admin/list', 'Api\Admin\AdminController@getDaftarAdmin');
-Route::post('/siAdmino/users/admin/edit/{id}', 'Api\Admin\AdminController@editAdmin');
-Route::post('/siAdmino/users/admin/delete/{id}', 'Api\Admin\AdminController@deleteAdmin');
-Route::post('/siAdmino/users/admin/search', 'Api\Admin\AdminController@searchAdmin');
+    /**
+     * Universal Role
+     */
+    // Profile Settings
+    Route::post('/universal/profile/password/edit', 'Api\ProfileSettingsController@changePassword');
+    Route::post('/universal/profile/identity/edit', 'Api\ProfileSettingsController@editIdentity');
+
+    /**
+     * Admin Section
+     */
+    // Users
+    Route::post('/siAdmino/users/create', 'Api\Admin\UsersController@createUser');
+    // Members
+    Route::get('/siAdmino/users/member/list', 'Api\Admin\MemberController@getDaftarMember');
+    Route::post('/siAdmino/users/member/edit/{id}', 'Api\Admin\MemberController@editMember');
+    Route::post('/siAdmino/users/member/delete/{id}', 'Api\Admin\MemberController@deleteMember');
+    Route::post('/siAdmino/users/member/search', 'Api\Admin\MemberController@searchMember');
+
+    // Pustakawan
+    Route::get('/siAdmino/users/pustakawan/list', 'Api\Admin\PustakawanController@getDaftarPustakawan');
+    Route::post('/siAdmino/users/pustakawan/edit/{id}', 'Api\Admin\PustakawanController@editPustakawan');
+    Route::post('/siAdmino/users/pustakawan/delete/{id}', 'Api\Admin\PustakawanController@deletePustakawan');
+    Route::post('/siAdmino/users/pustakawan/search', 'Api\Admin\PustakawanController@searchPustakawan');
+
+    // Admin
+    Route::get('/siAdmino/users/admin/list', 'Api\Admin\AdminController@getDaftarAdmin');
+    Route::post('/siAdmino/users/admin/edit/{id}', 'Api\Admin\AdminController@editAdmin');
+    Route::post('/siAdmino/users/admin/delete/{id}', 'Api\Admin\AdminController@deleteAdmin');
+    Route::post('/siAdmino/users/admin/search', 'Api\Admin\AdminController@searchAdmin');
 
 
-/**
- * Pustakawan Section
- */
-// Buku
-Route::post('/perpus/buku/create', 'Api\Pustakawan\BukuController@createBuku');
-Route::get('/perpus/buku/list', 'Api\Pustakawan\BukuController@getDaftarBuku');
-Route::post('/perpus/buku/edit/{id}', 'Api\Pustakawan\BukuController@editBuku');
-Route::post('/perpus/buku/delete/{id}', 'Api\Pustakawan\BukuController@deleteBuku');
-// Member
-Route::get('/perpus/users/member/list', 'Api\Pustakawan\MemberController@getDaftarMember');
-Route::post('/perpus/users/member/edit/{id}', 'Api\Pustakawan\MemberController@editMember');
-Route::post('/perpus/users/member/delete/{id}', 'Api\Pustakawan\MemberController@deleteMember');
-Route::post('/perpus/users/member/create', 'Api\Pustakawan\MemberController@createMember');
-Route::post('/perpus/users/member/search', 'Api\Pustakawan\MemberController@searchMember');
-// Peminjaman
-Route::post('/perpus/pinjam-buku', 'Api\Pustakawan\PeminjamanController@createPeminjamanBuku');
-Route::get('/perpus/sikulasi/list', 'Api\Pustakawan\PeminjamanController@getDaftarSirkulasi');
-Route::post('/perpus/perpanjang-buku/{id}', 'Api\Pustakawan\PeminjamanController@perpanjangBuku');
-Route::post('/perpus/kembalikan-buku/{id}', 'Api\Pustakawan\PeminjamanController@kembalikanBuku');
-Route::get('/perpus/log-data/peminjaman', 'Api\Pustakawan\PeminjamanController@getDaftarPeminjaman');
-Route::get('/perpus/log-data/peminjaman/export', 'Api\Pustakawan\PeminjamanController@exportLogPeminjaman');
-Route::get('/perpus/log-data/pengembalian', 'Api\Pustakawan\PeminjamanController@getDaftarPengembalian');
-Route::get('/perpus/log-data/pengembalian/export', 'Api\Pustakawan\PeminjamanController@exportLogPengembalian');
+    /**
+     * Pustakawan Section
+     */
+    // Buku
+    Route::post('/perpus/buku/create', 'Api\Pustakawan\BukuController@createBuku');
+    Route::get('/perpus/buku/list', 'Api\Pustakawan\BukuController@getDaftarBuku');
+    Route::post('/perpus/buku/edit/{id}', 'Api\Pustakawan\BukuController@editBuku');
+    Route::post('/perpus/buku/delete/{id}', 'Api\Pustakawan\BukuController@deleteBuku');
+    // Member
+    Route::get('/perpus/users/member/list', 'Api\Pustakawan\MemberController@getDaftarMember');
+    Route::post('/perpus/users/member/edit/{id}', 'Api\Pustakawan\MemberController@editMember');
+    Route::post('/perpus/users/member/delete/{id}', 'Api\Pustakawan\MemberController@deleteMember');
+    Route::post('/perpus/users/member/create', 'Api\Pustakawan\MemberController@createMember');
+    Route::post('/perpus/users/member/search', 'Api\Pustakawan\MemberController@searchMember');
+    // Peminjaman
+    Route::post('/perpus/pinjam-buku', 'Api\Pustakawan\PeminjamanController@createPeminjamanBuku');
+    Route::get('/perpus/sikulasi/list', 'Api\Pustakawan\PeminjamanController@getDaftarSirkulasi');
+    Route::post('/perpus/perpanjang-buku/{id}', 'Api\Pustakawan\PeminjamanController@perpanjangBuku');
+    Route::post('/perpus/kembalikan-buku/{id}', 'Api\Pustakawan\PeminjamanController@kembalikanBuku');
+    Route::get('/perpus/log-data/peminjaman', 'Api\Pustakawan\PeminjamanController@getDaftarPeminjaman');
+    Route::get('/perpus/log-data/peminjaman/export', 'Api\Pustakawan\PeminjamanController@exportLogPeminjaman');
+    Route::get('/perpus/log-data/pengembalian', 'Api\Pustakawan\PeminjamanController@getDaftarPengembalian');
+    Route::get('/perpus/log-data/pengembalian/export', 'Api\Pustakawan\PeminjamanController@exportLogPengembalian');
+    
+});
+
