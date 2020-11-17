@@ -34,12 +34,7 @@ Route::group([
     
 });
 
-Route::group([
-
-    'middleware' => 'api',
-    'prefix' => 'auth'
-
-], function ($router) {
+Route::middleware(['jwt.verify'])->group(function () {
 
     /**
      * Universal Role
@@ -95,6 +90,5 @@ Route::group([
     Route::get('/perpus/log-data/peminjaman/export', 'Api\Pustakawan\PeminjamanController@exportLogPeminjaman');
     Route::get('/perpus/log-data/pengembalian', 'Api\Pustakawan\PeminjamanController@getDaftarPengembalian');
     Route::get('/perpus/log-data/pengembalian/export', 'Api\Pustakawan\PeminjamanController@exportLogPengembalian');
-    
-});
 
+});
