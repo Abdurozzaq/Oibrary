@@ -1,131 +1,150 @@
 <template>
-  <v-app id="inspire">
-    <v-content>
-      <v-container
-        class="fill-height"
-        fluid
-      >
-        <v-row
-          align="center"
-          justify="center"
-        >
-          <v-col
-            cols="12"
-            sm="8"
-            md="4"
-          >
-            <v-card class="elevation-12">
-              <v-toolbar
-                color="success"
-                dark
-                flat
-              >
-                <v-toolbar-title>Reset Password form</v-toolbar-title>
-              </v-toolbar>
-              <v-card-text>
+  <v-content class="pt-0">
+		<v-container
+			fluid
+			class="fill-height py-0"
+		>
+			<v-row
+				align="center"
+				justify="center"
+			>
+				<v-col
+					cols="12"
+					sm="12"
+					md="7"
+					lg="7"
+				>
+					<v-img
+						src="/statics/reset-password.png"
+						max-width="400"
+						class="mx-auto"
+					>
+					</v-img>
+				</v-col>
 
-                <v-alert
-                  v-model="errorAlert"
-                  border="top"
-                  color="red lighten-2"
-                  dark
-                  dismissible
-                >
-                  <ul v-for="(error, index) in serverError" v-bind:key="index">
-                    <li>{{ error[0] }}</li>
-                  </ul>
-                </v-alert>
+				<v-col
+					cols="12"
+					sm="12"
+					md="5"
+					lg="5"
+					class="pa-0"
+				>
+					<v-card
+						height="130vh"
+						dark
+						class="deep-purple d-flex align-center"
+						rounded="0"
+					>
 
-                <v-form v-on:submit.prevent="resetPass">
+						<v-row>
+							<v-col>
+								<v-card-text class="text-center">
+									<div class="text-h6">Reset Password!</div>
+									<div class="text-subtitle1 pb-3">Please, keep your new password safe</div>
+								</v-card-text>
 
-                  <v-text-field
-                    label="Email"
-                    name="email"
-                    prepend-icon="mail"
-                    type="text"
-                    v-model="email"
-                  ></v-text-field>
+								<v-card-text v-if="serverError" class="py-0">
+									<error-alert class="mx-5" v-if="serverError" :serverError="serverError"/>
+								</v-card-text>
 
-                  <v-text-field
-                    id="password"
-                    label="Password"
-                    name="password"
-                    prepend-icon="lock"
-                    type="password"
-                    v-model="password"
-                  ></v-text-field>
+								<v-card-text class="text-center">
+									<v-form v-on:submit.prevent="resetPass">
 
-                  <v-text-field
-                    id="password"
-                    label="Confirm Password"
-                    name="password-confirmation"
-                    prepend-icon="lock"
-                    type="password"
-                    v-model="password_confirmation"
-                  ></v-text-field>
+										<v-text-field
+											label="Email"
+											filled
+											dense
+											class="mx-5"
+											v-model="email"
+											type="email"
+										></v-text-field>
 
-                  <v-btn type="submit" color="success">Reset</v-btn>
-                </v-form>
+										<v-text-field
+											label="Password"
+											filled
+											dense
+											class="mx-5"
+											v-model="password"
+											type="password"
+										></v-text-field>
 
-                <v-overlay
-                  :absolute="true"
-                  :value="overlay"
-                >
-                  <v-progress-circular
-                    :size="50"
-                    color="white"
-                    indeterminate
-                  ></v-progress-circular>
-                </v-overlay>
+										<v-text-field
+											label="Password"
+											filled
+											dense
+											class="mx-5"
+											v-model="password_confirmation"
+											type="password"
+										></v-text-field>
 
-              </v-card-text>
-              <v-toolbar
-                color="success"
-                dark
-                flat
-              >
-                <!-- <v-btn href="/register" outlined class="mr-2" color="white">Register</v-btn> -->
-                <v-btn href="/login" outlined class="mr-2" color="white">Login</v-btn>
-              </v-toolbar>
-            </v-card>
-          </v-col>
-        </v-row>
-      </v-container>
+										<v-btn
+											rounded
+											color="white"
+											width="300px"
+											class="mb-3"
+											type="submit"
+										>
+											<div class="font-weight-bold deep-purple--text">Register</div>
+										</v-btn>
+									</v-form>
 
-      <v-snackbar
-        v-model="successSnackbar"
-        :timeout="5000"
-        color="success"
-      >
-        Your password has been changed in successfully.
-        <v-btn
-          color="white"
-          text
-          @click="successSnackbar = false"
-        >
-          Close
-        </v-btn>
-      </v-snackbar>
+									<a class="text-subtitle1 white--text" href="/">Login?</a>
+									<!-- <a class="text-subtitle1 white--text" href="/resend-verification-mail">Resend Verification Mail?</a> -->
+								</v-card-text>
+							</v-col>
+						</v-row>
 
-    </v-content>
-  </v-app>
+						<!-- Loading -->
+						<v-overlay
+							:absolute="true"
+							:value="overlay"
+						>
+							<v-progress-circular
+								:size="50"
+								color="white"
+								indeterminate
+							></v-progress-circular>
+						</v-overlay>
+					</v-card>
+				</v-col>
+			</v-row>
+		</v-container>
+
+		<v-snackbar
+			v-model="snackbar"
+			:timeout="5000"
+			:color="snackbarColor"
+		>
+			{{ snackbarText }}
+			<v-btn
+				color="white"
+				text
+				@click="snackbar = false"
+			>
+				Close
+			</v-btn>
+		</v-snackbar>
+
+	</v-content>
 </template>
 
 <script>
+  import ErrorAlert from "../../components/ErrorAlert.vue"
   import axios from 'axios'
   export default {
-    props: {
-      source: String,
-    },
+		components: {
+			ErrorAlert,
+		},
 
     data() {
       return {
-        email: null,
-        password: null,
-        password_confirmation: null,
-        serverError: null,
-        errorAlert: false,
-        successSnackbar: false,
+        email: "",
+        password: "",
+        password_confirmation: "",
+        serverError: "",
+        snackbar: false,
+				snackbarColor: "",
+				snackbarText: "",
         overlay: false,
       }
     },
@@ -133,7 +152,7 @@
     methods: {
       resetPass: function() {
         let currentObj = this
-        currentObj.errorAlert = false
+        currentObj.serverError = ""
         currentObj.overlay = true
           const token = this.$route.query.token;
           axios.post('/api/auth/password/reset', {
@@ -149,17 +168,23 @@
             currentObj.password_confirmation = null
 
             // after success show successSnackbar
-            currentObj.successSnackbar = true
+            currentObj.snackbar = true
+						currentObj.snackbarColor = 'success'
+						currentObj.snackbarText = "Password has been changed sucessfully, now redirecting to login page..."
+						currentObj.overlay = false
 
-            currentObj.overlay = false
-
+						setTimeout(function() 
+						{ 
+							currentObj.$router.push('/')
+						}, 3000);
 
           })
           .catch(function (error) {
             currentObj.overlay = false
             if(error.response) {
               currentObj.serverError = error.response.data.errors
-              currentObj.errorAlert = true
+							currentObj.password = ""
+							currentObj.password_confirmation = ""
             }
           })
       } // end of login method

@@ -18,12 +18,8 @@
           >
             <v-img
 							class="mb-4"
-							src="/statics/403.png"
+							src="/statics/404.png"
 						></v-img>
-
-						<br>
-
-						<div>Stop! Please verify your email first...</div>
 
 						<br>
 
@@ -31,12 +27,10 @@
 							rounded
 							color="deep-purple"
 							dark
-							:loading="redirecting"
-      				:disabled="redirecting"
-							@click.prevent="redirectToResendMail"
+							@click.prevent="redirectToLogin"
 							class="mx-auto"
 						>
-							Resend Verification Mail?
+							Back To Login Page
 						</v-btn>
           </v-col>
         </v-row>
@@ -69,30 +63,18 @@
         snackbar: false,
 				snackbarColor: "",
 				snackbarText: "",
-				redirecting: false
       }
     },
 
     methods: {
-			redirectToResendMail: function() {
+			redirectToLogin: function() {
 				let currentObj = this
-
-				currentObj.redirecting = true
 
 				currentObj.snackbar = true
 				currentObj.snackbarColor = "success"
-				currentObj.snackbarText = "Redirecting to resend verification mail page..."
+				currentObj.snackbarText = "Redirecting to login page..."
 
-				axios.post('/api/auth/logout')
-					.then(function (response) {
-						localStorage.removeItem('userToken')
-						currentObj.$router.push('/resend-verification-mail')
-					})
-					.catch(function (error) {
-							console.log(error);
-					});
-
-				currentObj.redirecting = false
+				currentObj.$router.push('/')
 			}
     } // end of methods
   }

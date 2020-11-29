@@ -1,49 +1,6 @@
 import multiguard from 'vue-router-multiguard';
 import axios from 'axios'
 
-import PustakawanLayout from "./layouts/Dashboard-Pustakawan.vue";
-// import MemberLayout from "./layouts/Dashboard-Member.vue";
-import AdminLayout from "./layouts/Dashboard-Admin.vue";
-
-// For Auth
-import Login from "./pages/auth/Login.vue"
-import Register from "./pages/auth/Register.vue"
-import ForgotPassword from "./pages/auth/ForgotPassword.vue"
-import ResetPassword from "./pages/auth/ResetPassword.vue"
-import ResendVerificationMail from "./pages/auth/ResendVerificationMail.vue"
-import RedirectAfterVerify from "./pages/auth/RedirectAfterVerify.vue"
-import LandingLayout from "./layouts/Landing.vue"
-import LandingPage from "./pages/LandingPage.vue"
-import UnverifiedEmail from "./pages/auth/UnverifiedEmail.vue"
-import Halaman404 from "./pages/404.vue"
-
-// Admin
-import AdminHomePage from "./pages/admin/AdminHome.vue"
-import AdminCreateUser from "./pages/admin/users/CreateUser.vue"
-import AdminDaftarAnggota from "./pages/admin/users/DaftarAnggota.vue"
-import AdminDaftarPustakawan from "./pages/admin/users/DaftarPustakawan.vue"
-import AdminDaftarAdmin from "./pages/admin/users/DaftarAdmin.vue"
-import AdminEditPassword from "./pages/admin/settings/EditPassword.vue"
-import AdminEditIdentity from "./pages/admin/settings/EditIdentity.vue"
-
-// Pustakawan
-import PusatakawanHomePage from "./pages/pustakawan/PustakawanHome.vue"
-import CreateBuku from "./pages/pustakawan/buku/BuatBuku.vue"
-import DaftarBuku from "./pages/pustakawan/buku/DaftarBuku.vue"
-import PinjamBuku from "./pages/pustakawan/peminjaman/PinjamBuku.vue"
-import Sirkulasi from "./pages/pustakawan/peminjaman/Sirkulasi.vue"
-import LogPeminjaman from "./pages/pustakawan/logData/Peminjaman.vue"
-import LogPengembalian from "./pages/pustakawan/logData/Pengembalian.vue"
-import CreateAnggota from "./pages/pustakawan/anggota/CreateAnggota.vue"
-import DaftarAnggota from "./pages/pustakawan/anggota/DaftarAnggota.vue"
-import PustakawanEditPassword from "./pages/pustakawan/settings/EditPassword.vue"
-import PustakawanEditIdentity from "./pages/pustakawan/settings/EditIdentity.vue"
-
-// // Member
-// import MemberHomePage from "./pages/member/MemberHome.vue"
-
-import Component from "./components/ExampleComponent.vue"
-
 const token = localStorage.getItem('userToken')
 if (token) {
   axios.defaults.headers.common['Authorization'] = 'Bearer' + ' ' + token
@@ -217,18 +174,56 @@ const pageTitle = (to, from, next) => {
 
 
 export const routes = [
+    /**
+     * Authentication Routes
+     */
     {
         path: "",
-        component: LandingLayout,
-        beforeEnter: multiguard([ifNotAuthenticated]),
+        component: () => import(/* webpackChunkName: "LandingLayout" */'./layouts/Landing.vue'),
         children: [
             {
                 path: "",
+                component: () => import(/* webpackChunkName: "LoginPage" */'./pages/auth/Login.vue'),
                 meta: {
-                    title: 'Welcome To' + 'Perpus ' + nama_sekolah,
+                        title: 'Welcome - ' + 'Perpus ' + nama_sekolah,
                 },
-                component: LandingPage,
-            }
+                beforeEnter: multiguard([pageTitle, ifNotAuthenticated]),
+            },
+            /**
+             * Pustakawan Must Be Registered by Admin 
+             */
+            // {
+            //     path: "/register",
+            //     component: () => import(/* webpackChunkName: "RegisterPage" */'./pages/auth/Register.vue'),
+            //     meta: {
+            //             title: 'Register - ' + 'Perpus ' + nama_sekolah,
+            //     },
+            //     beforeEnter: multiguard([pageTitle, ifNotAuthenticated]),
+            // },
+            // {
+            //     path: "/resend-verification-mail",
+            //     component: () => import(/* webpackChunkName: "ResendVerificationEmail" */'./pages/auth/ResendVerificationMail.vue'),
+            //     meta: {
+            //             title: 'Resend Verification Mail - ' + 'Perpus ' + nama_sekolah,
+            //     },
+            //     beforeEnter: multiguard([ifNotAuthenticated]),
+            // },
+            {
+                path: "/forgot-password",
+                component: () => import(/* webpackChunkName: "ForgotPassword" */'./pages/auth/ForgotPassword.vue'),
+                meta: {
+                        title: 'Forgot Password - ' + 'Perpus ' + nama_sekolah,
+                },
+                beforeEnter: multiguard([ifNotAuthenticated]),
+            },
+            {
+                path: "/reset-password",
+                component: () => import(/* webpackChunkName: "ResetPassword" */'./pages/auth/ResetPassword.vue'),
+                meta: {
+                        title: 'Reset Password - ' + 'Perpus ' + nama_sekolah,
+                },
+                beforeEnter: multiguard([ifNotAuthenticated]),
+            },
         ]
     },
     // {
@@ -244,11 +239,11 @@ export const routes = [
     // },
     {
         path: "/perpus",
-        component: PustakawanLayout,
+        component: () => import(/* webpackChunkName: "PustakawanLayout" */'./layouts/Dashboard-Pustakawan.vue'),
         children: [
             {
                 path: "",
-                component: PusatakawanHomePage,
+                component: () => import(/* webpackChunkName: "PusatakawanHomePage" */'./pages/pustakawan/PustakawanHome.vue'),
                 meta: {
                     title: 'Home - ' + 'Perpus ' + nama_sekolah,
                 },
@@ -256,7 +251,7 @@ export const routes = [
             },
             {
                 path: "buku/create",
-                component: CreateBuku,
+                component: () => import(/* webpackChunkName: "CreateBuku" */'./pages/pustakawan/buku/BuatBuku.vue'),
                 meta: {
                     title: 'Tambah Buku - ' + 'Perpus ' + nama_sekolah,
                 },
@@ -264,7 +259,7 @@ export const routes = [
             },
             {
                 path: "buku/list",
-                component: DaftarBuku,
+                component: () => import(/* webpackChunkName: "DaftarBuku" */'./pages/pustakawan/buku/DaftarBuku.vue'),
                 meta: {
                     title: 'Daftar Buku - ' + 'Perpus ' + nama_sekolah,
                 },
@@ -272,7 +267,7 @@ export const routes = [
             },
             {
                 path: "pinjam-buku",
-                component: PinjamBuku,
+                component: () => import(/* webpackChunkName: "PinjamBuku" */'./pages/pustakawan/peminjaman/PinjamBuku.vue'),
                 meta: {
                     title: 'Pinjam Buku - ' + 'Perpus ' + nama_sekolah,
                 },
@@ -280,7 +275,7 @@ export const routes = [
             },
             {
                 path: "sirkulasi",
-                component: Sirkulasi,
+                component: () => import(/* webpackChunkName: "Sirkulasi" */'./pages/pustakawan/peminjaman/Sirkulasi.vue'),
                 meta: {
                     title: 'Sirkulasi - ' + 'Perpus ' + nama_sekolah,
                 },
@@ -288,7 +283,7 @@ export const routes = [
             },
             {
                 path: "log-data/peminjaman",
-                component: LogPeminjaman,
+                component: () => import(/* webpackChunkName: "LogPeminjaman" */'./pages/pustakawan/logData/Peminjaman.vue'),
                 meta: {
                     title: 'Log Data Peminjaman - ' + 'Perpus ' + nama_sekolah,
                 },
@@ -296,7 +291,7 @@ export const routes = [
             },
             {
                 path: "log-data/pengembalian",
-                component: LogPengembalian,
+                component: () => import(/* webpackChunkName: "LogPengembalian" */'./pages/pustakawan/logData/Pengembalian.vue'),
                 meta: {
                     title: 'Log Data Pengembalian - ' + 'Perpus ' + nama_sekolah,
                 },
@@ -304,7 +299,7 @@ export const routes = [
             },
             {
                 path: "anggota/create",
-                component: CreateAnggota,
+                component: () => import(/* webpackChunkName: "CreateAnggota" */'./pages/pustakawan/anggota/CreateAnggota.vue'),
                 meta: {
                     title: 'Tambah Anggota - ' + 'Perpus ' + nama_sekolah,
                 },
@@ -312,7 +307,7 @@ export const routes = [
             },
             {
                 path: "anggota/list",
-                component: DaftarAnggota,
+                component: () => import(/* webpackChunkName: "DaftarAnggota" */'./pages/pustakawan/anggota/DaftarAnggota.vue'),
                 meta: {
                     title: 'Daftar Anggota - ' + 'Perpus ' + nama_sekolah,
                 },
@@ -320,7 +315,7 @@ export const routes = [
             },
             {
                 path: "profile/settings/password",
-                component: PustakawanEditPassword,
+                component: () => import(/* webpackChunkName: "PustakawanEditPassword" */'./pages/pustakawan/settings/EditPassword.vue'),
                 meta: {
                     title: 'Ganti Password - ' + 'Perpus ' + nama_sekolah,
                 },
@@ -328,7 +323,7 @@ export const routes = [
             },
             {
                 path: "profile/settings/identity",
-                component: PustakawanEditIdentity,
+                component: () => import(/* webpackChunkName: "PustakawanEditIdentity" */'./pages/pustakawan/settings/EditIdentity.vue'),
                 meta: {
                     title: 'Ubah Identitas - ' + 'Perpus ' + nama_sekolah,
                 },
@@ -338,11 +333,11 @@ export const routes = [
     },
     {
         path: "/siAdmino",
-        component: AdminLayout,
+        component: () => import(/* webpackChunkName: "AdminLayout" */'./layouts/Dashboard-Admin.vue'),
         children: [
             {
                 path: "",
-                component: AdminHomePage,
+                component: () => import(/* webpackChunkName: "AdminHomePage" */'./pages/admin/AdminHome.vue'),
                 meta: {
                     title: 'Admin Home - ' + 'Perpus ' + nama_sekolah,
                 },
@@ -350,7 +345,7 @@ export const routes = [
             },
             {
                 path: "users/create",
-                component: AdminCreateUser,
+                component: () => import(/* webpackChunkName: "AdminCreateUser" */'./pages/admin/users/CreateUser.vue'),
                 meta: {
                     title: 'Create User - ' + 'Perpus ' + nama_sekolah,
                 },
@@ -358,7 +353,7 @@ export const routes = [
             },
             {
                 path: "users/anggota/list",
-                component: AdminDaftarAnggota,
+                component: () => import(/* webpackChunkName: "AdminDaftarAnggota" */'./pages/admin/users/DaftarAnggota.vue'),
                 meta: {
                     title: 'Daftar Anggota - ' + 'Perpus ' + nama_sekolah,
                 },
@@ -366,7 +361,7 @@ export const routes = [
             },
             {
                 path: "users/pustakawan/list",
-                component: AdminDaftarPustakawan,
+                component: () => import(/* webpackChunkName: "AdminDaftarPustakawan" */'./pages/admin/users/DaftarPustakawan.vue'),
                 meta: {
                     title: 'Daftar Pustakawan - ' + 'Perpus ' + nama_sekolah,
                 },
@@ -374,7 +369,7 @@ export const routes = [
             },
             {
                 path: "users/admin/list",
-                component: AdminDaftarAdmin,
+                component: () => import(/* webpackChunkName: "AdminDaftarAdmin" */'./pages/admin/users/DaftarAdmin.vue'),
                 meta: {
                     title: 'Daftar Admin - ' + 'Perpus ' + nama_sekolah,
                 },
@@ -382,7 +377,7 @@ export const routes = [
             },
             {
                 path: "profile/settings/password",
-                component: AdminEditPassword,
+                component: () => import(/* webpackChunkName: "AdminEditPassword" */'./pages/admin/settings/EditPassword.vue'),
                 meta: {
                     title: 'Ganti Password - ' + 'Perpus ' + nama_sekolah,
                 },
@@ -390,7 +385,7 @@ export const routes = [
             },
             {
                 path: "profile/settings/identity",
-                component: AdminEditIdentity,
+                component: () => import(/* webpackChunkName: "AdminEditIdentity" */'./pages/admin/settings/EditIdentity.vue'),
                 meta: {
                     title: 'Ubah Identitas - ' + 'Perpus ' + nama_sekolah,
                 },
@@ -400,72 +395,35 @@ export const routes = [
     },
 
     /**
-     * For Authentication Purposes
+     * Other Page Routes
      */
-    {
-        path: "/login",
-        component: Login,
-        meta: {
-            title: 'Login - ' + 'Perpus ' + nama_sekolah,
-        },
-        beforeEnter: multiguard([ifNotAuthenticated, pageTitle]),
-    },
     // {
-    //     path: "/register",
-    //     component: Register,
+    //     path: "/verification-success",
+    //     component: () => import(/* webpackChunkName: "VerificaitonSuccess" */'./pages/auth/RedirectAfterVerify.vue'),
     //     meta: {
-    //         title: 'Register - ' + nama_sekolah,
+    //         title: 'Verification Success - ' + 'Perpus ' + nama_sekolah,
     //     },
-    //     beforeEnter: multiguard([ifNotAuthenticated]),
+    //     beforeEnter: multiguard([pageTitle]),
     // },
     // {
-    //     path: "/forgot-password",
-    //     component: ForgotPassword,
+    //     path: "/UnverifiedEmail",
+    //     component: () => import(/* webpackChunkName: "UnverifiedEmail" */'./pages/auth/UnverifiedEmail.vue'),
     //     meta: {
-    //         title: 'Forgot Password - ' + 'Perpus ' + nama_sekolah,
+    //         title: 'Unverified Email Address - ' + 'Perpus ' + nama_sekolah,
     //     },
-    //     beforeEnter: multiguard([ifNotAuthenticated, pageTitle]),
+    //     beforeEnter: multiguard([pageTitle]),
     // },
-    // {
-    //     path: "/reset-password",
-    //     component: ResetPassword,
-    //     meta: {
-    //         title: 'Reset Password - ' + 'Perpus ' + nama_sekolah,
-    //     },
-    //     beforeEnter: multiguard([ifNotAuthenticated, pageTitle]),
-    // },
-    // {
-    //     path: "/resend-verification-mail",
-    //     component: ResendVerificationMail,
-    //     meta: {
-    //         title: 'Resend Verification Mail - ' + 'Perpus ' + nama_sekolah,
-    //     },
-    //     beforeEnter: multiguard([ifNotAuthenticated, pageTitle]),
-    // },
-    {
-        path: "/verification-success",
-        component: RedirectAfterVerify,
-        meta: {
-            title: 'Verification Success - ' + 'Perpus ' + nama_sekolah,
-        },
-        beforeEnter: multiguard([pageTitle]),
-    },
-    {
-        path: "/UnverifiedEmail",
-        component: UnverifiedEmail,
-        meta: {
-            title: 'Unverified Email Address - ' + 'Perpus ' + nama_sekolah,
-        },
-        beforeEnter: multiguard([pageTitle]),
-    },
-    {
-        path: "*",
-        component: Halaman404,
-        meta: {
-            title: '404 Not Found - ' + 'Perpus ' + nama_sekolah,
-        },
-        beforeEnter: multiguard([pageTitle]),
-    }
+    /**
+		 * Error Page Routes
+		 */
+		{
+			path: "*",
+			component: () => import(/* webpackChunkName: "Error404Page" */'./pages/error/404.vue'),
+			meta: {
+				title: '404 Not Found - ' + 'Perpus ' + nama_sekolah,
+			},
+			beforeEnter: multiguard([pageTitle]),
+		},
 ];
 
 

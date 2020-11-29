@@ -5,7 +5,7 @@
         class="fill-height"
         fluid
       >
-        <v-row
+      	<v-row
           align="center"
           justify="center"
         >
@@ -13,58 +13,73 @@
             cols="12"
             sm="8"
             md="4"
+						lg="4"
+						class="text-center"
           >
-            <v-card
-                class="mx-auto"
-                color="success"
-                dark
-                max-width="400"
-            >
-                <v-card-title>
-                <v-icon
-                    large
-                    left
-                >
-                    mdi-account-check
-                </v-icon>
-                <span class="title font-weight-light">Verification Success</span>
-                </v-card-title>
+            <v-img
+							class="mb-4"
+							src="/statics/activation.png"
+						></v-img>
 
-                <v-card-text class="headline font-weight-bold">
-                You've successfully verify your email. Thank You.
-                </v-card-text>
+						<br>
 
-                <v-card-actions>
-                  <v-btn @click="redirect">Redirect To Login Page</v-btn>
-                </v-card-actions>
-                
+						<div>Thank You, Now Your Account is Activated!</div>
 
-            </v-card>
+						<br>
+
+						<v-btn
+							rounded
+							color="deep-purple"
+							dark
+							@click.prevent="redirectToLogin"
+							class="mx-auto"
+						>
+							Back To Login Page
+						</v-btn>
           </v-col>
         </v-row>
       </v-container>
+
+      <v-snackbar
+        v-model="snackbar"
+        :timeout="5000"
+        :color="snackbarColor"
+      >
+        {{ snackbarText }}
+        <v-btn
+          color="white"
+          text
+          @click="snackbar = false"
+        >
+          Close
+        </v-btn>
+      </v-snackbar>
+
     </v-content>
   </v-app>
 </template>
 
 <script>
-    import axios from 'axios'
+  import axios from 'axios'
   export default {
-    props: {
-      source: String,
+    data() {
+      return {
+        snackbar: false,
+				snackbarColor: "",
+				snackbarText: "",
+      }
     },
 
     methods: {
-      redirect: function() {
-        let currentObj = this
-        currentObj.$router.push('/login')
-      }
-    }, // end of methods
+			redirectToLogin: function() {
+				let currentObj = this
 
-    mounted: function() {
-        let currentObj = this
-    }
-}
+				currentObj.snackbar = true
+				currentObj.snackbarColor = "success"
+				currentObj.snackbarText = "Redirecting to login page..."
 
-  
+				currentObj.$router.push('/')
+			}
+    } // end of methods
+  }
 </script>

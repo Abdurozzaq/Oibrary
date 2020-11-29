@@ -2,30 +2,77 @@
   <v-app>
     <v-app-bar
       app
-      dark
+      color="transparent"
+      elevation="0"
+      flat
+      hide-on-scroll
     >
-      <v-toolbar-title
-        style="width: 300px"
-        class="ml-0 pl-4"
-      >
-        <span>{{ nama_sekolah }}</span>
-      </v-toolbar-title>
+      <v-container class="py-0 fill-height">
+        <v-toolbar-title
+					style="width: 300px"
+					class="ml-0 pl-4"
+        >
+					<v-avatar
+						size="48"
+						v-if="logo_sekolah"
+					>
+						<img
+							class="hidden-sm-and-down"
+							:src="logo_sekolah"
+							alt="Logo"
+						>
+					</v-avatar>
+          <span>{{ nama_sekolah }}</span>
+        </v-toolbar-title>
 
-      <v-spacer></v-spacer>
+        <v-spacer></v-spacer>
 
-      <v-btn href="/login" text>
-        LOGIN
-      </v-btn>
-      <!-- <v-btn href="/register" text>
-        REGISTER
-      </v-btn> -->
+				<div v-if="$vuetify.breakpoint.mdAndUp">
+					<v-btn href="/" class="white--text mr-2" outlined rounded>
+            			LOGIN
+					</v-btn>
+					<v-btn href="/forgot-password" class="white--text" outlined rounded>
+						FORGOT PASSWORD?
+					</v-btn>
+					<!-- <v-btn href="/register" class="white--text" outlined rounded>
+						REGISTER
+					</v-btn> -->
+				</div>
+
+				<div v-if="$vuetify.breakpoint.smAndDown" class="text-center">
+					<v-menu offset-y>
+						<template v-slot:activator="{ on, attrs }">
+							<v-btn
+								class="mx-2"
+								fab
+								text
+								v-bind="attrs"
+								v-on="on"
+							>
+								<v-icon dark>
+									mdi-format-list-bulleted-square
+								</v-icon>
+							</v-btn>
+						</template>
+						<v-list>
+							<v-list-item
+								v-for="(item, index) in menus"
+								:key="index"
+								:href="item.link"
+							>
+								<v-list-item-title>{{ item.title }}</v-list-item-title>
+							</v-list-item>
+						</v-list>
+					</v-menu>
+				</div>
+        
+      </v-container>
     </v-app-bar>
 
     <!-- Sizes your content based upon application components -->
-    <v-content class="gradient">
-
+    <v-content class="pt-0">
       <!-- Provides the application the proper gutter -->
-      <v-container fluid>
+      <v-container class="pa-0" fluid>
 
         <!-- If using vue-router -->
         <router-view></router-view>
@@ -39,11 +86,21 @@
     name: 'LandingPage',
     data() {
       return {
-
+		menus: [
+			{
+				title: "Login",
+				link: "/login"
+			},
+			{
+				title: "Register",
+				link: "/register"
+			}
+		],
+		app_name: process.env.MIX_APP_NAME
       }
-    }, // End of Data ()
-
-    computed: {
+	}, // end of data
+	
+	computed: {
       nama_sekolah: function () {
         return process.env.MIX_NAMA_SEKOLAH;
       },
@@ -60,10 +117,5 @@
 <style>
   .font {
     font-family: 'Baloo Da 2', cursive;
-  }
-  .gradient {
-    background: #BBD2C5;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #292E49, #536976, #BBD2C5);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #292E49, #536976, #BBD2C5); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   }
 </style>

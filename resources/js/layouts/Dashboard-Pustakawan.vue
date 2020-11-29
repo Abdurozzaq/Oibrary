@@ -166,9 +166,10 @@
             alt="Logo"
           >
         </v-avatar>
-        <span class="hidden-sm-and-down">{{ nama_sekolah }} <code class="purple lighten-5  purple--text text--darken-3">Pustakawan</code></span>
+        <span class="hidden-sm-and-down">{{ nama_sekolah }}</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
+      <code class="hidden-sm-and-down purple lighten-5  purple--text text--darken-3">Pustakawan</code>
       <v-menu
         v-model="menu"
         :close-on-content-click="false"
@@ -185,7 +186,7 @@
           </v-btn>
         </template>
 
-        <v-card>
+        <v-card max-width="300">
           <v-list>
             <v-list-item>
               <v-list-item-avatar>
@@ -193,7 +194,7 @@
               </v-list-item-avatar>
 
               <v-list-item-content>
-                <v-list-item-title>{{ firstName }} {{ lastName }}</v-list-item-title>
+                <v-list-item-title class="text-truncate">{{ firstName }} {{ lastName }}</v-list-item-title>
                 <v-list-item-subtitle>Logged In</v-list-item-subtitle>
               </v-list-item-content>
             </v-list-item>
@@ -285,7 +286,7 @@
           axios.post('/api/auth/logout')
           .then(function (response) {
             localStorage.removeItem('userToken')
-            currentObj.$router.push('/login')
+            currentObj.$router.push('/')
           })
           .catch(function (error) {
             console.log(error);

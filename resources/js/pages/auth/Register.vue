@@ -1,155 +1,169 @@
 <template>
-  <v-app id="inspire">
-    <v-content>
-      <v-container
-        class="fill-height"
-        fluid
-      >
-        <v-row
-          align="center"
-          justify="center"
-        >
-          <v-col
-            cols="12"
-            sm="8"
-            md="4"
-          >
-            <v-card class="elevation-12">
-              <v-toolbar
-                color="success"
-                dark
-                flat
-              >
-                <v-toolbar-title>Register form</v-toolbar-title>
-              </v-toolbar>
-              <v-card-text>
-                <v-alert
-                  v-model="errorAlert"
-                  border="top"
-                  color="red lighten-2"
-                  dark
-                  dismissible
-                >
-                  <ul v-for="(error, index) in serverError" v-bind:key="index">
-                    <li>{{ error[0] }}</li>
-                  </ul>
-                </v-alert>
+  <v-content class="pt-0">
+		<v-container
+			fluid
+			class="fill-height py-0"
+		>
+			<v-row
+				align="center"
+				justify="center"
+			>
+				<v-col
+					cols="12"
+					sm="12"
+					md="7"
+					lg="7"
+				>
+					<v-img
+						src="/statics/login.png"
+						max-width="400"
+						class="mx-auto"
+					>
+					</v-img>
+				</v-col>
 
-                <v-form v-on:submit.prevent="register">
-                  <v-text-field
-                    label="First Name"
-                    name="first_name"
-                    prepend-icon="person"
-                    type="text"
-                    v-model="first_name"
-                  ></v-text-field>
+				<v-col
+					cols="12"
+					sm="12"
+					md="5"
+					lg="5"
+					class="pa-0"
+				>
+					<v-card
+						height="130vh"
+						dark
+						class="deep-purple d-flex align-center"
+						rounded="0"
+					>
 
-                  <v-text-field
-                    label="Last Name"
-                    name="last_name"
-                    prepend-icon="person"
-                    type="text"
-                    v-model="last_name"
-                  ></v-text-field>
+						<v-row>
+							<v-col>
+								<v-card-text class="text-center">
+									<div class="text-h6">Welcome! you're new, right?</div>
+									<div class="text-subtitle1 pb-3">Let's Create An Account</div>
+								</v-card-text>
 
-                  <v-text-field
-                    label="Email"
-                    name="email"
-                    prepend-icon="mail"
-                    type="text"
-                    v-model="email"
-                  ></v-text-field>
+								<v-card-text v-if="serverError" class="py-0">
+									<error-alert class="mx-5" v-if="serverError" :serverError="serverError"/>
+								</v-card-text>
 
-                  <v-text-field
-                    id="password"
-                    label="Password"
-                    name="password"
-                    prepend-icon="lock"
-                    type="password"
-                    v-model="password"
-                  ></v-text-field>
+								<v-card-text class="text-center">
+									<v-form v-on:submit.prevent="register">
+										<v-text-field
+											label="First Name"
+											filled
+											dense
+											class="mx-5"
+											v-model="first_name"
+											type="text"
+										></v-text-field>
 
-                  <v-text-field
-                    id="password"
-                    label="Confirm Password"
-                    name="password-confirmation"
-                    prepend-icon="lock"
-                    type="password"
-                    v-model="password_confirmation"
-                  ></v-text-field>
+										<v-text-field
+											label="last Name"
+											filled
+											dense
+											class="mx-5"
+											v-model="last_name"
+											type="text"
+										></v-text-field>
 
-                  <v-btn type="submit" color="success">Register</v-btn>
-                </v-form>
+										<v-text-field
+											label="Email"
+											filled
+											dense
+											class="mx-5"
+											v-model="email"
+											type="email"
+										></v-text-field>
 
-                <v-overlay
-                  :absolute="true"
-                  :value="overlay"
-                >
-                  <v-progress-circular
-                    :size="50"
-                    color="white"
-                    indeterminate
-                  ></v-progress-circular>
-                </v-overlay>
+										<v-text-field
+											label="Password"
+											filled
+											dense
+											class="mx-5"
+											v-model="password"
+											type="password"
+										></v-text-field>
 
-              </v-card-text>
-              <v-toolbar
-                color="success"
-                dark
-                flat
-              >
-                <v-btn href="/login" outlined class="mr-2" color="white">Login</v-btn>
-                <v-btn href="/forgot-password" outlined class="mr-2" color="white">Forgot Password?</v-btn>
-              </v-toolbar>
-              <v-toolbar
-                color="success"
-                dark
-                flat
-               
-              >
-                <v-btn href="/resend-verification-mail" outlined class="mr-2" color="white">Resend Verification Mail?</v-btn>
-              </v-toolbar>
-            </v-card>
-          </v-col>
-        </v-row>
-      </v-container>
+										<v-text-field
+											label="Password"
+											filled
+											dense
+											class="mx-5"
+											v-model="password_confirmation"
+											type="password"
+										></v-text-field>
 
-      <v-snackbar
-        v-model="successSnackbar"
-        :timeout="5000"
-        color="success"
-      >
-        You has been registered successfully. Please check your email for verify your email.
-        <v-btn
-          color="white"
-          text
-          @click="successSnackbar = false"
-        >
-          Close
-        </v-btn>
-      </v-snackbar>
+										<v-btn
+											rounded
+											color="white"
+											width="300px"
+											class="mb-3"
+											type="submit"
+										>
+											<div class="font-weight-bold deep-purple--text">Register</div>
+										</v-btn>
+									</v-form>
 
-    </v-content>
-  </v-app>
+									<a class="text-subtitle1 white--text" href="/">Already a member?</a>
+									<a class="text-subtitle1 white--text" href="/resend-verification-mail">Resend Verification Mail?</a>
+								</v-card-text>
+							</v-col>
+						</v-row>
+
+						<!-- Loading -->
+						<v-overlay
+							:absolute="true"
+							:value="overlay"
+						>
+							<v-progress-circular
+								:size="50"
+								color="white"
+								indeterminate
+							></v-progress-circular>
+						</v-overlay>
+					</v-card>
+				</v-col>
+			</v-row>
+		</v-container>
+
+		<v-snackbar
+			v-model="snackbar"
+			:timeout="5000"
+			:color="snackbarColor"
+		>
+			{{ snackbarText }}
+			<v-btn
+				color="white"
+				text
+				@click="snackbar = false"
+			>
+				Close
+			</v-btn>
+		</v-snackbar>
+
+	</v-content>
 </template>
 
 <script>
+  import ErrorAlert from "../../components/ErrorAlert.vue"
   import axios from 'axios'
   export default {
-    props: {
-      source: String,
-    },
+		components: {
+			ErrorAlert,
+		},
 
     data() {
       return {
-        first_name: null,
-        last_name: null,
-        email: null,
-        password: null,
-        password_confirmation: null,
-        serverError: null,
-        errorAlert: false,
-        successSnackbar: false,
+        first_name: "",
+        last_name: "",
+        email: "",
+        password: "",
+        password_confirmation: "",
+        serverError: "",
+        snackbar: false,
+				snackbarColor: "",
+				snackbarText: "",
         overlay: false,
       }
     },
@@ -157,7 +171,7 @@
     methods: {
       register: function() {
         let currentObj = this
-        currentObj.errorAlert = false
+        currentObj.serverError = ""
         currentObj.overlay = true
 
           axios.post('api/auth/register', {
@@ -168,9 +182,17 @@
             password_confirmation: currentObj.password_confirmation
           })
           .then(function (response) {
-          
+
+						currentObj.first_name = ""
+						currentObj.last_name = ""
+						currentObj.email = ""
+						currentObj.password = ""
+						currentObj.password_confirmation = ""
+
             // after success show successSnackbar
-            currentObj.successSnackbar = true
+            currentObj.snackbar = true
+						currentObj.snackbarColor = 'success'
+						currentObj.snackbarText = "Register successed, check your email for confirmation link..."
 
             currentObj.overlay = false
 
@@ -181,7 +203,8 @@
             currentObj.overlay = false
             if(error.response) {
               currentObj.serverError = error.response.data.errors
-              currentObj.errorAlert = true
+							currentObj.password = ""
+							currentObj.password_confirmation = ""
             }
           })
 

@@ -1,224 +1,201 @@
 <template>
-  <v-app id="inspire">
-    <v-content>
-      <v-container
-        class="fill-height"
-        fluid
-      >
-        <v-row
-          align="center"
-          justify="center"
-        >
-          <v-col
-            cols="12"
-            sm="8"
-            md="4"
-          >
-            <v-avatar
-              size="64"
-              class="d-block mx-auto"
-            >
-              <img
-                :src="logo_sekolah"
-                alt="Logo"
-              >
-            </v-avatar>
+	<v-content class="pt-0">
+		<v-container
+			fluid
+			class="fill-height py-0"
+		>
+			<v-row
+				align="center"
+				justify="center"
+			>
+				<v-col
+					cols="12"
+					sm="12"
+					md="7"
+					lg="7"
+				>
+					<v-img
+						src="/statics/login.png"
+						max-width="400"
+						class="mx-auto"
+					>
+					</v-img>
+				</v-col>
 
-            <div class="text-h5 text-center grey--text text--darken-2 mb-1">{{ nama_sekolah }}</div>
+				<v-col
+					cols="12"
+					sm="12"
+					md="5"
+					lg="5"
+					class="pa-0"
+				>
+					<v-card
+						height="110vh"
+						dark
+						class="deep-purple d-flex align-center"
+						rounded="0"
+					>
 
-            <v-card class="elevation-12">
-              <v-toolbar
-                color="primary"
-                dark
-                flat
-              >
-                <v-toolbar-title>Login form</v-toolbar-title>
-              </v-toolbar>
-              <v-card-text>
-                <v-alert
-                  v-model="errorAlert"
-                  border="top"
-                  color="red lighten-2"
-                  dark
-                  dismissible
-                >
-                  <ul v-for="(error, index) in serverError" v-bind:key="index">
-                    <li>
-                      {{ error[0] }} 
-                    </li>
-                  </ul>
-                </v-alert>
-                <v-form v-on:submit.prevent="login">
-                  <v-text-field
-                    label="Email"
-                    name="email"
-                    prepend-icon="person"
-                    type="text"
-                    v-model="email"
-                  ></v-text-field>
+						<v-row>
+							<v-col>
+								<v-card-text class="text-center">
+									<div class="text-h6">Welcome!</div>
+									<div class="text-subtitle1 pb-3">Sign in to your account</div>
+								</v-card-text>
 
-                  <v-text-field
-                    id="password"
-                    label="Password"
-                    name="password"
-                    prepend-icon="lock"
-                    type="password"
-                    v-model="password"
-                  ></v-text-field>
+								<v-card-text v-if="serverError" class="py-0">
+									<error-alert class="mx-5" v-if="serverError" :serverError="serverError"/>
+								</v-card-text>
 
-                  <v-btn type="submit" color="primary">Login</v-btn>
-                </v-form>
+								<v-card-text class="text-center">
+									<v-form v-on:submit.prevent="login">
+										<v-text-field
+											label="Email"
+											filled
+											dense
+											class="mx-5"
+											v-model="email"
+											type="email"
+										></v-text-field>
 
-                <v-overlay
-                  :absolute="true"
-                  :value="overlay"
-                >
-                  <v-progress-circular
-                    :size="50"
-                    color="white"
-                    indeterminate
-                  ></v-progress-circular>
-                </v-overlay>
+										<v-text-field
+											label="Password"
+											filled
+											dense
+											class="mx-5"
+											v-model="password"
+											type="password"
+										></v-text-field>
 
-              </v-card-text>
-              <!-- <v-toolbar
-                color="primary"
-                dark
-                flat
-              >
-                <v-btn href="/register" outlined class="mr-2" color="white">Register</v-btn>
-                <v-btn href="/forgot-password" outlined class="mr-2" color="white">Forgot Password?</v-btn>
-               
-              </v-toolbar> -->
-              <!-- <v-toolbar
-                color="primary"
-                dark
-                flat
-               
-              >
-                <v-btn href="/resend-verification-mail" outlined class="mr-2" color="white">Resend Verification Mail?</v-btn>
-              </v-toolbar> -->
-            </v-card>
-          </v-col>
-        </v-row>
-      </v-container>
+										<v-btn
+											rounded
+											color="white"
+											width="300px"
+											class="mb-3"
+											type="submit"
+										>
+											<div class="font-weight-bold deep-purple--text">Sign In</div>
+										</v-btn>
+									</v-form>
 
-      <v-snackbar
-        v-model="successSnackbar"
-        :timeout="5000"
-        color="success"
-      >
-        You has been logged in successfully. Redirecting to Dashboard...
-        <v-btn
-          color="white"
-          text
-          @click="successSnackbar = false"
-        >
-          Close
-        </v-btn>
-      </v-snackbar>
+									<a class="text-subtitle1 white--text" href="/forgot-password">Fogot Password?</a>
+									<!-- <a class="text-subtitle1 white--text" href="/resend-verification-mail">Resend Verification Mail?</a> -->
+								</v-card-text>
+							</v-col>
+						</v-row>
 
-    </v-content>
-  </v-app>
+						<!-- Loading -->
+						<v-overlay
+							:absolute="true"
+							:value="overlay"
+						>
+							<v-progress-circular
+								:size="50"
+								color="white"
+								indeterminate
+							></v-progress-circular>
+						</v-overlay>
+					</v-card>
+				</v-col>
+			</v-row>
+		</v-container>
+
+		<v-snackbar
+			v-model="snackbar"
+			:timeout="5000"
+			:color="snackbarColor"
+		>
+			{{ snackbarText }}
+			<v-btn
+				color="white"
+				text
+				@click="snackbar = false"
+			>
+				Close
+			</v-btn>
+		</v-snackbar>
+
+	</v-content>
 </template>
 
+
 <script>
+	import ErrorAlert from "../../components/ErrorAlert.vue"
   import axios from 'axios'
   export default {
-    props: {
-      source: String,
-    },
+		components: {
+			ErrorAlert,
+		},
 
-    data() {
-      return {
-        email: null,
-        password: null,
-        serverError: null,
-        errorAlert: false,
-        successSnackbar: false,
-        overlay: false,
-        serverErrorCode: null,
-      }
-    },
+		data() {
+			return {
+				email: "",
+				password: "",
+				serverError: "",
+				snackbar: false,
+				snackbarColor: "",
+				snackbarText: "",
+				overlay: false,
+			}
+		},
 
-    computed: {
-      nama_sekolah: function () {
-        return process.env.MIX_NAMA_SEKOLAH;
-      },
-      alamat_sekolah: function () {
-        return process.env.MIX_ALAMAT_SEKOLAH;
-      },
-      logo_sekolah: function () {
-        return process.env.MIX_LOGO_URL;
-      }
-    }, // End of Computed
+		methods: {
+			login: function() {
+			let currentObj = this	
+			currentObj.serverError = ""
+			currentObj.overlay = true
 
-    methods: {
-      login: function() {
-        let currentObj = this
-        currentObj.errorAlert = false
-        currentObj.overlay = true
+			axios.post('api/auth/login', {
+				email: currentObj.email,
+				password: currentObj.password
+			})
+			.then(function (response) {
+				const token = response.data.access_token
+				console.log(token)
+				// add bearer token to localstorage
+				localStorage.setItem('userToken', token)
 
-          axios.post('api/auth/login', {
-            email: currentObj.email,
-            password: currentObj.password
-          })
-          .then(function (response) {
-            const token = response.data.access_token
-            console.log(token)
-            // add bearer token to localstorage
-            localStorage.setItem('userToken', token)
+				if (token) {
+					axios.defaults.headers.common['Authorization'] = 'Bearer' + ' ' + token
+				}
 
-            if (token) {
-              axios.defaults.headers.common['Authorization'] = 'Bearer' + ' ' + token
-            }
+				// after success show successSnackbar
+				currentObj.snackbar = true
+				currentObj.snackbarColor = 'success'
+				currentObj.snackbarText = "Sign In Successed, now redirecting to your dashboard..."
+				currentObj.overlay = false
 
-            // after success show successSnackbar
-            currentObj.successSnackbar = true
-
-            currentObj.overlay = false
-
-            // after all success redirect to home
-            axios.get('api/auth/me', {
-              headers: {
-                Authorization: 'Bearer ' + token,
-                withCredentials: true //the token is a variable which holds the token
-              }
-              })
-              .then(function (response) {
-                  // handle success
-                  // let userRole = response.data.role
-                  // if (userRole == "admin") {
-                  //   currentObj.$router.push('/siAdmino')
-                  // } else if (userRole == "pustakawan") {
-                  //   currentObj.$router.push('/siPustakawano')
-                  // } else {
-                  //   currentObj.$router.push('/home')
-                  // }
-                  let userRole = response.data.role
-                  if (userRole == "admin") {
-                    currentObj.$router.push('/siAdmino')
-                  } 
-                  if (userRole == 'pustakawan') {
-                    currentObj.$router.push('/perpus')
-                  }
-              })
-              .catch(function (error) {
-                  // handle error
-                  console.log(error);
-              })
-
-
-          })
-          .catch(function (error) {
-            localStorage.removeItem('userToken')
-            currentObj.overlay = false
-            if(error.response) {
-              currentObj.serverError = error.response.data.errors
-              currentObj.errorAlert = true
-            }
-          })
-      }, // end of login method
-    } // end of methods
-  }
+				// after all success redirect to home
+				axios.get('api/auth/me', {
+					headers: {
+						Authorization: 'Bearer ' + token,
+						withCredentials: true //the token is a variable which holds the token
+					}
+				})
+					.then(function (response) {
+						// handle success
+						let userRole = response.data.role
+						if (userRole == "admin") {
+							currentObj.$router.push('/siAdmino')
+						} 
+						if (userRole == 'pustakawan') {
+							currentObj.$router.push('/perpus')
+						}
+					})
+					.catch(function (error) {
+						// handle error
+						console.log(error);
+					})
+			})
+			.catch(function (error) {
+				localStorage.removeItem('userToken')
+				currentObj.overlay = false
+				if(error.response) {
+					currentObj.serverError = error.response.data.errors
+					currentObj.password = ""
+				}
+			})
+		}, // end of login method
+	} // end of methods
+}
 </script>
