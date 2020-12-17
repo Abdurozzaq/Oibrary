@@ -14,6 +14,6 @@ Main Features: Borrow books and return books (circulation), book borrowing repor
 Additional: Change profile data & change password (admin & librarian)
 
 # Docs Link :
-<p><a href="https://oibrary.readme.io/docs">https://oibrary.readme.io/docs</a></p>
+<p><a href="https://oibrary-docs.vercel.app/">https://oibrary-docs.vercel.app/</a></p>
 
 
