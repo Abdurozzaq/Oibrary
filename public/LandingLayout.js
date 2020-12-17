@@ -103,7 +103,7 @@ __webpack_require__.r(__webpack_exports__);
         title: "Register",
         link: "/register"
       }],
-      app_name: "Laravel"
+      app_name: "Oibrary"
     };
   },
   // end of data
