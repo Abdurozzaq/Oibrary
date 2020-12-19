@@ -3079,9 +3079,3 @@
 /*!******************************************************************************!*\
   !*** external {"commonjs":"vue","commonjs2":"vue","amd":"vue","root":"Vue"} ***!
   \******************************************************************************/
-
-//! moment.js
-
-//! moment.js language configuration
-
-//! moment.js locale configuration

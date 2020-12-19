@@ -88,12 +88,9 @@
 <script>
   import { required, email } from 'vuelidate/lib/validators'
   import axios from 'axios'
-  import moment from 'moment'
   export default {
     data() {
       return {
-        // plugin
-        moment: moment,
 
         // Form Response
         serverError: null,

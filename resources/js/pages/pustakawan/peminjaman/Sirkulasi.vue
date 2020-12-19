@@ -44,11 +44,11 @@
         </template>
 
         <template v-slot:[`item.tanggal_pinjam`]="{ item }">
-          <span>{{ moment(item.tanggal_pinjam).format('DD-MM-YYYY') }}</span>
+          <span>{{ format(new Date(item.tanggal_pinjam), 'dd/MM/yyyy') }}</span>
         </template>
 
         <template v-slot:[`item.tanggal_harus_kembali`]="{ item }">
-          <span>{{ moment(item.tanggal_harus_kembali).format('DD-MM-YYYY') }}</span>
+          <span>{{ format(new Date(item.tanggal_harus_kembali), 'dd/MM/yyyy') }}</span>
         </template>
 
         <template v-slot:[`item.denda`]="{ item }">
@@ -100,11 +100,11 @@
         </template>
 
         <template v-slot:[`item.tanggal_pinjam`]="{ item }">
-          <span>{{ moment(item.tanggal_pinjam).format('DD-MM-YYYY') }}</span>
+          <span>{{ format(new Date(item.tanggal_pinjam), 'dd/MM/yyyy') }}</span>
         </template>
 
         <template v-slot:[`item.tanggal_harus_kembali`]="{ item }">
-          <span>{{ moment(item.tanggal_harus_kembali).format('DD-MM-YYYY') }}</span>
+          <span>{{ format(new Date(item.tanggal_harus_kembali), 'dd/MM/yyyy') }}</span>
         </template>
 
         <template v-slot:[`item.denda`]="{ item }">
@@ -169,15 +169,14 @@
 <script>
   import { required, email } from 'vuelidate/lib/validators'
   import axios from 'axios'
-  import moment from 'moment'
+  import format from 'date-fns/format'
   export default {
     data() {
       return {
-        // plugin
-        moment: moment,
+        // plugin 
+        format,
 
         // Form Response
-
         serverError: null,
         errorAlert: false,
 

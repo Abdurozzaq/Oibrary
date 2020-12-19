@@ -316,8 +316,5 @@
       }, // End of createAnggota()
 
     }, // End of Methods
-
-
-
   }
 </script>
