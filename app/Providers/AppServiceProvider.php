@@ -24,9 +24,12 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         // for deploy (test on netlify)
-        if($this->app->environment() == 'production') {
-            \URL::forceScheme('https');
-            \URL::forceRootUrl(\Config::get('app.url'));
+//         if($this->app->environment() == 'production') {
+//             \URL::forceScheme('https');
+//             \URL::forceRootUrl(\Config::get('app.url'));
+//         }
+        If (env('APP_ENV') !== 'local') {
+            $this->app['request']->server->set('HTTPS', true);
         }
     }
 }
