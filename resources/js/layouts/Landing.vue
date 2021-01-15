@@ -8,44 +8,12 @@
       hide-on-scroll
     >
       <v-container class="py-0 fill-height">
-        <v-toolbar-title
-					style="width: 300px"
-					class="ml-0 pl-4"
-        >
-					<v-avatar
-						size="48"
-						v-if="logo_sekolah"
-					>
-						<img
-							class="hidden-sm-and-down"
-							:src="logo_sekolah"
-							alt="Logo"
-						>
-					</v-avatar>
-          <span>{{ nama_sekolah }}</span>
-        </v-toolbar-title>
 
-        <v-spacer></v-spacer>
-
-				<div v-if="$vuetify.breakpoint.mdAndUp">
-					<v-btn href="/" class="white--text mr-2" outlined rounded>
-            			LOGIN
-					</v-btn>
-					<v-btn href="/forgot-password" class="white--text" outlined rounded>
-						FORGOT PASSWORD?
-					</v-btn>
-					<!-- <v-btn href="/register" class="white--text" outlined rounded>
-						REGISTER
-					</v-btn> -->
-				</div>
-
-				<div v-if="$vuetify.breakpoint.smAndDown" class="text-center">
+        <div v-if="$vuetify.breakpoint.smAndDown" class="text-center">
 					<v-menu offset-y>
 						<template v-slot:activator="{ on, attrs }">
 							<v-btn
-								class="mx-2"
-								fab
-								text
+								icon
 								v-bind="attrs"
 								v-on="on"
 							>
@@ -64,6 +32,37 @@
 							</v-list-item>
 						</v-list>
 					</v-menu>
+				</div>
+
+        <v-avatar
+          v-if="logo_sekolah && $vuetify.breakpoint.smAndUp"
+          size="48"
+        >
+          <img
+            :src="logo_sekolah"
+            alt="Logo"
+          >
+        </v-avatar>
+
+        <v-toolbar-title
+					style="width: 200px"
+					class="ml-0 pl-4"
+        >
+          <div class="my-auto text-caption text-sm-caption text-md-subtitle-2 text-lg-h6">SMKN 12 KABTA</div>
+        </v-toolbar-title>
+
+        <v-spacer></v-spacer>
+
+				<div v-if="$vuetify.breakpoint.mdAndUp">
+					<v-btn href="/" class="white--text mr-2" outlined rounded>
+            			LOGIN
+					</v-btn>
+					<v-btn href="/forgot-password" class="white--text" outlined rounded>
+						FORGOT PASSWORD?
+					</v-btn>
+					<!-- <v-btn href="/register" class="white--text" outlined rounded>
+						REGISTER
+					</v-btn> -->
 				</div>
         
       </v-container>
@@ -92,8 +91,8 @@
 				link: "/login"
 			},
 			{
-				title: "Register",
-				link: "/register"
+				title: "Forgot Password",
+				link: "/forgot-password"
 			}
 		],
 		app_name: process.env.MIX_APP_NAME
