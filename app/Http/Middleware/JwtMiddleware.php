@@ -39,7 +39,10 @@ class JwtMiddleware extends BaseMiddleware
             }else if ($e instanceof \Tymon\JWTAuth\Exceptions\TokenExpiredException){
                 return response()->json(['message' => 'Token is Expired'], 401);
             }else {
-                return response()->json($e, 401);
+                return response()->json([
+                  'test' => 'bisa',
+                  'errornya' => $e
+                ], 401);
             }
         }
         return $next($request);
