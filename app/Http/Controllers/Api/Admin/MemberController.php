@@ -16,8 +16,8 @@ class MemberController extends Controller
     public function getDaftarMember() {
         $users = User::role('member')
                         ->select(
-                            'users.*'//,
-                            // DB::raw('CONCAT(users.first_name, " ", users.last_name) AS full_name')
+                            'users.*', 
+                            DB::raw('CONCAT(users.first_name, " ", users.last_name) AS full_name')
                         )
                         ->get();
 
