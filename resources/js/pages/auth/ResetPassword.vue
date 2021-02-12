@@ -84,7 +84,7 @@
 											class="mb-3"
 											type="submit"
 										>
-											<div class="font-weight-bold deep-purple--text">Register</div>
+											<div class="font-weight-bold deep-purple--text">Reset Password</div>
 										</v-btn>
 									</v-form>
 
