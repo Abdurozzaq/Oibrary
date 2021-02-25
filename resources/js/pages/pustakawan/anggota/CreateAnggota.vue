@@ -156,7 +156,7 @@
                     align="center"
                     justify="end"
                   >
-                    <v-btn color="red darken-1 white--text" type="submit" >Tambah</v-btn>
+                    <v-btn color="purple darken-3 white--text" type="submit" >Tambah</v-btn>
                   </v-row>
                 </v-list-item>
               </v-card-actions>
