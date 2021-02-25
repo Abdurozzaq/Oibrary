@@ -69,8 +69,8 @@
 										</v-btn>
 									</v-form>
 
-									<a class="text-subtitle1 white--text" href="/forgot-password">Fogot Password?</a>
-									<a class="text-subtitle1 white--text" href="/">Login</a>
+									<router-link class="text-subtitle1 white--text" to="/forgot-password">Fogot Password?</router-link>
+									<router-link class="text-subtitle1 white--text" to="/">Login</router-link>
 								</v-card-text>
 							</v-col>
 						</v-row>

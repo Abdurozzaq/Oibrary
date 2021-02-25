@@ -88,8 +88,8 @@
 										</v-btn>
 									</v-form>
 
-									<a class="text-subtitle1 white--text" href="/">Login?</a>
-									<!-- <a class="text-subtitle1 white--text" href="/resend-verification-mail">Resend Verification Mail?</a> -->
+									<router-link class="text-subtitle1 white--text" to="/">Login?</router-link>
+									<!-- <a class="text-subtitle1 white--text" to="/resend-verification-mail">Resend Verification Mail?</a> -->
 								</v-card-text>
 							</v-col>
 						</v-row>

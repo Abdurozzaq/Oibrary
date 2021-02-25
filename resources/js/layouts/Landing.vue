@@ -26,7 +26,7 @@
 							<v-list-item
 								v-for="(item, index) in menus"
 								:key="index"
-								:href="item.link"
+								:to="item.link"
 							>
 								<v-list-item-title>{{ item.title }}</v-list-item-title>
 							</v-list-item>
@@ -54,13 +54,13 @@
         <v-spacer></v-spacer>
 
 				<div v-if="$vuetify.breakpoint.mdAndUp">
-					<v-btn href="/" class="white--text mr-2" outlined rounded>
+					<v-btn to="/" class="white--text mr-2" outlined rounded>
             			LOGIN
 					</v-btn>
-					<v-btn href="/forgot-password" class="white--text" outlined rounded>
+					<v-btn to="/forgot-password" class="white--text" outlined rounded>
 						FORGOT PASSWORD?
 					</v-btn>
-					<!-- <v-btn href="/register" class="white--text" outlined rounded>
+					<!-- <v-btn to="/register" class="white--text" outlined rounded>
 						REGISTER
 					</v-btn> -->
 				</div>

@@ -25,7 +25,7 @@
       <v-list>
         <v-list-item
           link
-          href="/perpus"
+          to="/perpus"
         >
           <v-list-item-icon>
             <v-icon>mdi-view-dashboard-outline</v-icon>
@@ -44,7 +44,7 @@
 
           <v-list-item
             link
-            href="/perpus/anggota/create"
+            to="/perpus/anggota/create"
           >
             <v-list-item-title>Tambah Anggota</v-list-item-title>
             <v-list-item-icon>
@@ -54,7 +54,7 @@
 
           <v-list-item
             link
-            href="/perpus/anggota/list"
+            to="/perpus/anggota/list"
           >
             <v-list-item-title>Daftar Anggota</v-list-item-title>
             <v-list-item-icon>
@@ -74,7 +74,7 @@
 
           <v-list-item
             link
-            href="/perpus/buku/create"
+            to="/perpus/buku/create"
           >
             <v-list-item-title>Tambah Buku</v-list-item-title>
             <v-list-item-icon>
@@ -84,7 +84,7 @@
 
           <v-list-item
             link
-            href="/perpus/buku/list"
+            to="/perpus/buku/list"
           >
             <v-list-item-title>Daftar Buku</v-list-item-title>
             <v-list-item-icon>
@@ -95,7 +95,7 @@
 
         <v-list-item
           link
-          href="/perpus/pinjam-buku"
+          to="/perpus/pinjam-buku"
         >
           <v-list-item-icon>
             <v-icon>mdi-book</v-icon>
@@ -104,7 +104,7 @@
         </v-list-item>
         <v-list-item
           link
-          href="/perpus/sirkulasi"
+          to="/perpus/sirkulasi"
         >
           <v-list-item-icon>
             <v-icon>mdi-autorenew</v-icon>
@@ -123,7 +123,7 @@
 
           <v-list-item
             link
-            href="/perpus/log-data/peminjaman"
+            to="/perpus/log-data/peminjaman"
           >
             <v-list-item-title>Peminjaman</v-list-item-title>
             <v-list-item-icon>
@@ -133,7 +133,7 @@
 
           <v-list-item
             link
-            href="/perpus/log-data/pengembalian"
+            to="/perpus/log-data/pengembalian"
           >
             <v-list-item-title>Pengembalian</v-list-item-title>
             <v-list-item-icon>
@@ -208,7 +208,7 @@
               <v-list-item
                 v-for="(ip, i) in itemsPopup"
                 :key="i"
-                :href="ip.url"
+                :to="ip.url"
               >
                 <v-list-item-icon>
                   <v-icon v-text="ip.icon"></v-icon>

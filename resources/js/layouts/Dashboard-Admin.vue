@@ -8,7 +8,7 @@
       <v-list>
         <v-list-item
           link
-          href="/siAdmino"
+          to="/siAdmino"
         >
           <v-list-item-icon>
             <v-icon>mdi-view-dashboard-outline</v-icon>
@@ -27,7 +27,7 @@
           <v-list-item
             link
             color="red"
-            href="/siAdmino/users/create"
+            to="/siAdmino/users/create"
           >
             <v-list-item-title>Create User</v-list-item-title>
             <v-list-item-icon>
@@ -37,7 +37,7 @@
           <v-list-item
             link
             color="red"
-            href="/siAdmino/users/anggota/list"
+            to="/siAdmino/users/anggota/list"
           >
             <v-list-item-title>Daftar Anggota</v-list-item-title>
             <v-list-item-icon>
@@ -47,7 +47,7 @@
            <v-list-item
             link
             color="red"
-            href="/siAdmino/users/pustakawan/list"
+            to="/siAdmino/users/pustakawan/list"
           >
             <v-list-item-title>Daftar Pustakawan</v-list-item-title>
             <v-list-item-icon>
@@ -57,7 +57,7 @@
           <v-list-item
             link
             color="red"
-            href="/siAdmino/users/admin/list"
+            to="/siAdmino/users/admin/list"
           >
             <v-list-item-title>Daftar Admin</v-list-item-title>
             <v-list-item-icon>
@@ -136,7 +136,7 @@
               <v-list-item
                 v-for="(ip, i) in itemsPopup"
                 :key="i"
-                :href="ip.url"
+                :to="ip.url"
               >
                 <v-list-item-icon>
                   <v-icon v-text="ip.icon"></v-icon>
