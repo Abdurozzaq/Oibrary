@@ -18,6 +18,21 @@
         ></v-text-field>
       </v-card-title>
 
+      <v-card-text>
+        <v-alert
+          v-model="errorAlert"
+          border="top"
+          color="red lighten-2"
+          dismissible
+        >
+          <ul v-for="(error, index) in serverError" v-bind:key="index">
+            <li class="white--text">
+              {{ error[0] }} 
+            </li>
+          </ul>
+        </v-alert>
+      </v-card-text>
+
       <v-data-table
         v-if="daftarAdmin && daftarAdminFiltered == null"
         :headers="headers"

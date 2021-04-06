@@ -95,13 +95,22 @@ class AdminController extends Controller
 
     public function deleteAdmin($id) {
 
-        $member = User::findOrFail($id);
-        $member->delete();
+        if ($id == Auth::user()->id) {
+          return response()->json([
+            "errors" => [
+              'password' => ['Gagal! Admin yang anda ingin hapus adalah anda sendiri.'] 
+            ],
+          ], 401);
+        } else {
+            $member = User::findOrFail($id);
+            $member->delete();
 
-        return response()->json([
-            'status' => 'success',
-            'message' => 'Admin telah berhasil dihapus.'
-        ], 200);
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Admin telah berhasil dihapus.'
+            ], 200);
+        }
+        
     }
 
     public function searchAdmin(Request $request) {

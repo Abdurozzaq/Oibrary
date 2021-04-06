@@ -37,7 +37,7 @@ class LogPengembalianExport implements FromCollection, WithHeadings
             'Judul Buku',
             'Jumlah Buku',
             'Kode Peminjaman',
-            'Tgl Pinjam',
+            'Tanggal Pengembalian',
             'Kode Peminjam',
             'Nama Peminajam'
         ];
