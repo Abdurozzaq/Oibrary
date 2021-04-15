@@ -45,16 +45,32 @@ class denda extends Command
 
         $tglSekarang = Carbon::now();
         Carbon::setWeekendDays([ Carbon::SUNDAY, Carbon::SATURDAY ]);
-
+        
         foreach($pengembalian as $item) {
             $tglKembali = Carbon::parse($item['tanggal_harus_kembali']);
+			
+			// Jika Tanggal sekarang lebih besar dari tanggal harus kembali
+			// maka, tgl sekarang dikurang tgl kembali adalah hari terlambatnya 
+            if ($tglSekarang->greaterThan($tglKembali)) {
+                $selisih = $tglSekarang->diffInWeekdays($tglKembali) - 1;
 
-            $selisih = $tglSekarang->diffInWeekdays($tglKembali) - 1;
+                if($selisih > 0) {
+                    $item['denda'] = $selisih * 500;
+                    $item['terlambat'] = $selisih;
+                    $item->save();
+                }
+            }   
+            
+			// Jika tgl kembali lebih besar dari tgl sekarang
+			// maka tgl kembali dikurangi tgl sekarang adalah hari lebih nya (sisa hari)
+            if ($tglKembali->greaterThan($tglSekarang)) {
+                $selisih = $tglKembali->diffInWeekdays($tglSekarang) - 1;
 
-            if($selisih > 0) {
-                $item['denda'] = $selisih * 500;
-                $item['terlambat'] = $selisih;
-                $item->save();
+                if($selisih < 0) {
+                    $item['denda'] = $selisih * 500;
+                    $item['terlambat'] = $selisih;
+                    $item->save();
+                }
             }
         }
       
