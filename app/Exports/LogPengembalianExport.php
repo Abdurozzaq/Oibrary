@@ -39,7 +39,7 @@ class LogPengembalianExport implements FromCollection, WithHeadings
             'Kode Peminjaman',
             'Tanggal Pengembalian',
             'Kode Peminjam',
-            'Nama Peminajam'
+            'Nama Peminjam'
         ];
     }
 }

@@ -38,7 +38,7 @@ class LogPeminjamanExport implements FromCollection, WithHeadings
             'Kode Peminjaman',
             'Tanggal Pinjam',
             'Kode Peminjam',
-            'Nama Peminajam'
+            'Nama Peminjam'
         ];
     }
 }
