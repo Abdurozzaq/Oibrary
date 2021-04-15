@@ -357,6 +357,26 @@
 
             currentObj.overlay = false
           })
+      },
+
+      runDendaCron: function() {
+        let currentObj = this
+
+        axios.get('api/perpus/sikulasi/denda/run')
+          .then(function (response) {
+
+            currentObj.snack = true
+            currentObj.snackColor = 'success'
+            currentObj.snackText = 'Berhasil sinkron Denda!'
+
+          })
+          .catch(function (error) {
+
+            currentObj.snack = true
+            currentObj.snackColor = 'error'
+            currentObj.snackText = 'Tidak Bisa sinkron Denda'
+
+          })
       }
 
     }, // End of Methods
@@ -366,7 +386,11 @@
     mounted: function() {
       let currentObj = this
 
-      currentObj.getData()
+      currentObj.runDendaCron()
+
+      setTimeout(function() { 
+        currentObj.getData()
+      }, 2000);
     }
   }
 </script>

@@ -91,6 +91,7 @@ Route::middleware(['jwt.verify'])->group(function () {
         Route::get('/perpus/log-data/peminjaman/export', 'Api\Pustakawan\PeminjamanController@exportLogPeminjaman');
         Route::get('/perpus/log-data/pengembalian', 'Api\Pustakawan\PeminjamanController@getDaftarPengembalian');
         Route::get('/perpus/log-data/pengembalian/export', 'Api\Pustakawan\PeminjamanController@exportLogPengembalian');
+        Route::get('/perpus/sikulasi/denda/run', 'Api\Pustakawan\PeminjamanController@sinkronDenda');
     });
 
 });
